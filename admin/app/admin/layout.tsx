@@ -18,7 +18,7 @@ export default function StudentLayout({children}:{children:JSX.Element}) {
           <Sidebar setOpen={setOpen}/>
         </div>
         <div className="sm:w-[calc(100%-16rem)] w-full p-2 ">
-            <div className="p-2 w-full h-full rounded-md  shadow-lg border dark:border-border">
+            <div className="p-2 w-full h-full rounded-md  shadow-lg border dark:border-border dark:bg-slate-800 ">
               {children}
             </div>
         </div>        

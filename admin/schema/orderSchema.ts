@@ -95,6 +95,24 @@ export const responseSchema = z.object({
   statusCode: z.number(),
   success: z.boolean(),
 });
+export const orderListArraySchema = z.array(orderListSchema);
+export const orderListResponseSchema = z.object({
+  data: z.object({
+    orders: orderListArraySchema,
+    totalOrders: z.number(),
+    limit:  z.number(),
+    page: z.number(),
+    totalPages:  z.number(),
+    serialNumberStartFrom:  z.number(),
+    hasPrevPage: z.boolean(),
+    hasNextPage: z.boolean(),
+    prevPage:z.nullable(z.number()),
+    nextPage: z.nullable(z.number()),
+  }),
+  message: z.string(),
+  statusCode: z.number(),
+  success: z.boolean(),
+});
 
 
 export type addressType = z.infer<typeof addressSchema>;
@@ -104,7 +122,15 @@ export type itemType = z.infer<typeof itemSchema>;
 export type OrderListType = z.infer<typeof orderListSchema>;
 export type detailedOrderType = detailedOrderResponseType['data']['order'];
 export type detailedOrderResponseType = z.infer<typeof responseSchema>;
+export type orderListArrayType = z.infer<typeof orderListArraySchema>;
+export type orderListResponseType = z.infer<typeof orderListResponseSchema>;
+export type orderListResponseDataType = z.infer<typeof orderListResponseSchema>['data'];
 
 export function detailedOrderParser(jsonData:any):detailedOrderType{
     return detailedOrderSchema.parse(jsonData);
+}
+
+export function orderListParser(jsonData:any):orderListResponseDataType{
+    const orderlistresponse  = orderListResponseSchema.parse(jsonData);
+    return orderlistresponse.data;
 }

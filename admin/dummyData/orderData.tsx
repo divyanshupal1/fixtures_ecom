@@ -685,12 +685,484 @@ export const orderListData = {
         "status": "PENDING",
         "totalOrderItems": 4,
         "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f11",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c22",
+          "addressLine1": "17737 Carroll Drive",
+          "addressLine2": "Funk Lane",
+          "city": "Lake Elton",
+          "country": "Saint Vincent and the Grenadines",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972bb",
+          "pincode": "134887",
+          "state": "Florida",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c72",
+          "couponCode": "SEQUI636",
+          "name": "repellat"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972bb",
+          "email": "dustin_kiehn@gmail.com",
+          "username": "estrella.damore43"
+        },
+        "discountedOrderPrice": 932,
+        "isPaymentDone": true,
+        "orderPrice": 1568,
+        "paymentId": "eFnN41x7AF4Jfwq9MSL32Jlo",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f14",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c17",
+          "addressLine1": "83590 Kovacek Junctions",
+          "addressLine2": "Kieran Parks",
+          "city": "Alfonzoport",
+          "country": "Bahrain",
+          "createdAt": "2023-07-04T09:26:00.029Z",
+          "owner": "64a3daee2aaac053bc597294",
+          "pincode": "689388",
+          "state": "Wisconsin",
+          "updatedAt": "2023-07-04T09:26:00.029Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc597294",
+          "email": "ken94@gmail.com",
+          "username": "stanton.berge53"
+        },
+        "discountedOrderPrice": 3462,
+        "isPaymentDone": true,
+        "orderPrice": 3462,
+        "paymentId": "cvuE5IUZ8oOLbS0cAbPbbs2O",
+        "paymentProvider": "RAZORPAY",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f19",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c21",
+          "addressLine1": "3111 Haag Field",
+          "addressLine2": "Dare Green",
+          "city": "Asheville",
+          "country": "Cape Verde",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972b8",
+          "pincode": "014313",
+          "state": "Tennessee",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972b8",
+          "email": "mireille.kihn57@hotmail.com",
+          "username": "shawna_schmeler"
+        },
+        "discountedOrderPrice": 1041,
+        "isPaymentDone": true,
+        "orderPrice": 1041,
+        "paymentId": "ewdOErqsgJurF0JSrGHR5rBM",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f1c",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c0e",
+          "addressLine1": "79729 Brekke Station",
+          "addressLine2": "Georgianna Fords",
+          "city": "New Brenda",
+          "country": "Singapore",
+          "createdAt": "2023-07-04T09:26:00.028Z",
+          "owner": "64a3daee2aaac053bc59725b",
+          "pincode": "892122",
+          "state": "Montana",
+          "updatedAt": "2023-07-04T09:26:00.028Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc59725b",
+          "email": "rebeka.bashirian@yahoo.com",
+          "username": "delia_zboncak15"
+        },
+        "discountedOrderPrice": 3462,
+        "isPaymentDone": true,
+        "orderPrice": 3462,
+        "paymentId": "hUrsmZjsMRevG6LxTRRrgMFb",
+        "paymentProvider": "PAYPAL",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265ef8",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c20",
+          "addressLine1": "45477 Kerluke Summit",
+          "addressLine2": "Effertz Brook",
+          "city": "North Little Rock",
+          "country": "Turks and Caicos Islands",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972b5",
+          "pincode": "920910",
+          "state": "Nevada",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.178Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972b5",
+          "email": "mercedes.christiansen21@gmail.com",
+          "username": "asa_schmeler"
+        },
+        "discountedOrderPrice": 1471,
+        "isPaymentDone": true,
+        "orderPrice": 1471,
+        "paymentId": "e5vUu6SArWYAcNyIP0v6rifr",
+        "paymentProvider": "PAYPAL",
+        "status": "PENDING",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.178Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265efb",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c1d",
+          "addressLine1": "9845 Jerry Divide",
+          "addressLine2": "Bartell Highway",
+          "city": "Floymouth",
+          "country": "Finland",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972af",
+          "pincode": "755338",
+          "state": "New Hampshire",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.178Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972af",
+          "email": "ova.fisher@gmail.com",
+          "username": "emmet67"
+        },
+        "discountedOrderPrice": 2179,
+        "isPaymentDone": true,
+        "orderPrice": 2179,
+        "paymentId": "zwvq3RqYoZZGOLXQnK0Td3Ya",
+        "paymentProvider": "PAYPAL",
+        "status": "PENDING",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.178Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265efe",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c21",
+          "addressLine1": "3111 Haag Field",
+          "addressLine2": "Dare Green",
+          "city": "Asheville",
+          "country": "Cape Verde",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972b8",
+          "pincode": "014313",
+          "state": "Tennessee",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c67",
+          "couponCode": "DELECTUS555",
+          "name": "temporibus"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972b8",
+          "email": "mireille.kihn57@hotmail.com",
+          "username": "shawna_schmeler"
+        },
+        "discountedOrderPrice": 1723,
+        "isPaymentDone": true,
+        "orderPrice": 2278,
+        "paymentId": "FS6oqGm8wYZ162zvpSX4foWI",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 3,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f02",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c0d",
+          "addressLine1": "572 Kiley Spurs",
+          "addressLine2": "Rogers Key",
+          "city": "Colefort",
+          "country": "Azerbaijan",
+          "createdAt": "2023-07-04T09:26:00.028Z",
+          "owner": "64a3daee2aaac053bc597258",
+          "pincode": "590965",
+          "state": "Louisiana",
+          "updatedAt": "2023-07-04T09:26:00.028Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c68",
+          "couponCode": "QUIDEM520",
+          "name": "necessitatibus"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc597258",
+          "email": "zackery_lesch49@gmail.com",
+          "username": "branson.marks"
+        },
+        "discountedOrderPrice": 2775,
+        "isPaymentDone": true,
+        "orderPrice": 3295,
+        "paymentId": "Wl3UAWAsJiXcKA8zXbURzm3u",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f07",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c0e",
+          "addressLine1": "79729 Brekke Station",
+          "addressLine2": "Georgianna Fords",
+          "city": "New Brenda",
+          "country": "Singapore",
+          "createdAt": "2023-07-04T09:26:00.028Z",
+          "owner": "64a3daee2aaac053bc59725b",
+          "pincode": "892122",
+          "state": "Montana",
+          "updatedAt": "2023-07-04T09:26:00.028Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c6f",
+          "couponCode": "EARUM361",
+          "name": "doloribus"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc59725b",
+          "email": "rebeka.bashirian@yahoo.com",
+          "username": "delia_zboncak15"
+        },
+        "discountedOrderPrice": 2805,
+        "isPaymentDone": true,
+        "orderPrice": 3166,
+        "paymentId": "5peUjU8Tn7ALplHlEbrBpeBf",
+        "paymentProvider": "RAZORPAY",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f0c",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c0a",
+          "addressLine1": "17177 Issac Freeway",
+          "addressLine2": "Marks Expressway",
+          "city": "New Alfordville",
+          "country": "Cameroon",
+          "createdAt": "2023-07-04T09:26:00.027Z",
+          "owner": "64a3daee2aaac053bc59727f",
+          "pincode": "902787",
+          "state": "New Jersey",
+          "updatedAt": "2023-07-04T09:26:00.027Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c68",
+          "couponCode": "QUIDEM520",
+          "name": "necessitatibus"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc59727f",
+          "email": "ignacio_sauer@yahoo.com",
+          "username": "florida74"
+        },
+        "discountedOrderPrice": 2775,
+        "isPaymentDone": true,
+        "orderPrice": 3295,
+        "paymentId": "1WTXfEDX78wTz19a6v5vBROj",
+        "paymentProvider": "RAZORPAY",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f11",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c22",
+          "addressLine1": "17737 Carroll Drive",
+          "addressLine2": "Funk Lane",
+          "city": "Lake Elton",
+          "country": "Saint Vincent and the Grenadines",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972bb",
+          "pincode": "134887",
+          "state": "Florida",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": {
+          "_id": "64a3e5a8a22936b868265c72",
+          "couponCode": "SEQUI636",
+          "name": "repellat"
+        },
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972bb",
+          "email": "dustin_kiehn@gmail.com",
+          "username": "estrella.damore43"
+        },
+        "discountedOrderPrice": 932,
+        "isPaymentDone": true,
+        "orderPrice": 1568,
+        "paymentId": "eFnN41x7AF4Jfwq9MSL32Jlo",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f14",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c17",
+          "addressLine1": "83590 Kovacek Junctions",
+          "addressLine2": "Kieran Parks",
+          "city": "Alfonzoport",
+          "country": "Bahrain",
+          "createdAt": "2023-07-04T09:26:00.029Z",
+          "owner": "64a3daee2aaac053bc597294",
+          "pincode": "689388",
+          "state": "Wisconsin",
+          "updatedAt": "2023-07-04T09:26:00.029Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc597294",
+          "email": "ken94@gmail.com",
+          "username": "stanton.berge53"
+        },
+        "discountedOrderPrice": 3462,
+        "isPaymentDone": true,
+        "orderPrice": 3462,
+        "paymentId": "cvuE5IUZ8oOLbS0cAbPbbs2O",
+        "paymentProvider": "RAZORPAY",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f19",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c21",
+          "addressLine1": "3111 Haag Field",
+          "addressLine2": "Dare Green",
+          "city": "Asheville",
+          "country": "Cape Verde",
+          "createdAt": "2023-07-04T09:26:00.030Z",
+          "owner": "64a3daee2aaac053bc5972b8",
+          "pincode": "014313",
+          "state": "Tennessee",
+          "updatedAt": "2023-07-04T09:26:00.030Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc5972b8",
+          "email": "mireille.kihn57@hotmail.com",
+          "username": "shawna_schmeler"
+        },
+        "discountedOrderPrice": 1041,
+        "isPaymentDone": true,
+        "orderPrice": 1041,
+        "paymentId": "ewdOErqsgJurF0JSrGHR5rBM",
+        "paymentProvider": "PAYPAL",
+        "status": "DELIVERED",
+        "totalOrderItems": 2,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
+      },
+      {
+        "__v": 0,
+        "_id": "64a3e5a8a22936b868265f1c",
+        "address": {
+          "__v": 0,
+          "_id": "64a3e5a7a22936b868265c0e",
+          "addressLine1": "79729 Brekke Station",
+          "addressLine2": "Georgianna Fords",
+          "city": "New Brenda",
+          "country": "Singapore",
+          "createdAt": "2023-07-04T09:26:00.028Z",
+          "owner": "64a3daee2aaac053bc59725b",
+          "pincode": "892122",
+          "state": "Montana",
+          "updatedAt": "2023-07-04T09:26:00.028Z"
+        },
+        "coupon": null,
+        "createdAt": "2023-07-04T09:26:00.179Z",
+        "customer": {
+          "_id": "64a3daee2aaac053bc59725b",
+          "email": "rebeka.bashirian@yahoo.com",
+          "username": "delia_zboncak15"
+        },
+        "discountedOrderPrice": 3462,
+        "isPaymentDone": true,
+        "orderPrice": 3462,
+        "paymentId": "hUrsmZjsMRevG6LxTRRrgMFb",
+        "paymentProvider": "PAYPAL",
+        "status": "PENDING",
+        "totalOrderItems": 4,
+        "updatedAt": "2023-07-04T09:26:00.179Z"
       }
     ],
     "page": 2,
     "prevPage": 1,
     "serialNumberStartFrom": 11,
-    "totalOrders": 20,
+    "totalOrders": 41,
     "totalPages": 2
   },
   "message": "Orders fetched successfully",
@@ -915,13 +1387,14 @@ export const detailedOrderData = {
   "success": true
 }
 
-import { orderListSchema} from "@/schema/orderSchema"
-import { detailedOrderParser ,detailedOrderType} from '@/schema/orderSchema';
+import { detailedOrderParser ,orderListParser,detailedOrderType ,orderListSchema,orderListResponseDataType} from '@/schema/orderSchema';
 import { z } from "zod"
 
 
-export function getDummyOrderListData(){
-  return z.array(orderListSchema).parse(orderListData.data.orders)
+export function getDummyOrderListData(status:"PENDING"|"DELIVERED"|"CANCELLED"="PENDING",page:number=1,limit:number=10):orderListResponseDataType{
+  // const data = orderListParser(orderListData)
+  // data = data.orders.filter((order)=>order.status===status)
+  return orderListParser(orderListData)
 }
 export function getDummydetailedOrderData():detailedOrderType{
   return detailedOrderParser(detailedOrderData.data.order)

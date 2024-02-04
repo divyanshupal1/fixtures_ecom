@@ -6,7 +6,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import React, { useEffect } from 'react'
+import React from 'react'
 import { orderListSchema } from "../../../../schema/orderSchema"
 
 
@@ -37,21 +37,13 @@ function EditOrder({row}:{row:any}) {
 
 export default EditOrder  
 
-import { detailedOrderData } from "../../../../dummyData/orderData"
-import { detailedOrderParser } from "../../../../schema/orderSchema"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { itemType } from "../../../../schema/orderSchema"
 import  useOrderById  from "@/hooks/useOrderById"
 
- 
-function LoadOrderData(){
-  console.log("data loaded")
-  return detailedOrderParser(detailedOrderData)
-}
-
 export function ProfileForm({order_id}:{order_id:string}) {
   
-  const {order_data,loading,error} = useOrderById('6589943e71a890d36fce91b9')
+  const {order_data,loading,error} = useOrderById(order_id)
   
   if(order_data==undefined )
   return (

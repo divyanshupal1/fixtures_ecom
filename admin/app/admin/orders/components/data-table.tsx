@@ -24,29 +24,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
+import { orderListResponseDataType } from "@/schema/orderSchema"
 import { DataTablePagination } from "../components/data-table-pagination"
 import { DataTableToolbar } from "../components/data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data:orderListResponseDataType,
+  page:{get:number,set:React.Dispatch<React.SetStateAction<number>>},
+  limit:{get:number,set:React.Dispatch<React.SetStateAction<number>>},
+  status:{get:"PENDING"|"DELIVERED"|"CANCELLED",set:React.Dispatch<React.SetStateAction<"PENDING"|"DELIVERED"|"CANCELLED">>},
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  page,
+  limit,
+  status
 }: DataTableProps<TData, TValue > | any) {
+
   const [rowSelection, setRowSelection] = React.useState({})
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
+  const [columnVisibility, setColumnVisibility] =React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [sorting, setSorting] = React.useState<SortingState>([])
 
   const table = useReactTable({
-    data,
+    data: data?.orders|| [],
     columns,
     state: {
       sorting,
@@ -54,6 +58,7 @@ export function DataTable<TData, TValue>({
       rowSelection,
       columnFilters,
     },
+    pageCount:data?.totalPages||0,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -69,12 +74,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4 flex flex-col  w-full h-full flex-shrink">
-      <DataTableToolbar table={table}/>
-      <div className="rounded-md border flex-grow overflow-y-scroll h-1 dark:border-border">
+      <DataTableToolbar table={table} status={status} />
+      <div className="rounded-md border flex-grow overflow-y-scroll h-1 dark:border-neutral-200">
         <Table className="border-collapse ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="dark:border-border">
+              <TableRow key={headerGroup.id} className="dark:border-neutral-200">
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id} colSpan={header.colSpan} >
@@ -121,7 +126,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} page={page} limit={limit} data={data} />
     </div>
   )
 }
