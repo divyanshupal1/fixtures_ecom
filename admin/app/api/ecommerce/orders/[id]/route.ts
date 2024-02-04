@@ -1,6 +1,6 @@
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
-export async function GET(req:NextApiRequest, {params}:{params:{id:string}}) {
+export async function GET(req:NextRequest, {params}:{params:{id:string}}) {
   const data = {
     "data": {
       "_id": "649e7bfcdbf96264731f5a0c",
