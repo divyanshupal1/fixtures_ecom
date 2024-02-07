@@ -7,6 +7,8 @@ import ProductsData from "./smallcomponents/ProductsData.js"
 
 const Body = ({addToCart}) =>{
 
+  const rating=13000;
+
     return (
       <div className="container">
         <div className="quant">
@@ -25,22 +27,19 @@ const Body = ({addToCart}) =>{
         <div className="quant2">
           <div className="specifictions">
             <div className="each-specification">
-              <i class="fas fa-regular fa-gem"></i>
-            </div>
-            <div className="each-specification">
-              <h4>Original Product</h4>
+              <h2>Original Product</h2>
               <p>100% Original product that covered warranty by the vendor.</p>
             </div>
             <div className="each-specification">
-              <h4>30 Days Warranty</h4>
+              <h2>30 Days Warranty</h2>
               <p>You have the right to return your orders within 30 days.</p>
             </div>
             <div className="each-specification">
-              <h4>Global Shipping</h4>
+              <h2>Global Shipping</h2>
               <p>Your orders are shipped seamlessly between countries</p>
             </div>
             <div className="each-specification">
-              <h4>100% Secure</h4>
+              <h2>100% Secure</h2>
               <p>Your payments are secure with our private security network.</p>
             </div>
           </div>
@@ -49,22 +48,22 @@ const Body = ({addToCart}) =>{
         <div className="all-shops">
           <div className="quant3">
           <div className="branches">
-            <h3>Save up to $600 on select Home Appliance.</h3>
+            <h2>Save up to $600 on select Home Appliance.</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <button className="shop-now">CLAIM PROMO</button>
           </div>
           <div className="branches">
-            <h3>Enjoy sensational discounts of up to 50% this month only!</h3>
+            <h2>Enjoy sensational discounts of up to 50% this month only!</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
             <button className="shop-now">SHOP NOW!</button>
           </div>
             <div className="subbranch-container">
             <div className="sub-branches">
-              <h4>Elevate your bathing experience</h4>
+              <h2>Elevate your bathing experience</h2>
               <button className="shop-now">SHOP NOW!</button>
             </div>
             <div className="sub-branches">
-              <h4>Explore our Kitchen Essentials Collection</h4>
+              <h2>Explore our Kitchen Essentials Collection</h2>
               <button className="shop-now">SHOP NOW!</button>
             </div>
             </div>
@@ -73,11 +72,11 @@ const Body = ({addToCart}) =>{
 
         <div className="quant4">
           <div className="flashsale">
-            <h1>Flash Sale</h1>
+            <h2 style={{fontSize: "40px"}}>Flash Sale</h2>
             <p>Grab the Best Deals on Bathroom & Kitchen Essentials Now!</p>
             <Timer hours={7} minutes={30} seconds={0} />
           </div>
-          {/* {ProductsData.map((product) => (
+          {ProductsData.slice(0,3).map((product) => (
               <Link key={product._id} to={`/product/${product._id}`}>
                 <SaleCard
                   key={product._id}
@@ -88,14 +87,17 @@ const Body = ({addToCart}) =>{
                   price={product.price}
                 />
               </Link>
-            ))} */}
+            ))}
+            <div className="more">
+              <Link to="/shop" ><i class="fa-solid fa-circle-chevron-right" style={{color: "#FFD43B", fontSize: "50px", padding:"185px 0px 195px 0px"}}></i></Link>
+            </div>
         </div>
 
         <div className="quant5">
-          <h1>New Arrival</h1>
+          <h2 style={{fontSize: "30px"}}>New Arrival</h2>
           <div className="arrival-cards">
             {ProductsData && ProductsData.length > 0
-              ? ProductsData.map((product) => (
+              ? ProductsData.map((product,i) => (
               <Link key={product._id} to={`/product/${product._id}`}>
                 <SaleCard
                   key={product._id}
@@ -111,28 +113,28 @@ const Body = ({addToCart}) =>{
           </div>
           <div className="why">
             <div className="content-box">
-              <p style={{ color: "blue", fontWeight: "500" }}>Why choose us</p>
+              <p style={{ color: "#2346A7", fontWeight: "600", margin: "4px 2px" }}>Why choose us</p>
               <h2>Elevate Your Home, Elevate Your Happiness.</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
                 tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
               </p>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Top-Notch Quality</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Top-Notch Quality</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
                 </p>
               </div>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Competitive Pricing & Exclusive Discounts</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Competitive Pricing & Exclusive Discounts</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
                 </p>
               </div>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Expert Assistance & Support</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Expert Assistance & Support</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
@@ -143,8 +145,19 @@ const Body = ({addToCart}) =>{
         </div>
 
         <div className="quant6">
-          <h3>Customer FeedBack and Reviews</h3>
+          <div className="couple">
+            <div className="small-couple">
+              <p style={{color:"darkblue"}}>Testimonial</p>
+              <h3>Customer FeedBack and Reviews</h3>
+            </div>
+            <div className="small-couple" style={{textAlign:"right"}}>
+              <p>Excellent ({rating})</p>
+            </div>
+          </div>
           <div className="feedbacks">
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
             <ReviewCard />
           </div>
         </div>
@@ -154,7 +167,7 @@ const Body = ({addToCart}) =>{
             <h4>
               Subscribe to our newsletter for new products, trends and offers.
             </h4>
-            <input type="email" placeholder="Email" />
+            <input type="email" placeholder=" Email" />
             <button className="signup">
               <i class="fa-solid fa-envelope"></i> Sign Up
             </button>

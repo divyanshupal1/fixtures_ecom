@@ -5,11 +5,11 @@ const About = () => {
   return (
     <div className="container">
       <div className="about-section">
-        <h1>About Us Page</h1>
+        <h1 style={{fontSize: "30px", margin: "10px 0px"}}>About Us Page</h1>
         <p>Some text about who we are and what we do.</p>
       </div>
 
-        <h2 style={{ textAlign: "center" }}>Our Team</h2>
+        <h2 style={{ textAlign: "center", margin: "20px 0px 10px 0px", fontSize: "25px" }}>Our Team</h2>
 
         <div className="row">
           <TeamMember

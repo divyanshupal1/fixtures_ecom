@@ -34,13 +34,14 @@ const ReviewCard = () => {
         </div>
       </div>
       <div>
-        <h4 style={{textAlign:"left",margin:"1px 10px"}}>Feedback:</h4>
+        <h4 style={{textAlign:"left",margin:"10px"}}>Feedback:</h4>
         <textarea
           placeholder='Write your Review'
           rows="3"
           cols="50"
           value={feedback}
           onChange={handleFeedbackChange}
+          style={{margin:"10px"}}
         ></textarea>
       </div>
       <button onClick={handleSubmit}>Submit Review</button>

@@ -44,7 +44,7 @@ const Cart = ({ cartItems, removeFromCart  }) => {
 }
     <div className="payment">
       <h3>Grand Total: ₹{calculateGrandTotal()}</h3>
-      <button className="add-to-cart">PAY NOW</button>
+      <button className="add-to-cart" style={{ marginTop: "10px"}}>PAY NOW</button>
     </div>
     </div>
   );
