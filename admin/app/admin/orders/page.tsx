@@ -1,20 +1,17 @@
-import { Metadata } from "next"
-import { z } from "zod"
+"use client"
 
 import { columns } from "./components/columns"
 import { DataTable } from "./components/data-table"
 import { UserNav } from "./components/user-nav"
-import { orderListSchema } from "@/schema/orderSchema"
-import { getDummyOrderListData, orderListData } from "../../../dummyData/orderData"
-export const metadata: Metadata = {
-  title: "Tasks",
-  description: "A task and issue tracker build using Tanstack Table.",
-}
+import useOrderList from "@/hooks/useOrderList"
+import React from "react"
 
 
-
-export default async function TaskPage() {
-  const tasks =  getDummyOrderListData()
+export default function TaskPage() {
+  const [status, setStatus] = React.useState<"PENDING"|"DELIVERED"|"CANCELLED">("PENDING") // ["PENDING","DELIVERED","CANCELLED"
+  const [page, setPage] = React.useState(1)
+  const [limit, setLimit] = React.useState(20)
+  const { orders, loading, error } = useOrderList(status,page,limit);
 
   return (
     <>
@@ -28,7 +25,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks} columns={columns}/>
+        {!loading && <DataTable data={orders} status={{get:status,set:setStatus}} columns={columns} page={{get:page,set:setPage}} limit={{get:limit,set:setLimit}} />}
       </div>
     </>
   )

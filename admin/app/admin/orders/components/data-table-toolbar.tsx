@@ -7,16 +7,18 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableViewOptions } from "./data-table-view-options"
 
-import { payment, sellers, statuses } from "../data/filtersData"
+import { payment, sellers} from "../data/filtersData"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
-import { DatePickerWithRange } from "./date-picker"
+
 
 interface DataTableToolbarProps<TData> {
-  table: Table<TData>
+  table: Table<TData>,
+  status:{get:"PENDING"|"DELIVERED"|"CANCELLED",set:React.Dispatch<React.SetStateAction<"PENDING"|"DELIVERED"|"CANCELLED">>},
 }
 
 export function DataTableToolbar<TData>({
   table,
+  status
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -29,15 +31,8 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("_id")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-8 w-[150px] lg:w-[250px] dark:border-neutral-50"
         />
-        {table.getColumn("status") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
-        )}
         {table.getColumn("isPaymentDone") && (
           <DataTableFacetedFilter
             column={table.getColumn("isPaymentDone")}            
@@ -62,6 +57,11 @@ export function DataTableToolbar<TData>({
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
+      </div>
+      <div className="flex flex-1 items-center justify-end space-x-2 mr-3">
+        <Button variant={status.get!="PENDING"?"secondary":"default"} onClick={()=>status.set("PENDING")} className="h-8">Pending</Button>
+        <Button variant={status.get!="DELIVERED"?"secondary":"default"} onClick={()=>status.set("DELIVERED")} className="h-8">Delivered</Button>
+        <Button variant={status.get!="CANCELLED"?"secondary":"default"} onClick={()=>status.set("CANCELLED")} className="h-8">Cancelled</Button>
       </div>
       <div className="flex  items-center gap-x-5">
         <DataTableViewOptions table={table} />

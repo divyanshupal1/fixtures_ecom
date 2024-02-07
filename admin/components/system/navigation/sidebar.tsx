@@ -1,5 +1,5 @@
 "use client"
-import { Box, GlassWater, LucideLayoutDashboard, Menu,User,UserPlus2} from 'lucide-react'
+import { Box, GlassWater, LucideLayoutDashboard, Menu,User,UserPlus2,BadgePercent} from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import React from 'react'
@@ -13,6 +13,7 @@ const links = [
   {href:"/admin",icon:<LucideLayoutDashboard/>,text:"Dashboard",active:"dashboard"},
   {href:"/admin/orders",icon:<Box/>,text:"Orders",active:"orders"},
   {href:"/admin/products",icon:<GlassWater/>,text:"Products",active:"products"},
+  {href:"/admin/coupons",icon:<BadgePercent/>,text:"Coupons",active:"coupons"},
   {href:"/admin/customers",icon:<User/>,text:"Customers",active:"customers"},
 ]
 
@@ -28,7 +29,7 @@ function Sidebar({setOpen}:{setOpen:React.Dispatch<React.SetStateAction<boolean>
         {
           path.split('/')[1] === 'admin' && (
             <div className='w-full flex flex-col justify-center items-center pr-2 pt-6'>
-              <div className='flex flex-col gap-y-2 w-full pl-2'>
+              <div className='flex flex-col gap-y-1 w-full pl-2'>
                   {
                       links.map((item,index)=><NavTab key={index} item={item}/>)
                   }
@@ -50,7 +51,7 @@ function NavTab({item}:{item:{href:string,icon:JSX.Element,text:string,active:st
     const path = usePathname()
     return (
         <Link href={item.href} className='w-full'>
-            <div className={`w-full flex transition-colors items-center gap-x-3 p-3 px-6 rounded-full hover:bg-primary hover:text-white ${path.split('/')[2] === item.active ?'bg-primary text-white':""}`}>
+            <div className={`w-full flex transition-colors items-center gap-x-3 p-2 px-4 rounded-sm hover:bg-primary hover:text-white ${path.split('/')[2] === item.active ?'bg-primary text-white':""}`}>
                 {item.icon}
                 {item.text}
             </div>
