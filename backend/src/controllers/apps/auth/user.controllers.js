@@ -152,6 +152,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
+    .header("Same-Site", "None")
     .cookie("accessToken", accessToken, options) // set the access token in the cookie
     .cookie("refreshToken", refreshToken, options) // set the refresh token in the cookie
     .json(

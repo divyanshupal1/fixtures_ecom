@@ -2,7 +2,7 @@
 "use client"
 import {useEffect, useState} from "react"
 import { Button } from "@/components/ui/button"
-import {LOGIN_URL, USER_ROUTE} from "@/constants";
+import axiosInstance from "@/lib/axiosInstance";
 // import useCurrentUser from "@/hooks/loggedUser";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -29,14 +29,11 @@ export function LoginForm() {
 
   function SignMeIN(){
       setLoading(1)
-      fetch(LOGIN_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials:"include",
-        body: JSON.stringify({ username:username, password:password }),
-      }).then((res) => res.json()).then((data)=>{
+      axiosInstance.post("/users/login",{ 
+        username:username,
+        password:password 
+      })
+      .then((res) => res.data).then((data)=>{
         if(data.success) {
           console.log(data.data)
           setMsg("Successfully logged in")
@@ -57,11 +54,8 @@ export function LoginForm() {
       })
   }
   const fetchUser = async () =>{
-    const response = await fetch(USER_ROUTE+"/current-user",{
-      method:"GET",
-      credentials: 'include',
-    });
-    const data = await response.json();
+    const response = await axiosInstance.get("users/current-user");
+    const data = await response.data;
     if(data.success){
       console.log(data.data)
       router.push("/")
@@ -74,7 +68,7 @@ export function LoginForm() {
   // console.log(user)
   return (
 
-        <div className="w-[380px] p-6 rounded-3xl -mt-10 dark:bg-slate-900 bg-slate-100 bg-opacity-80 border drop-shadow-md">
+        <div className="w-[380px] max-sm:w-11/12 p-6 max-sm:p-3 max-sm:py-6 rounded-3xl -mt-10 max-sm:mt-[-200px] dark:bg-slate-900 bg-slate-100 bg-opacity-80 border drop-shadow-md">
           <div >
             <div className="text-lg font-bold leading-4 p-4">Login</div>
           </div>

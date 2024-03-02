@@ -1,12 +1,12 @@
 import { NextRequest } from "next/server";
-
 export async function GET(req:NextRequest, {params}:{params:{id:string}}) {
-  const data = {
+  const { id } = params;
+  let response = {
     "data": {
-      "_id": "649e7bfcdbf96264731f5a0c",
+      "_id": id,
       "order": {
         "__v": 0,
-        "_id": "649e7bfcdbf96264731f5a0c",
+        "_id": id,
         "address": {
           "__v": 0,
           "_id": "649e7bfcdbf96264731f5738",
@@ -218,5 +218,5 @@ export async function GET(req:NextRequest, {params}:{params:{id:string}}) {
     "statusCode": 200,
     "success": true
   }
-  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(response), { headers: { 'Content-Type': 'application/json' } });
 }

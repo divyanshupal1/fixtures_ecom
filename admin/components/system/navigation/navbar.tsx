@@ -11,7 +11,7 @@ function Navbar({ open, setOpen }:{open?:boolean, setOpen?:React.Dispatch<React.
   const path = usePathname()
 
   return (
-    <div className="w-full p-3 bg-primary-foreground flex items-center justify-between">
+    <div className="w-full p-3 dark:bg-primary-foreground max-sm:bg-white flex items-center justify-between">
       <div className="flex items-center gap-x-4">
        {path!='/login' && <div className="sm:hidden" onClick={() =>setOpen && setOpen((prev) => !prev)}>
           <Menu />

@@ -36,6 +36,11 @@ app.use(
 
 app.use(requestIp.mw());
 
+app.use((req, res, next) => {
+  console.log("Request IP: ", req.clientIp);
+  console.log("Request URL: ", req.originalUrl);
+  next();
+});
 // Rate limiter to avoid misuse of the service and avoid cost spikes
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

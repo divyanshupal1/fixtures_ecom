@@ -31,7 +31,7 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("_id")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px] dark:border-neutral-50"
+          className="h-8 w-[150px] lg:w-[250px] bg-background"
         />
         {table.getColumn("isPaymentDone") && (
           <DataTableFacetedFilter
@@ -57,11 +57,6 @@ export function DataTableToolbar<TData>({
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
-      </div>
-      <div className="flex flex-1 items-center justify-end space-x-2 mr-3">
-        <Button variant={status.get!="PENDING"?"secondary":"default"} onClick={()=>status.set("PENDING")} className="h-8">Pending</Button>
-        <Button variant={status.get!="DELIVERED"?"secondary":"default"} onClick={()=>status.set("DELIVERED")} className="h-8">Delivered</Button>
-        <Button variant={status.get!="CANCELLED"?"secondary":"default"} onClick={()=>status.set("CANCELLED")} className="h-8">Cancelled</Button>
       </div>
       <div className="flex  items-center gap-x-5">
         <DataTableViewOptions table={table} />

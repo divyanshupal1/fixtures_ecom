@@ -46,11 +46,11 @@ router
 
 router
   .route("/list/admin")
-  .get(verifyPermission([UserRolesEnum.ADMIN]), getOrderListAdmin);
+  .get(verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]), getOrderListAdmin);
 router
   .route("/status/:orderId")
   .patch(
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     mongoIdPathVariableValidator("orderId"),
     orderUpdateStatusValidator(),
     validate,
