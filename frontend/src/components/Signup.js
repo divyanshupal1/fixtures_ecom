@@ -81,7 +81,7 @@ const Signup = () => {
                     <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br />
                     {/* <h2>Confirm Password</h2>
                     <input type="password" placeholder="Password"  onChange={(e)=>setConfirmPassword(e.target.value)}/><br /> */}
-                        <button onClick={RegisterMe} disabled={loading!=0&&true}>Signup</button>
+                        <button className="fill" onClick={RegisterMe} disabled={loading!=0&&true}>Signup</button>
                         <br />
                         <p>Already have an Account?</p> <Link to="/login">Login here</Link>
                 </div>

@@ -12,6 +12,7 @@ const Body = ({addToCart}) =>{
     return (
       <div className="container">
         <div className="quant">
+          <div className="bg-black">
           <div className="shop">
             <h1>Get inspired</h1>
             <h1>and Redesign</h1>
@@ -20,7 +21,8 @@ const Body = ({addToCart}) =>{
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit
               tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
             </p>
-            <button className="shop-now">SHOP NOW!</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
+          </div>
           </div>
         </div>
 
@@ -50,21 +52,21 @@ const Body = ({addToCart}) =>{
           <div className="branches">
             <h2>Save up to $600 on select Home Appliance.</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button className="shop-now">CLAIM PROMO</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>CLAIM PROMO</span><span>CLAIM PROMO</span></div></Link></div>
           </div>
           <div className="branches">
             <h2>Enjoy sensational discounts of up to 50% this month only!</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
-            <button className="shop-now">SHOP NOW!</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
           </div>
             <div className="subbranch-container">
             <div className="sub-branches">
               <h2>Elevate your bathing experience</h2>
-              <button className="shop-now">SHOP NOW!</button>
+              <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
             </div>
             <div className="sub-branches">
               <h2>Explore our Kitchen Essentials Collection</h2>
-              <button className="shop-now">SHOP NOW!</button>
+              <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
             </div>
             </div>
           </div>
@@ -89,7 +91,7 @@ const Body = ({addToCart}) =>{
               </Link>
             ))}
             <div className="more">
-              <Link to="/shop" ><i class="fa-solid fa-circle-chevron-right" style={{color: "#FFD43B", fontSize: "50px", padding:"185px 0px 195px 0px"}}></i></Link>
+              <Link to="/shop" ><i class="fa-solid fa-circle-chevron-right" style={{color: "#ffad14", fontSize: "50px", padding:"185px 0px 195px 0px"}}></i></Link>
             </div>
         </div>
 
@@ -158,7 +160,6 @@ const Body = ({addToCart}) =>{
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
-            <ReviewCard />
           </div>
         </div>
 
@@ -167,10 +168,13 @@ const Body = ({addToCart}) =>{
             <h4>
               Subscribe to our newsletter for new products, trends and offers.
             </h4>
-            <input type="email" placeholder=" Email" />
-            <button className="signup">
-              <i class="fa-solid fa-envelope"></i> Sign Up
-            </button>
+            <div style={{display:"flex"}}>
+              <input type="email" placeholder=" Email" />
+              <button className="signup">
+                <i class="fa-solid fa-envelope" style={{padding:"2px 0px 5px 0px"}}></i> <p>SignUp</p>
+              </button>
+            </div>
+              
             <p style={{ fontSize: "x-small" }}>
               We respect your Privacy, so we never share your info.
             </p>

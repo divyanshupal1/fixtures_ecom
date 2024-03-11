@@ -14,7 +14,7 @@ const SaleCard = ({ id, imageURL, name, description, price, addToCart }) => {
             <p>{description.slice(0,65)+"..."}</p>
             <h4>₹{price}</h4>
             </div>
-            <button className="add-to-cart">VIEW DETAILS</button>
+            <button className="fill">VIEW DETAILS</button>
         </div>
     )
 }

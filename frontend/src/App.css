@@ -8,15 +8,25 @@
 header,
 header a {
   color: white;
-  height: 95px;
+  height: 0px;
   text-decoration: none;
-  background-color: rgb(0,0,0);
+  background-color: transparent;
   vertical-align: middle;
   font-size: 20px;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+
+header:hover {
+  background-color: rgb(0, 0, 0, 0.5);
 }
 
 header a{
   background-color: transparent;
+}
+header a:hover {
+  color: #ffde16;
 }
 
 header p,
@@ -36,8 +46,9 @@ p {
 
 .upper-header {
   display: flex;
-  padding: 15px 5px;
+  padding: 8px 5px;
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .headsale {
@@ -74,7 +85,7 @@ p {
 }
 
 .nav:hover {
-  color: yellow;
+  color: #ffde16;
 }
 
 
@@ -153,10 +164,16 @@ hr{
   width: 0%;
   overflow-y: scroll;
   overflow-x: hidden;
+  transition-duration: 0.2s;
 }
 
 .lower-header {
-  height: 50px;
+  transition: background-color 0.3s ease;
+  height: 35px;
+}
+
+.lower-header:hover{
+  background-color: rgb(0, 0, 0, 0.6);
 }
 
 .lower-header a {
@@ -166,24 +183,37 @@ hr{
 }
 
 .lower-header a:hover {
-  color: yellow;
+  color: #ffde16;
+}
+
+.small-part{
+  border: 1px solid gray;
+  padding: 10px 0px;
+  margin: 19px 8px;
 }
 
 .quant {
   /* background-image: url("https://picsum.photos/1000/280"); */
-  background-image: url("https://www.svjtechnocoat.com/wp-content/uploads/2023/09/BATHROOM-ACCESSORIES-4.jpg");
+  /* background-image: url("https://www.svjtechnocoat.com/wp-content/uploads/2023/09/BATHROOM-ACCESSORIES-4.jpg"); */
+  background-image: url("./components/images/image1.png");
+  z-index: 1;
   color: white;
   text-align: left;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  font-size: larger;
+  font-size: x-large;
+}
+
+.bg-black{
+  background-color: rgb(0, 0, 0, 0.5);
 }
 
 .shop {
   text-align: left;
-  padding: 10%;
+  padding: 8%;
   max-width: 450px;
+  z-index: 2;
 }
 
 .shop{
@@ -202,6 +232,7 @@ hr{
   font-weight: 600;
   margin: 7px 0px;
   padding: 13px 20px;
+  cursor: pointer;
 }
 
 
@@ -326,8 +357,9 @@ hr{
   position: relative;
   min-width: 100px;
   max-width: 250px;
-  max-height: 380px;
+  max-height: 400px;
   height:400px;
+  transition-duration: 0.5s;
 }
 
 .more{
@@ -354,7 +386,7 @@ hr{
   padding: 10px 15px;
   border: none;
   width: fit-content;
-  
+  cursor: pointer;
 }
 
 .salemark {
@@ -411,7 +443,8 @@ hr{
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 28px 8px;
-  margin: 2%;
+  margin: 2% auto;
+  max-width: 1200px;
 }
 
 .review-card {
@@ -450,11 +483,12 @@ textarea {
 }
 
 button:hover {
-  background-color: #f9c468;
+  background-color: #ffa600;
 }
 
 .quant7 {
-  background-image: url("https://images.meesho.com/images/products/129225681/f0wtk_512.webp");
+  /* background-image: url("https://images.meesho.com/images/products/129225681/f0wtk_512.webp"); */
+  background-image: url("./components/images/img2.jpg");
   padding: 80px 0px;
   background-position: center;
   background-repeat: no-repeat;
@@ -465,10 +499,10 @@ button:hover {
   margin: auto;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
-  width: 40%;
+  width: 50%;
   min-width: 300px;
-  max-width: 400px;
-  padding: 12px;
+  max-width: 450px;
+  padding: 2% 4px 10px 8px;
   color: white;
   font-size: larger;
   padding: 2%;
@@ -476,47 +510,51 @@ button:hover {
 }
 
 .newsletter input {
-  width: 60%;
+  flex-basis: 60%;
   max-width: 400px;
-  margin-bottom: 5px;
-  height: 30px;
+  height: 35px;
   border: none;
   border-radius: 4px 0px 0px 4px;
 }
 
 .newsletter h4 {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .signup {
   color: #2346a7;
   background-color: #ffdd00;
-  padding: 7px 15 px;
+  padding: 7px 4%;
   font-weight: 500;
-  height: 32px;
+  height: 37px;
   border: none;
   border-radius: 0px 4px 4px 0px;
+  flex-basis: 40%;
+  display: flex;
+  justify-content: center;
 }
 
 .signup:hover {
-  background-color: #dcce0e;
+  background-color: #ffa600;
 }
 
 footer {
   background-color: #090909;
   color: white;
-  padding: 50px 5px;
+  padding: 30px 5px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   text-align: left;
 }
 
 .foot-address {
   margin-top: 20px;
+  padding: 2%;
+  flex-basis: 30%;
 }
 
 .foot-address i {
-  padding: 5px;
+  padding: 8px 0px 18px 15px ;
   margin: 8px 2px;
   background-color: #dcce0e;
   color: #090909;
@@ -524,10 +562,14 @@ footer {
 
 .row{
   padding-bottom: 80px;
+  max-width: fit-content;
 }
 
 .foot-lists {
   display: flex;
+  flex-basis: 65%;
+  justify-content: space-between;
+  padding: 2% 4% 2% 2%;
 }
 
 .list-category {
@@ -537,6 +579,7 @@ footer {
 footer a {
   text-decoration: none;
   color: white;
+  padding: 4px 0px;
 }
 
 .contact {
@@ -618,15 +661,15 @@ footer a {
 }
 
 .filter-left input {
-  width: 52%;
+  width: 50%;
 }
 
 .filter-left select {
-  width: 78%;
+  width: 81%;
 }
 
 .search-product {
-  margin: 10px 5px;
+  margin: 10px 0px;
   padding: 10px 15px;
   background-color: #ffa600;
   width: 80%;
@@ -634,7 +677,7 @@ footer a {
 }
 
 .couple{
-  padding: 25px 20%;
+  padding: 25px 10%;
   display: flex;
   justify-content: space-between;
 }
@@ -662,12 +705,34 @@ footer a {
 .product-details {
   text-align: left;
   max-width: 600px;
-  padding: 5% 0px;
+  padding: 1% 5% 1% 0px;
 }
 .product-details p,
 h4 {
   margin: 4px 0px;
   font-size: larger;
+}
+
+.cart-flex{
+  display: flex;
+  transition-duration: 0.5s;
+}
+
+.cart-flex:hover{
+  scale: 1.03;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.details{
+  padding: 2% 2% 2% 5%;
+  flex-basis: 60%;
+  text-align: left;
+}
+
+.cart-layout{
+  margin: auto;
+  width: fit-content;
+  max-width: 700px;
 }
 
 .sub-images {
@@ -747,11 +812,12 @@ h2 {
   text-align: center;
   cursor: pointer;
   width: 100%;
+  &:hover{
+    background-color: #ffa600;
+    color: #000;
+  }
 }
 
-.button:hover {
-  background-color: #555;
-}
 
 /* Login Page Code */
 
@@ -853,9 +919,14 @@ h2 {
   }
 }
 
+.cart-item{
+  width: fit-content;
+}
+
 .payment{
   text-align: right;
-  margin: 10px 5%;
+  width: 50%;
+  margin: 10px auto;
 }
 
 .loader-container {
@@ -879,6 +950,9 @@ h2 {
 }
 
 @media (max-width: 850px) {
+  .small-part{
+    margin: 0px 8px;
+  }
   .specifictions {
     display: none;
   }
@@ -899,6 +973,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     margin: auto;
+  margin-top: 5%;
   }
   .foot-address {
     margin: 5px 10px;
@@ -947,11 +1022,24 @@ h2 {
 }
 
 @media (max-width: 450px) {
+  .payment{
+    width: 100%;
+  }
+  .cart-flex{
+    flex-direction: column;
+    text-align: center;
+  }
+  .details{
+    padding: 2%;
+    flex-basis: 60%;
+    text-align: center;
+  }
   .couple{
     padding: 0px 6%;
   }
   .shop {
     padding: 30px;
+    font-size:large;
   }
   .cards {
     flex-direction: column;
@@ -970,9 +1058,13 @@ h2 {
   .product-page {
     flex-direction: column;
   }
-  .product-details {
+  .product-details{
     margin: 5px;
     text-align: center;
+    padding: 2% 10%;
+    p{
+      text-align: center;
+    }
   }
   .counter {
     margin: 10px auto 3px auto;
@@ -1037,3 +1129,180 @@ h2 {
   margin: 5px 0px;
   margin-right: 2px;
 }
+
+
+/* Egg Reviews Css */
+
+.portfolio-container {
+	margin: 10px 0px;
+}
+
+.portfolio-card {
+	background-color: #030128;
+	padding: 20px;
+	text-align: center;
+	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+	margin:20px;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 5px, rgba(0, 0, 0, 0.3) 0px 10px, rgba(0, 0, 0, 0.2) 0px 15px, rgba(0, 0, 0, 0.1) 0px 20px, rgba(0, 0, 0, 0.05) 0px 25px;
+  max-width: 300px;
+  margin: auto;
+}
+.portfolio-card img {
+	max-width: 95%;
+	height: 250px;
+	width: 250px;
+	border-radius:50%;
+	margin-bottom: 20px;
+	box-shadow: #fba226 0px 0px 0px 3px, #dea437 0px 0px 0px 6px, #f6bc0e 0px 0px 0px 9px;
+}
+
+.portfolio-card h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+	color:aliceblue;
+}
+
+.portfolio-card p {
+	font-size: 11px;
+	margin-bottom: 20px;
+	color:aliceblue;
+	padding: 30px;
+}
+.egg {
+	/* Modify size here: */
+	--size: 50px;
+	display: block;
+	width: var(--size);
+	height: calc(var(--size) * 1.44);
+	background-color: #333;
+  }
+
+  .portfolio-card:hover{
+	  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    scale:1.02;
+  }
+
+  .credit a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: 800;
+  }
+  
+  .credit {
+	  color: #fff;
+	text-align: center;
+	margin-top: 10px;
+	font-family: Verdana,Geneva,Tahoma,sans-serif;
+  }
+
+
+  .btn-epic {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 100;
+    height: 52px;
+    background: #fff;
+    transform: translate3d(0px, 0%, 0px);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    transition-delay: 0.6s;
+  }
+  .btn-epic:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    border-radius: 50% 50% 0 0;
+    transform: translateY(100%) scaleY(0.5);
+    transition: all 0.6s ease;
+  }
+  .btn-epic:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffad14;
+    border-radius: 0;
+    transform: translateY(0) scaleY(1);
+    transition: all 0.6s ease;
+  }
+  .btn-epic div {
+    position: relative;
+    top: 16px;
+    width: 100%;
+    height: 52px;
+    text-transform: uppercase;
+    overflow: hidden;
+  }
+  .btn-epic span {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.5s ease;
+  }
+  .btn-epic span:first-child {
+    color: #ffad14;
+    transform: translateY(24px);
+  }
+  .btn-epic span:last-child {
+    color: #1e0f21;
+    transform: translateY(0);
+  }
+  .btn-epic:hover {
+    background: #3ad2d0;
+    transition: background 0.2s linear;
+    transition-delay: 0.6s;
+  }
+  .btn-epic:hover:after {
+    border-radius: 0 0 50% 50%;
+    transform: translateY(-100%) scaleY(0.5);
+    transition-delay: 0;
+  }
+  .btn-epic:hover:before {
+    border-radius: 0;
+    transform: translateY(0) scaleY(1);
+    transition-delay: 0;
+  }
+  .btn-epic:hover span:first-child {
+    transform: translateY(0);
+  }
+  .btn-epic:hover span:last-child {
+    transform: translateY(-24px);
+  }
+  
+
+  .fill {
+    color: #000000;
+    --hover: #ffad14;
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    margin: 2px 0px 18px 0px;
+    transition: 0.5s;
+    cursor: pointer;
+    &:focus { 
+      border-color: var(--hover);
+      color: #fff;
+    }
+  }
+  .fill:hover, .fill:focus {
+    border-color: var(--hover);
+    color: #000000;
+  }
+  .fill:hover,
+  .fill:focus {
+    box-shadow: inset 0 0 0 2em var(--hover);
+  }

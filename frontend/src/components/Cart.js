@@ -10,42 +10,51 @@ const Cart = ({ cartItems, removeFromCart  }) => {
 
   return (
     <div className="cart">
-       <h1>My Cart</h1>
-       
-       {
-  (cartItems.length>0)?<table>
-  <tr>
-    <th>Image</th>
-    <th>Product Name</th>
-    <th>Price</th>
-    <th>Count</th>
-    <th>Total Price</th>
-    {/* <th>Remove</th> */}
-  </tr>
-  <hr style={{width:"500%",margin:"5px 0px 10px 3px"}}/>
-  
-  {cartItems.map((item) => (
-    <>
-    <tr key={item.id} className="cart-item">
-      <td><img src={item.image} alt="cartProductImage" /></td>
-      <td>{item.name}</td>
-      <td>₹{item.price}</td>
-      <td>{item.count}</td>
-      <td>₹{item.price * item.count}</td>  
-      <td>
-        <button onClick={() => removeFromCart(item.id)} className="add-to-cart"><i class="fa-solid fa-trash"></i></button>
-      </td>
-    </tr>
-  <hr style={{width:"500%", margin:"5px 0px 10px 5%"}}/>
-    </>
-  ))}
-</table>
-:<h1 style={{color:"gray"}}>No Products added to Cart.</h1>
-}
-    <div className="payment">
-      <h3>Grand Total: ₹{calculateGrandTotal()}</h3>
-      <button className="add-to-cart" style={{ marginTop: "10px"}}>PAY NOW</button>
-    </div>
+      <h1>My Cart</h1>
+
+      {cartItems.length > 0 ? (
+        <div className="cart-layout">
+          <hr style={{ width: "98%", margin: "5px 0px 10px 3px" }} />
+
+          {cartItems.map((item) => (
+            <>
+              <div key={item.id} className="cart-item">
+                <div className="cart-flex">
+                  <div className="cart-image" style={{ flexBasis:"30%", minWidth:"250px",padding:"1%"}}>
+                  <img
+                    src={item.image}
+                    alt="cartProductImage"
+                    style={{width:"100%"}}
+                  />
+                  </div>
+                  <div className="details">
+                    <p style={{fontWeight:"600"}}>{item.name}</p>
+                    <p>Price: ₹{item.price}</p>
+                    <p>Qty: {item.count}</p>
+                    <p>Sub Total: ₹{item.price * item.count}</p>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="add-to-cart"
+                      style={{margin:"4px 0px"}}
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr style={{ width: "98%", margin: "5px 0px 10px 0px" }} />
+            </>
+          ))}
+        </div>
+      ) : (
+        <h1 style={{ color: "gray" }}>No Products added to Cart.</h1>
+      )}
+      <div className="payment">
+        <h3>Grand Total: ₹{calculateGrandTotal()}</h3>
+        <button className="add-to-cart" style={{ marginTop: "10px"}}>
+          PAY NOW
+        </button>
+      </div>
     </div>
   );
 };

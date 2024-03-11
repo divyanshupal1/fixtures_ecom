@@ -73,7 +73,7 @@ const Login=()=>{
                     <input type="text" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/><br />
                     <h2>Password</h2>
                     <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} /><br />
-                        <button onClick={SignMeIN} disabled={loading!=0&&true}>Login</button>
+                        <button className="fill" onClick={SignMeIN} disabled={loading!=0&&true}>Login</button>
                         <br />
                         {/* <Loader /> */}
                         <p>Dont have an Account?</p> <Link to="/signup">Register here</Link>
