@@ -211,7 +211,8 @@ hr{
 
 .shop {
   text-align: left;
-  padding: 8%;
+  padding: 6%;
+  padding-top: 8%;
   max-width: 450px;
   z-index: 2;
 }
@@ -234,7 +235,6 @@ hr{
   padding: 13px 20px;
   cursor: pointer;
 }
-
 
 .specifictions {
   display: flex;

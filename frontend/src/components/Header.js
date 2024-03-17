@@ -8,8 +8,10 @@ const Header = () =>
     window.addEventListener('scroll', function() {
         var header = document.querySelector('.upper-header');
         var downheader = document.querySelector('.lower-header');
-        header.style.backgroundColor = window.scrollY > 0 ? 'rgb(0,0,0,0.6)' : 'transparent';
-        downheader.style.backgroundColor = window.scrollY > 0 ? 'rgb(0,0,0,0.6)' : 'transparent';
+        header.style.backgroundColor = window.scrollY > 0 ? 'rgb(0,0,0,0.5)' : 'transparent';
+        header.style.transitionDuration = '1s'
+        downheader.style.backgroundColor = window.scrollY > 0 ? 'rgb(0,0,0,0.5)' : 'transparent';
+        downheader.style.transitionDuration = '1s'
       });
 
     return(
