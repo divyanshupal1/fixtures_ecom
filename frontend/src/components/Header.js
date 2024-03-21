@@ -24,7 +24,7 @@ const Header = () =>
                 <li className='nav' style={{listStyle:"none"}}><i class="fa-solid fa-circle-user" style={{padding: "2% 0.5%"}}></i></li>
             </div>
         </div>
-        <hr style={{color:"gray", opacity:"0.8", margin:"0px"}} />
+        <hr style={{color:"gray", opacity:"0.5", margin:"0px"}} />
         <div className='lower-header' style={{textAlign:"left"}}>
             <i class="fa-solid fa-bars" style={{padding:"8px 20px"}} onClick={() =>{setToggle(!toggle)}}></i>
         </div>

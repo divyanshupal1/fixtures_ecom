@@ -73,7 +73,15 @@ const ProductPage = ({addToCart}) => {
           <img key={subImage._id} src={subImage.url} alt="subProductImage" />
         ))}
       </div>
-            <ReviewCard />
+      <h1>Customer Reviews</h1>
+
+      <div className='feedbacks'>
+      <ReviewCard />
+      <ReviewCard />
+      <ReviewCard />
+      <ReviewCard />
+      <ReviewCard />
+      </div>
     </div>
   );
 };

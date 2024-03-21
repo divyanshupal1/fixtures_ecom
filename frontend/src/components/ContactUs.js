@@ -3,6 +3,7 @@ import React from "react"
 const ContactUs = () =>{
     return (
       <div className="container">
+        <div style={{padding:"0px 2%"}}>
         <div className="contact">
           <p style={{ fontSize: "25px", fontWeight: "550", margin: "20px 0px 10px 0px" }}>
             Contact us for all your questions and opinions, or you can solve
@@ -53,6 +54,7 @@ const ContactUs = () =>{
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );

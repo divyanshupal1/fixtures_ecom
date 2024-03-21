@@ -1,8 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Libre+Baskerville&family=Lilita+One&display=swap');
 
+html{
+  scroll-behavior: smooth;
+}
+
 .App {
   text-align: center;
   font-family: 'Inter', sans-serif;
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff; /* Background color of the preloader */
+  z-index: 9999; /* Ensure preloader appears above other content */
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 16px solid #f3f3f3; /* Loader color */
+  border-top: 16px solid #ffde16; /* Loader color */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite; /* Loader animation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 header,
@@ -41,7 +73,6 @@ h4,
 p {
   margin: 0;
   padding: 5px 0px;
-
 }
 
 .upper-header {
@@ -54,6 +85,7 @@ p {
 .headsale {
   flex-basis: 70%;
   height: fit-content;
+  opacity: 0.6;
 }
 
 .log {
@@ -444,7 +476,13 @@ hr{
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 28px 8px;
   margin: 2% auto;
+  padding: 1% 0px;
   max-width: 1200px;
+  background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMjEtcGQtc2FzaS0wMy1qb2I1OTguanBn.jpg");
+  background-position: center;
+  background-size: cover;
+  overflow-y: scroll;
+  max-height: 200vh;
 }
 
 .review-card {
@@ -949,7 +987,7 @@ h2 {
   100% { transform: rotate(360deg); }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 920px) {
   .small-part{
     margin: 0px 8px;
   }
@@ -1019,6 +1057,9 @@ h2 {
   .couple{
     padding: 0px 15%;
   }
+  .salecard{
+    margin: 10px 0px;
+  }
 }
 
 @media (max-width: 450px) {
@@ -1039,7 +1080,8 @@ h2 {
   }
   .shop {
     padding: 30px;
-    font-size:large;
+    padding-top: 85px;
+    font-size: large;
   }
   .cards {
     flex-direction: column;
@@ -1084,6 +1126,7 @@ h2 {
   }
   .salecard{
     height: fit-content;
+    margin: 20px 0px;
   }
   .arrival-cards{
     padding: auto;
@@ -1093,6 +1136,13 @@ h2 {
   }
   .cart th{
     font-size: medium;
+  }
+  .log p{
+    padding: 0px 4px;
+  }
+  .log li
+  {
+    padding: 0px 2px;
   }
 }
 /* Filter Styling */
@@ -1138,14 +1188,13 @@ h2 {
 }
 
 .portfolio-card {
-	background-color: #030128;
+  background-color:rgba(0, 0, 0, 0.7);
 	padding: 20px;
 	text-align: center;
-	border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
 	margin:20px;
-	box-shadow: rgba(0, 0, 0, 0.4) 0px 5px, rgba(0, 0, 0, 0.3) 0px 10px, rgba(0, 0, 0, 0.2) 0px 15px, rgba(0, 0, 0, 0.1) 0px 20px, rgba(0, 0, 0, 0.05) 0px 25px;
   max-width: 300px;
   margin: auto;
+  border-radius: 8px;
 }
 .portfolio-card img {
 	max-width: 95%;
@@ -1178,8 +1227,8 @@ h2 {
   }
 
   .portfolio-card:hover{
-	  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     scale:1.02;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px, rgba(0, 0, 0, 0.3) 0px 10px, rgba(0, 0, 0, 0.2) 0px 15px, rgba(0, 0, 0, 0.1) 0px 20px, rgba(0, 0, 0, 0.05) 0px 25px;
   }
 
   .credit a {

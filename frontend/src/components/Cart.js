@@ -9,8 +9,8 @@ const Cart = ({ cartItems, removeFromCart  }) => {
 
 
   return (
-    <div className="cart">
-      <h1>My Cart</h1>
+    <div className="cart" style={{marginTop:"80px"}}>
+      <h1>MY CART</h1>
 
       {cartItems.length > 0 ? (
         <div className="cart-layout">
@@ -47,7 +47,7 @@ const Cart = ({ cartItems, removeFromCart  }) => {
           ))}
         </div>
       ) : (
-        <h1 style={{ color: "gray" }}>No Products added to Cart.</h1>
+        <h1 style={{ color: "gray" }}>The Cart is Empty</h1>
       )}
       <div className="payment">
         <h3>Grand Total: ₹{calculateGrandTotal()}</h3>
