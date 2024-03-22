@@ -29,7 +29,13 @@ const httpServer = createServer(app);
 // global middlewares
 app.use(
   cors({
-    origin:[ process.env.CORS_ORIGIN ,"http://localhost:3000/", "https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app/"],
+    origin:(origin, callback) => {
+      if ([ process.env.CORS_ORIGIN , "https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app/"].includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
