@@ -3,7 +3,7 @@
 "use client"
 import React, {useEffect, useState } from 'react'
 import { Categories } from './components/Categories';
-import { Products } from './components/Products';
+// import { Products } from './components/Products';
 import { useToast } from "@/components/ui/use-toast"
 import axiosInstance from '@/lib/axiosInstance';
 
@@ -65,10 +65,10 @@ export default function Page() {
           <div className={`w-full h-full flex transition-all ease-in-out relative overflow-hidden ${active==0?'':''}`}>
             <div className={`w-full h-full absolute left-0 top-0 flex transition-all ${active==1?'-translate-x-full':''}`}>
               <div className='w-full h-full shrink-0 flex flex-col' >
-                <Categories categories={categories} changeCategory={changeCategory} fetchCategories={fetchCategories} loading={laodingCategories}/>
+              {<Categories categories={categories} changeCategory={changeCategory} fetchCategories={fetchCategories} loading={laodingCategories}/> }
               </div>
               <div className='w-full h-full shrink-0 flex flex-col relative' >
-                <Products categories={categories} category={category} clearCategory={clearCategory}/>
+                {/**<Products categories={categories} category={category} clearCategory={clearCategory}/>**/}
               </div>              
             </div>
           </div>

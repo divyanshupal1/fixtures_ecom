@@ -341,8 +341,6 @@ export function AddProduct({
     //   setLoading(false)
   }
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty())
-  console.log(editorState.getCurrentContent().getAllEntities())
   return (
     <Dialog open={dialogOpen}>
       <DialogTrigger asChild>
@@ -405,19 +403,12 @@ export function AddProduct({
             </div>
           </div>
           <div className="w-full">
-            {/* <InputField
+            <InputField
               label="Description"
               placeholder="Product Description"
               value={description}
               onChange={setDescription}
               type="text"
-            /> */}
-            <Editor
-              editorState={editorState}
-              toolbarClassName="toolbarClassName bg-gray-500 shadow-sm rounded-md p-2"
-              wrapperClassName="wrapperClassName shadow-sm  rounded-md p-2"
-              editorClassName="editorClassName"
-              onEditorStateChange={setEditorState}
             />
           </div>
 
@@ -526,9 +517,7 @@ const InputField = ({
     </div>
   );
 };
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState } from 'draft-js'
+
 import {
   Select,
   SelectContent,
