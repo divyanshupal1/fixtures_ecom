@@ -210,24 +210,15 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
     },
   ]);
 
-  const products = await Product.aggregatePaginate(
-    productAggregate,
-    getMongoosePaginationOptions({
-      page,
-      limit,
-      customLabels: {
-        totalDocs: "totalProducts",
-        docs: "products",
-      },
-    })
-  );
+  const products = await Product.find({ category})
+
 
   return res
     .status(200)
     .json(
       new ApiResponse(
         200,
-        { ...products, category },
+        products,
         "Category products fetched successfully"
       )
     );

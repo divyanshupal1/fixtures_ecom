@@ -28,7 +28,7 @@ router
   .get(getAllProducts)
   .post(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     // In product form we will received one main image file type
     // And max 4 sub images
     upload.fields([
