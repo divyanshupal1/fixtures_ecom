@@ -29,7 +29,7 @@ const httpServer = createServer(app);
 // global middlewares
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin:[ process.env.CORS_ORIGIN ,"http://localhost:3000/", "https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app/"],
     credentials: true,
   })
 );
