@@ -27,23 +27,32 @@ const app = express();
 const httpServer = createServer(app);
 
 // global middlewares
-var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app/"]
+var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app"]
 app.use(
   cors({
     origin: function (origin, callback) {
-      console.log("Allowed by CORS",origin)
+      
       if (whitelist.indexOf(origin) !== -1 || !origin) {
-        callback(null, true)
+        console.log("Allowed by cors: "+origin)
+	      callback(null, true)
       } else {
         callback(new Error('Not allowed by CORS'+origin))
       }
     },
     credentials: true,
-    preflightContinue: true,
   })
 );
 app.options('*', cors())
-
+app.use((req, res, next) =>{
+  const origin = req.headers.origin;
+  if (whitelist.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }; // Replace this with your specific origin
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials
+  next();
+});
 app.use(requestIp.mw());
 
 app.use((req, res, next) => {
