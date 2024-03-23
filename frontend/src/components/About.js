@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="container">
       <div className="about-section">
-        <h1 style={{fontSize: "30px", margin: "10px 0px"}}>About Us Page</h1>
+        <h1 style={{fontSize: "30px", margin: "20px 0px", marginTop:"40px"}}>About Us Page</h1>
         <p>Some text about who we are and what we do.</p>
       </div>
 

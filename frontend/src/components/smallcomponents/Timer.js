@@ -41,10 +41,10 @@ const Timer = ({ hours, minutes, seconds }) => {
 
   return (
     <div>
-      <div style={{margin:"8px 0px"}}>
-        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black"}}>{time.hours < 10 ? `0${time.hours}` : time.hours}</span>:
-        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black"}}>{time.minutes < 10 ? `0${time.minutes}` : time.minutes}</span>:
-        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black"}}>{time.seconds < 10 ? `0${time.seconds}` : time.seconds}</span>
+      <div style={{margin:"20px 0px"}}>
+        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black", borderRadius:"4px"}}>{time.hours < 10 ? `0${time.hours}` : time.hours}</span>:
+        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black", borderRadius:"4px"}}>{time.minutes < 10 ? `0${time.minutes}` : time.minutes}</span>:
+        <span style={{backgroundColor:"rgb(255,215,2)", padding: "10px", color: "black", border:"1px solid black", borderRadius:"4px"}}>{time.seconds < 10 ? `0${time.seconds}` : time.seconds}</span>
       </div>
     </div>
   );

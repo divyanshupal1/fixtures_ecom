@@ -14,8 +14,8 @@ const Counter = ({count, setCount}) => {
 
   return (
     <div className='counter'>
-      <button onClick={handleDecrement} style={{width:"41px",backgroundColor: "wheat", marginRight:"12px"}}>-</button><h1>{count}</h1>
-      <button onClick={handleIncrement} style={{width:"41px",backgroundColor: "wheat",marginLeft: "12px"}}>+</button>
+      <button onClick={handleDecrement} style={{width:"48px",backgroundColor: "wheat", marginRight:"15px", cursor:"pointer"}}>-</button><h1>{count}</h1>
+      <button onClick={handleIncrement} style={{width:"48px",backgroundColor: "wheat",marginLeft: "15px", cursor:"pointer"}}>+</button>
     </div>
   );
 };

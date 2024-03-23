@@ -27,25 +27,45 @@ const Body = ({addToCart}) =>{
         </div>
 
         <div className="quant2">
-          <div className="specifictions">
-            <div className="each-specification">
-              <h2>Original Product</h2>
-              <p>100% Original product that covered warranty by the vendor.</p>
+                <div className="specifictions">
+                    <div className="each-specification">
+                      <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-gem" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Original Product</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>100% Original product that covered warranty by the vendor.</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-award" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>30 Days Warranty</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>You have the right to return your orders within 30 days.</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-truck" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Global Shipping</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your orders are shipped seamlessly between countries</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-shield" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>100% Secure</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your payments are secure with our private security network.</p>
+                    </div>
+                </div>
             </div>
-            <div className="each-specification">
-              <h2>30 Days Warranty</h2>
-              <p>You have the right to return your orders within 30 days.</p>
-            </div>
-            <div className="each-specification">
-              <h2>Global Shipping</h2>
-              <p>Your orders are shipped seamlessly between countries</p>
-            </div>
-            <div className="each-specification">
-              <h2>100% Secure</h2>
-              <p>Your payments are secure with our private security network.</p>
-            </div>
-          </div>
-        </div>
 
         <div className="all-shops">
           <div className="quant3">
@@ -75,7 +95,7 @@ const Body = ({addToCart}) =>{
         <div className="quant4">
           <div className="flashsale">
             <h2 style={{fontSize: "40px"}}>Flash Sale</h2>
-            <p>Grab the Best Deals on Bathroom & Kitchen Essentials Now!</p>
+            <p style={{margin:"10px 0px"}}>Grab the Best Deals on Bathroom & Kitchen Essentials Now!</p>
             <Timer hours={7} minutes={30} seconds={0} />
           </div>
           {ProductsData.slice(0,3).map((product) => (
@@ -96,7 +116,11 @@ const Body = ({addToCart}) =>{
         </div>
 
         <div className="quant5">
-          <h2 style={{fontSize: "30px"}}>New Arrival</h2>
+          <h2 style={{fontSize: "30px", textAlign:"left", paddingBottom:"10px", paddingLeft:"5%"}}>New Arrival</h2>
+          <p style={{textAlign:"left", padding:"5px 5%"}}>Some text about the latest released products</p>
+          <div style={{textAlign:"right", paddingRight:"5%"}}>
+            <Link to="/shop"><button className="shop-now">VIEW ALL</button></Link>
+          </div>
           <div className="arrival-cards">
             {ProductsData && ProductsData.length > 0
               ? ProductsData.map((product,i) => (

@@ -20,15 +20,15 @@ html{
 }
 
 #loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
+  top: 45%;
+  left: 48%;
   transform: translate(-50%, -50%);
   border: 16px solid #f3f3f3; /* Loader color */
   border-top: 16px solid #ffde16; /* Loader color */
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   animation: spin 2s linear infinite; /* Loader animation */
 }
 
@@ -204,10 +204,6 @@ hr{
   height: 35px;
 }
 
-.lower-header:hover{
-  background-color: rgb(0, 0, 0, 0.6);
-}
-
 .lower-header a {
   color: white;
   text-decoration: none;
@@ -220,7 +216,7 @@ hr{
 
 .small-part{
   border: 1px solid gray;
-  padding: 10px 0px;
+  padding: 20px 0px;
   margin: 19px 8px;
 }
 
@@ -274,7 +270,7 @@ hr{
 }
 
 .each-specification {
-  max-width: 270px;
+  max-width: 300px;
   text-align: left;
   padding: 2%;
 }
@@ -331,6 +327,10 @@ hr{
   margin: 40px 0px;
 }
 
+.more:hover{
+  scale: 1.05;
+}
+
 .quant4 {
   display: flex;
   justify-content: center;
@@ -358,6 +358,7 @@ hr{
 .more{
   height: fit-content;
   margin: auto 2px;
+  transition-duration: 0.6s;
 }
 
 .cards {
@@ -424,16 +425,21 @@ hr{
 .salemark {
   border-radius: 50% 50% 50% 50%;
   width: fit-content;
-  padding: 9px 3px 10px 4px;
+  padding: 10px 3px 10px 4px;
   vertical-align: middle;
   font-size: small;
-  background-color: black;
-  color: white;
+  background-color: #ffad14;
+  color: rgb(0, 0, 0);
   position: absolute;
   top: 0;
   right: 0;
   margin: 0px 0px 5px 5px;
   z-index: 2;
+  border: 1px solid rgb(209, 209, 209);
+}
+
+.flex{
+  display: flex;
 }
 
 .arrival-cards {
@@ -478,7 +484,6 @@ hr{
   margin: 2% auto;
   padding: 1% 0px;
   max-width: 1200px;
-  background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMjEtcGQtc2FzaS0wMy1qb2I1OTguanBn.jpg");
   background-position: center;
   background-size: cover;
   overflow-y: scroll;
@@ -700,10 +705,15 @@ footer a {
 
 .filter-left input {
   width: 50%;
+  border-radius: 4px;
+  height: 25px;
+  border: 1px solid rgb(132, 132, 132);
 }
 
 .filter-left select {
-  width: 81%;
+  width: 80.5%;
+  border-radius: 4px;
+  height: 35px;
 }
 
 .search-product {
@@ -1181,40 +1191,43 @@ h2 {
 }
 
 
-/* Egg Reviews Css */
+/* Rectangle Reviews Css */
 
 .portfolio-container {
 	margin: 10px 0px;
 }
 
 .portfolio-card {
-  background-color:rgba(0, 0, 0, 0.7);
-	padding: 20px;
+  background-color:rgb(237, 237, 237);
+  color: black;
+	padding: 40px;
 	text-align: center;
 	margin:20px;
-  max-width: 300px;
+  max-width: 220px;
   margin: auto;
   border-radius: 8px;
+  height: 350px;
+  transition-duration: 0.5s;
 }
 .portfolio-card img {
 	max-width: 95%;
-	height: 250px;
-	width: 250px;
+	height: 200px;
+	width: 200px;
 	border-radius:50%;
 	margin-bottom: 20px;
-	box-shadow: #fba226 0px 0px 0px 3px, #dea437 0px 0px 0px 6px, #f6bc0e 0px 0px 0px 9px;
+	box-shadow: #949494 0px 0px 0px 3px, #6b6b6b 0px 0px 0px 6px, #292929 0px 0px 0px 9px;
 }
 
 .portfolio-card h2 {
 	font-size: 24px;
 	margin-bottom: 10px;
-	color:aliceblue;
+	color:rgb(0, 0, 0);
 }
 
 .portfolio-card p {
 	font-size: 11px;
 	margin-bottom: 20px;
-	color:aliceblue;
+	color:rgb(0, 0, 0);
 	padding: 30px;
 }
 .egg {
@@ -1228,7 +1241,7 @@ h2 {
 
   .portfolio-card:hover{
     scale:1.02;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px, rgba(0, 0, 0, 0.3) 0px 10px, rgba(0, 0, 0, 0.2) 0px 15px, rgba(0, 0, 0, 0.1) 0px 20px, rgba(0, 0, 0, 0.05) 0px 25px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px;
   }
 
   .credit a {
@@ -1335,11 +1348,12 @@ h2 {
     --hover: #ffad14;
     background: none;
     border: 2px solid;
+    border-radius: 4px;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
-    margin: 2px 0px 18px 0px;
+    margin: 18px 0px 4px 0px;
     transition: 0.5s;
     cursor: pointer;
     &:focus { 

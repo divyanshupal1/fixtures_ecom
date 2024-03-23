@@ -69,7 +69,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{paddingTop:"120px"}}>
             <div className="login-form">
                 <h1>Signup</h1>
                 <div>

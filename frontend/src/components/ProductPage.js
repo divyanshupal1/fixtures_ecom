@@ -31,26 +31,43 @@ const ProductPage = ({addToCart}) => {
 
   return (
     <div className='container'>
-        <div className="quant2">
+        <div className="quant2" style={{marginTop:"80px"}}>
                 <div className="specifictions">
                     <div className="each-specification">
-                        <i class="fas fa-regular fa-gem"></i>
+                      <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-gem" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Original Product</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>100% Original product that covered warranty by the vendor.</p>
                     </div>
                     <div className="each-specification">
-                        <h4>Original Product</h4>
-                        <p>100% Original product that covered warranty by the vendor.</p>
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-award" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>30 Days Warranty</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>You have the right to return your orders within 30 days.</p>
                     </div>
                     <div className="each-specification">
-                        <h4>30 Days Warranty</h4>
-                        <p>You have the right to return your orders within 30 days.</p>
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-truck" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Global Shipping</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your orders are shipped seamlessly between countries</p>
                     </div>
                     <div className="each-specification">
-                        <h4>Global Shipping</h4>
-                        <p>Your orders are shipped seamlessly between countries</p>
-                    </div>
-                    <div className="each-specification">
-                        <h4>100% Secure</h4>
-                        <p>Your payments are secure with our private security network.</p>
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-shield" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>100% Secure</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your payments are secure with our private security network.</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +81,7 @@ const ProductPage = ({addToCart}) => {
             <p>{product.description}</p>
             <p style={{margin:"10px 0px"}}>- Last Updated: {product.updatedAt}</p>
             <Counter count={count} setCount={setCount} />
-            <button className='add-to-cart' style={{marginLeft:"0px"}} onClick={handleAddToCart}>ADD TO CART</button>
+            <button className='add-to-cart' style={{marginLeft:"0px", padding:"13px 25px"}} onClick={handleAddToCart}>ADD TO CART</button>
         </div>
         </div>
       <h2 style={{marginTop:"40px"}}>Related Images</h2>
