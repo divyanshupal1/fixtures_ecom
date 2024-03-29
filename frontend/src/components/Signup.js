@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link,  useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SIGNUP_URL, USER_ROUTE } from "./Constants";
+import Header from "./Header";
 
-const Signup = () => {
-    const navigate = useNavigate();
+const Signup = ({ toggleLoginPopup }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-//   const [confirmPassword, setConfirmPassword] = useState("");
-//   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState(null);
-
+  const [showPopup, setShowPopup] = useState(true);
   const [loading, setLoading] = useState(0);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const Signup = () => {
   }, [username, password]);
 
   function RegisterMe() {
-    console.log(email, username ,password);
     setLoading(1);
     fetch(SIGNUP_URL, {
       method: "POST",
@@ -28,23 +26,26 @@ const Signup = () => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({email:email, username: username, password: password }),
+      body: JSON.stringify({ email: email, username: username, password: password }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data);
           setMsg("Successfully registered");
           setUser(data.data);
           setLoading(2);
-          alert("Signed up Successfully")
+          setShowPopup(false);
+          alert("Signed up Successfully");
           navigate('/login');
         } else {
-          if (data.statusCode === 409) {setMsg("Username already exists")
-            alert("User Already Exists")
-            navigate('/login');}
-          else {setMsg("Something went wrong");
-            alert("Something went wrong")}
+          if (data.statusCode === 409) {
+            setMsg("Username already exists");
+            alert("User Already Exists");
+            navigate('/login');
+          } else {
+            setMsg("Something went wrong");
+            alert("Something went wrong");
+          }
           setLoading(0);
         }
       })
@@ -69,24 +70,29 @@ const Signup = () => {
   };
 
   return (
-    <div className="login-container" style={{paddingTop:"120px"}}>
-            <div className="login-form">
+    <>
+      {showPopup && (
+        <div className="popup-container">
+          <div className="container" style={{ width: "50%" }}>
+            <div className="login-container" style={{ paddingTop: "120px" }}>
+              <div className="login-form">
                 <h1>Signup</h1>
                 <div>
-                    <h2>Email</h2>
-                    <input type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/><br />
-                    <h2>Username</h2>
-                    <input type="text" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/><br />
-                    <h2>Password</h2>
-                    <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br />
-                    {/* <h2>Confirm Password</h2>
-                    <input type="password" placeholder="Password"  onChange={(e)=>setConfirmPassword(e.target.value)}/><br /> */}
-                        <button className="fill" onClick={RegisterMe} disabled={loading!=0&&true}>Signup</button>
-                        <br />
-                        <p>Already have an Account?</p> <Link to="/login">Login here</Link>
+                  <h2>Email</h2>
+                  <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} /><br />
+                  <h2>Username</h2>
+                  <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} /><br />
+                  <h2>Password</h2>
+                  <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
+                  <button className="fill" onClick={RegisterMe} disabled={loading != 0 && true}>Signup</button>
+                  
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -98,8 +98,8 @@ const Filter = ({addToCart}) => {
         </label>
         </div>
 
-        <button onClick={handleSearchButtonClick} className="search-product" style={{borderRadius:"4px"}}>
-          SEARCH
+        <button onClick={handleSearchButtonClick} className="search-product" style={{borderRadius:"8px"}}>
+          FILTER
         </button>
       </div>
       </div>

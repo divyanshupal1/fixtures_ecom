@@ -1,9 +1,12 @@
 import React from "react";
 import TeamMember from "./smallcomponents/TeamMember";
+import Header2 from "./Header2.js"
+
 
 const About = () => {
   return (
     <div className="container">
+      <Header2 />
       <div className="about-section">
         <h1 style={{fontSize: "30px", margin: "20px 0px", marginTop:"40px"}}>About Us Page</h1>
         <p>Some text about who we are and what we do.</p>

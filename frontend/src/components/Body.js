@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import SaleCard from "./smallcomponents/salecard.js"
 import ReviewCard from "./smallcomponents/ReviewCard.js"
 import ProductsData from "./smallcomponents/ProductsData.js"
+import Header2 from "./Header2.js"
 
 const Body = ({addToCart}) =>{
 
@@ -11,12 +12,14 @@ const Body = ({addToCart}) =>{
 
     return (
       <div className="container">
+      <Header2 />
+        
         <div className="quant">
           <div className="bg-black">
           <div className="shop">
-            <h1>Get inspired</h1>
-            <h1>and Redesign</h1>
-            <h1>Your Space.</h1>
+            <h1>Get inspired and</h1>
+            <h1>Redesign your</h1>
+            <h1>Space.</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit
               tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
@@ -193,13 +196,13 @@ const Body = ({addToCart}) =>{
               Subscribe to our newsletter for new products, trends and offers.
             </h4>
             <div style={{display:"flex"}}>
-              <input type="email" placeholder=" Email" />
+              <input type="email" placeholder="Email"/>
               <button className="signup">
-                <i class="fa-solid fa-envelope" style={{padding:"2px 0px 5px 0px"}}></i> <p>SignUp</p>
+                <i class="fa-regular fa-envelope" style={{padding:"2px 0px 5px 0px"}}></i> <p>SignUp</p>
               </button>
             </div>
               
-            <p style={{ fontSize: "x-small" }}>
+            <p style={{ fontSize: "x-small", marginTop:"5px" }}>
               We respect your Privacy, so we never share your info.
             </p>
           </div>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lottie-web": "^5.12.2",
+    "react-lottie": "^1.2.4"
+  }
+}

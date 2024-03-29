@@ -1,8 +1,11 @@
 import React from "react"
+import Header from "./Header";
 
 const ContactUs = () =>{
     return (
       <div className="container">
+      <Header />
+
         <div style={{padding:"0px 2%"}}>
         <div className="contact">
           <p style={{ fontSize: "25px", fontWeight: "550", margin: "100px 0px 10px 0px" }}>
