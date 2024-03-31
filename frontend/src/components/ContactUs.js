@@ -1,10 +1,14 @@
 import React from "react"
+import Header from "./Header";
 
 const ContactUs = () =>{
     return (
       <div className="container">
+      <Header />
+
+        <div style={{padding:"0px 2%"}}>
         <div className="contact">
-          <p style={{ fontSize: "23px", fontWeight: "400" }}>
+          <p style={{ fontSize: "25px", fontWeight: "550", margin: "100px 0px 10px 0px" }}>
             Contact us for all your questions and opinions, or you can solve
             your problems in a shorter time with our contact offices.
           </p>
@@ -34,10 +38,10 @@ const ContactUs = () =>{
             </div>
             <div className="box-2">
               <div className="contact-form">
-                <p style={{ fontSize: "20px", fontWeight: "400" }}>
+                <p style={{ fontSize: "25px", fontWeight: "400" }}>
                   Get in Touch
                 </p>
-                <p style={{ fontSize: "16px", color: "gray" }}>
+                <p style={{ fontSize: "16px", color: "gray", margin: "10px 0px 20px 0px" }}>
                   Quisque mattis tortor eu tristique sodales. Aenean sit amet
                   justo nec sem vestibulum.
                 </p>
@@ -53,6 +57,7 @@ const ContactUs = () =>{
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );

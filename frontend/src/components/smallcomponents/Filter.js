@@ -54,13 +54,13 @@ const Filter = ({addToCart}) => {
   return (
     <div className="filter">
       <div className="filter-left">
-          <input
+          <div className="small-part"><input
             type="text"
             placeholder="Search product..."
             value={searchTerm}
             onChange={handleSearchChange}
             className="searchbar ht"
-            style={{width:"75%"}}
+            style={{width:"76%"}}
           />
         <select
           value={selectedCategory}
@@ -76,6 +76,7 @@ const Filter = ({addToCart}) => {
             </option>
           ))}
         </select>
+        <div style={{width:"200px", marginLeft:"8%"}}>
         <label>
           <input
             type="number"
@@ -91,13 +92,16 @@ const Filter = ({addToCart}) => {
             value={maxPrice}
             onChange={handleMaxPriceChange}
             className="ht"
+            style={{margin:"0px 4px 0px 6px"}}
           />
           Max Price
         </label>
+        </div>
 
-        <button onClick={handleSearchButtonClick} className="search-product">
-          SEARCH
+        <button onClick={handleSearchButtonClick} className="search-product" style={{borderRadius:"8px"}}>
+          FILTER
         </button>
+      </div>
       </div>
       <div className="filter-right">
         <div className="allLists">

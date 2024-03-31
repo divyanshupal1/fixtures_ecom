@@ -4,68 +4,92 @@ import { Link } from "react-router-dom"
 import SaleCard from "./smallcomponents/salecard.js"
 import ReviewCard from "./smallcomponents/ReviewCard.js"
 import ProductsData from "./smallcomponents/ProductsData.js"
+import Header2 from "./Header2.js"
 
 const Body = ({addToCart}) =>{
 
+  const rating=13000;
+
     return (
       <div className="container">
+      <Header2 />
+        
         <div className="quant">
+          <div className="bg-black">
           <div className="shop">
-            <h1>Get inspired</h1>
-            <h1>and Redesign</h1>
-            <h1>Your Space.</h1>
+            <h1>Get inspired and</h1>
+            <h1>Redesign your</h1>
+            <h1>Space.</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utelit
               tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
             </p>
-            <button className="shop-now">SHOP NOW!</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
+          </div>
           </div>
         </div>
 
         <div className="quant2">
-          <div className="specifictions">
-            <div className="each-specification">
-              <i class="fas fa-regular fa-gem"></i>
+                <div className="specifictions">
+                    <div className="each-specification">
+                      <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-gem" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Original Product</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>100% Original product that covered warranty by the vendor.</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-award" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>30 Days Warranty</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>You have the right to return your orders within 30 days.</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-truck" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>Global Shipping</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your orders are shipped seamlessly between countries</p>
+                    </div>
+                    <div className="each-specification">
+                    <div className='flex'>
+                      <div style={{textAlign:"center"}}>
+                        <i className="fa-solid fa-shield" style={{paddingTop:"10px"}}></i>
+                      </div>
+                      <h4>100% Secure</h4>
+                      </div>
+                        <p style={{paddingLeft:"50px"}}>Your payments are secure with our private security network.</p>
+                    </div>
+                </div>
             </div>
-            <div className="each-specification">
-              <h4>Original Product</h4>
-              <p>100% Original product that covered warranty by the vendor.</p>
-            </div>
-            <div className="each-specification">
-              <h4>30 Days Warranty</h4>
-              <p>You have the right to return your orders within 30 days.</p>
-            </div>
-            <div className="each-specification">
-              <h4>Global Shipping</h4>
-              <p>Your orders are shipped seamlessly between countries</p>
-            </div>
-            <div className="each-specification">
-              <h4>100% Secure</h4>
-              <p>Your payments are secure with our private security network.</p>
-            </div>
-          </div>
-        </div>
 
         <div className="all-shops">
           <div className="quant3">
           <div className="branches">
-            <h3>Save up to $600 on select Home Appliance.</h3>
+            <h2>Save up to $600 on select Home Appliance.</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button className="shop-now">CLAIM PROMO</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>CLAIM PROMO</span><span>CLAIM PROMO</span></div></Link></div>
           </div>
           <div className="branches">
-            <h3>Enjoy sensational discounts of up to 50% this month only!</h3>
+            <h2>Enjoy sensational discounts of up to 50% this month only!</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
-            <button className="shop-now">SHOP NOW!</button>
+            <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
           </div>
             <div className="subbranch-container">
             <div className="sub-branches">
-              <h4>Elevate your bathing experience</h4>
-              <button className="shop-now">SHOP NOW!</button>
+              <h2>Elevate your bathing experience</h2>
+              <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
             </div>
             <div className="sub-branches">
-              <h4>Explore our Kitchen Essentials Collection</h4>
-              <button className="shop-now">SHOP NOW!</button>
+              <h2>Explore our Kitchen Essentials Collection</h2>
+              <div style={{overflow:"hidden",width:"200px"}}><Link className="btn-epic" to="/shop"><div><span>SHOP NOW !</span><span>SHOP NOW !</span></div></Link></div>
             </div>
             </div>
           </div>
@@ -73,11 +97,11 @@ const Body = ({addToCart}) =>{
 
         <div className="quant4">
           <div className="flashsale">
-            <h1>Flash Sale</h1>
-            <p>Grab the Best Deals on Bathroom & Kitchen Essentials Now!</p>
+            <h2 style={{fontSize: "40px"}}>Flash Sale</h2>
+            <p style={{margin:"10px 0px"}}>Grab the Best Deals on Bathroom & Kitchen Essentials Now!</p>
             <Timer hours={7} minutes={30} seconds={0} />
           </div>
-          {/* {ProductsData.map((product) => (
+          {ProductsData.slice(0,3).map((product) => (
               <Link key={product._id} to={`/product/${product._id}`}>
                 <SaleCard
                   key={product._id}
@@ -88,14 +112,21 @@ const Body = ({addToCart}) =>{
                   price={product.price}
                 />
               </Link>
-            ))} */}
+            ))}
+            <div className="more">
+              <Link to="/shop" ><i class="fa-solid fa-circle-chevron-right" style={{color: "#ffad14", fontSize: "50px", padding:"185px 0px 195px 0px"}}></i></Link>
+            </div>
         </div>
 
         <div className="quant5">
-          <h1>New Arrival</h1>
+          <h2 style={{fontSize: "30px", textAlign:"left", paddingBottom:"10px", paddingLeft:"5%"}}>New Arrival</h2>
+          <p style={{textAlign:"left", padding:"5px 5%"}}>Some text about the latest released products</p>
+          <div style={{textAlign:"right", paddingRight:"5%"}}>
+            <Link to="/shop"><button className="shop-now">VIEW ALL</button></Link>
+          </div>
           <div className="arrival-cards">
             {ProductsData && ProductsData.length > 0
-              ? ProductsData.map((product) => (
+              ? ProductsData.map((product,i) => (
               <Link key={product._id} to={`/product/${product._id}`}>
                 <SaleCard
                   key={product._id}
@@ -111,28 +142,28 @@ const Body = ({addToCart}) =>{
           </div>
           <div className="why">
             <div className="content-box">
-              <p style={{ color: "blue", fontWeight: "500" }}>Why choose us</p>
+              <p style={{ color: "#2346A7", fontWeight: "600", margin: "4px 2px" }}>Why choose us</p>
               <h2>Elevate Your Home, Elevate Your Happiness.</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
                 tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
               </p>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Top-Notch Quality</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Top-Notch Quality</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
                 </p>
               </div>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Competitive Pricing & Exclusive Discounts</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Competitive Pricing & Exclusive Discounts</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
                 </p>
               </div>
-              <div className="sub-branches" style={{ border: "none" }}>
-                <h4>Expert Assistance & Support</h4>
+              <div style={{ margin:"5px 0px" }}>
+                <h2>Expert Assistance & Support</h2>
                 <p>
                   Placerat vivamus lacus orci ex consectetuer cursus ultrices
                   pretium dis
@@ -143,8 +174,18 @@ const Body = ({addToCart}) =>{
         </div>
 
         <div className="quant6">
-          <h3>Customer FeedBack and Reviews</h3>
+          <div className="couple">
+            <div className="small-couple">
+              <p style={{color:"darkblue"}}>Testimonial</p>
+              <h3>Customer FeedBack and Reviews</h3>
+            </div>
+            <div className="small-couple" style={{textAlign:"right"}}>
+              <p>Excellent ({rating})</p>
+            </div>
+          </div>
           <div className="feedbacks">
+            <ReviewCard />
+            <ReviewCard />
             <ReviewCard />
           </div>
         </div>
@@ -154,11 +195,14 @@ const Body = ({addToCart}) =>{
             <h4>
               Subscribe to our newsletter for new products, trends and offers.
             </h4>
-            <input type="email" placeholder="Email" />
-            <button className="signup">
-              <i class="fa-solid fa-envelope"></i> Sign Up
-            </button>
-            <p style={{ fontSize: "x-small" }}>
+            <div style={{display:"flex"}}>
+              <input type="email" placeholder="Email"/>
+              <button className="signup">
+                <i class="fa-regular fa-envelope" style={{padding:"2px 0px 5px 0px"}}></i> <p>SignUp</p>
+              </button>
+            </div>
+              
+            <p style={{ fontSize: "x-small", marginTop:"5px" }}>
               We respect your Privacy, so we never share your info.
             </p>
           </div>

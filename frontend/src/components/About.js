@@ -1,15 +1,18 @@
 import React from "react";
 import TeamMember from "./smallcomponents/TeamMember";
+import Header2 from "./Header2.js"
+
 
 const About = () => {
   return (
     <div className="container">
+      <Header2 />
       <div className="about-section">
-        <h1>About Us Page</h1>
+        <h1 style={{fontSize: "30px", margin: "20px 0px", marginTop:"40px"}}>About Us Page</h1>
         <p>Some text about who we are and what we do.</p>
       </div>
 
-        <h2 style={{ textAlign: "center" }}>Our Team</h2>
+        <h2 style={{ textAlign: "center", margin: "20px 0px 10px 0px", fontSize: "25px" }}>Our Team</h2>
 
         <div className="row">
           <TeamMember
