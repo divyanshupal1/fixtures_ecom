@@ -44,12 +44,12 @@ import  useOrderById  from "@/hooks/useOrderById"
 export function ProfileForm({order_id}:{order_id:string}) {
   
   const {order_data,loading,error} = useOrderById(order_id)
-  
-  if(order_data==undefined )
+
+  if(order_data==undefined || loading || error )
   return (
     <div className="w-full h-full flex">
       <div className="animate-spin flex-grow-0 h-fit mx-auto">
-        <AiOutlineLoading3Quarters className="scale-150"/>
+        {error?<div>Some Error Occured Retry!</div>:<AiOutlineLoading3Quarters className="scale-150"/>}
       </div>
     </div>
   )

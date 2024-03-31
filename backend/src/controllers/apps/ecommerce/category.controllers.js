@@ -1,3 +1,4 @@
+import { query } from "express";
 import { Category } from "../../../models/apps/ecommerce/category.models.js";
 import { ApiError } from "../../../utils/ApiError.js";
 import { ApiResponse } from "../../../utils/ApiResponse.js";
@@ -7,6 +8,12 @@ import { getMongoosePaginationOptions } from "../../../utils/helpers.js";
 const createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
+  const findCategory = await Category.findOne({name, owner: req.user._id});
+  if (findCategory) {
+    return res.status(200)
+    .json(new ApiResponse(400, null, "Category already exists"));
+  }
+
   const category = await Category.create({ name, owner: req.user._id });
 
   return res
@@ -15,20 +22,7 @@ const createCategory = asyncHandler(async (req, res) => {
 });
 
 const getAllCategories = asyncHandler(async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
-  const categoryAggregate = Category.aggregate([{ $match: {} }]);
-
-  const categories = await Category.aggregatePaginate(
-    categoryAggregate,
-    getMongoosePaginationOptions({
-      page,
-      limit,
-      customLabels: {
-        totalDocs: "totalCategories",
-        docs: "categories",
-      },
-    })
-  );
+  const categories = await Category.find({}).populate("owner", "username email");
   return res
     .status(200)
     .json(new ApiResponse(200, categories, "Categories fetched successfully"));
@@ -48,22 +42,30 @@ const getCategoryById = asyncHandler(async (req, res) => {
 const updateCategory = asyncHandler(async (req, res) => {
   const { categoryId } = req.params;
   const { name } = req.body;
-  const category = await Category.findByIdAndUpdate(
-    categoryId,
-    {
-      $set: {
-        name,
-      },
-    },
-    { new: true }
-  );
-  if (!category) {
-    throw new ApiError(404, "Category does not exist");
+
+  const findCategory = await Category.findOne({name, owner: req.user._id});
+  if (findCategory) {
+    return res.status(200)
+    .json(new ApiResponse(400, null, "Category already exists"));
   }
 
+  if(req.user.role === "SUPERADMIN") {
+    const updatedCategory = await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
+    if (!updatedCategory) {
+      throw new ApiError(404, "Category does not exist");
+    }
+    return res
+      .status(200)
+      .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
+  }
+
+  const updatedCategory = await Category.findOneAndUpdate({ _id: categoryId, owner: req.user._id }, { name }, { new: true });
+  if (!updatedCategory) {
+    throw new ApiError(404, "Category does not exist");
+  }
   return res
     .status(200)
-    .json(new ApiResponse(200, category, "Category updated successfully"));
+    .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
 });
 
 const deleteCategory = asyncHandler(async (req, res) => {

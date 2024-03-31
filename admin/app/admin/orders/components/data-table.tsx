@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="space-y-4 flex flex-col  w-full h-full flex-shrink">
+    <div className="space-y-4 max-sm:space-y-2 flex flex-col  w-full h-full flex-shrink">
       <DataTableToolbar table={table} status={status} />
       <div className="rounded-md border flex-grow overflow-y-scroll h-1 dark:border-neutral-200">
         <Table className="border-collapse ">

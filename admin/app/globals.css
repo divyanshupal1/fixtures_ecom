@@ -49,3 +49,28 @@
     --ring: 224.3 76.3% 48%;
   }
 }
+
+/* width */
+@media screen and (min-width: 600px) {
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--accent);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+}

@@ -23,7 +23,7 @@ router
   .route("/")
   .post(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     categoryRequestBodyValidator(),
     validate,
     createCategory
@@ -35,14 +35,14 @@ router
   .get(mongoIdPathVariableValidator("categoryId"), validate, getCategoryById)
   .delete(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     mongoIdPathVariableValidator("categoryId"),
     validate,
     deleteCategory
   )
   .patch(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     categoryRequestBodyValidator(),
     mongoIdPathVariableValidator("categoryId"),
     validate,

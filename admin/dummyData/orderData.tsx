@@ -1388,7 +1388,7 @@ export const detailedOrderData = {
 }
 
 import { detailedOrderParser ,orderListParser,detailedOrderType ,orderListSchema,orderListResponseDataType} from '@/schema/orderSchema';
-import { z } from "zod"
+
 
 
 export function getDummyOrderListData(status:"PENDING"|"DELIVERED"|"CANCELLED"="PENDING",page:number=1,limit:number=10):orderListResponseDataType{

@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BASE_API ,MODE } from '@/constants';
+import axiosInstance from '@/lib/axiosInstance';
 import {orderListParser,orderListResponseDataType} from '@/schema/orderSchema';
-import { getDummyOrderListData } from '@/dummyData/orderData';
 
 const useOrderList = (status:"PENDING"|"DELIVERED"|"CANCELLED"="PENDING",page:number=1,limit:number=10) => {
 
@@ -13,19 +11,10 @@ const useOrderList = (status:"PENDING"|"DELIVERED"|"CANCELLED"="PENDING",page:nu
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(MODE=="demo"){
-          const data = getDummyOrderListData();
-          setData(data);
-          setLoading(false);
-        }
-        else{
-          const response = await axios.get(BASE_API+`/ecommerce/orders/list/admin?status=${status}&page=${page}&limit=${limit}`,{
-              withCredentials:true,
-          });
-          const data = orderListParser(response.data);
-          setData(data);
-          setLoading(false);
-        }
+        const response = await axiosInstance.get(`/ecommerce/orders/list/admin?status=${status}&page=${page}&limit=${limit}`);
+        const data = orderListParser(response.data);
+        setData(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         setError(error);
