@@ -125,6 +125,7 @@ export type detailedOrderResponseType = z.infer<typeof responseSchema>;
 export type orderListArrayType = z.infer<typeof orderListArraySchema>;
 export type orderListResponseType = z.infer<typeof orderListResponseSchema>;
 export type orderListResponseDataType = z.infer<typeof orderListResponseSchema>['data'];
+export type productType = z.infer<typeof productSchema>;
 
 export function detailedOrderParser(jsonData:any):detailedOrderType{
     return detailedOrderSchema.parse(jsonData);

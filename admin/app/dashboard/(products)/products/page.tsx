@@ -3,7 +3,7 @@
 "use client"
 import React, {useEffect, useState } from 'react'
 import { Categories } from './components/Categories';
-// import { Products } from './components/Products';
+import { Products } from './components/Products';
 import { useToast } from "@/components/ui/use-toast"
 import axiosInstance from '@/lib/axiosInstance';
 
@@ -56,7 +56,7 @@ export default function Page() {
 
   return (
     <>
-      <div className=" h-full max-sm:h-[calc(100%-60px)] flex flex-col justify-start items-start space-y-2 sm:p-8 max-sm:p-3 sm:pt-5 sm:pb-0 md:flex">
+      {/* <div className=" h-full max-sm:h-[calc(100%-60px)] flex flex-col justify-start items-start space-y-2 sm:p-8 max-sm:p-3 sm:pt-5 sm:pb-0 md:flex"> */}
           <div className="flex max-sm:hidden max-sm:items-start justify-between items-center w-full">
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight">Products</h2>
@@ -68,11 +68,11 @@ export default function Page() {
               {<Categories categories={categories} changeCategory={changeCategory} fetchCategories={fetchCategories} loading={laodingCategories}/> }
               </div>
               <div className='w-full h-full shrink-0 flex flex-col relative' >
-                {/**<Products categories={categories} category={category} clearCategory={clearCategory}/>**/}
+                <Products categories={categories} category={category} clearCategory={clearCategory}/>
               </div>              
             </div>
           </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }

@@ -8,35 +8,49 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import React from 'react'
 import {LOGO} from "@/constants";
-import { ExitIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from '@/components/themeToggle'
 import { RiLogoutCircleRFill } from "react-icons/ri";
+import { FaTableList } from "react-icons/fa6";
+import UserCard from '../userCard';
+import { CollapsibleTabs } from './collapsibleTab';
+import { MdCategory } from 'react-icons/md';
 
 const links = [
-  {href:"/admin/admin",icon:<FaUser/>,text:"Admin",active:"admin"},
-  {href:"/admin",icon:<FaCompass/>,text:"Dashboard",active:"dashboard"},
-  {href:"/admin/orders",icon:<IoBag />,text:"Orders",active:"orders"},
-  {href:"/admin/products",icon:<FaTshirt />,text:"Products",active:"products"},
-  {href:"/admin/coupons",icon:<BiSolidCoupon/>,text:"Coupons",active:"coupons"},
-  {href:"/admin/customers",icon:<HiUserGroup/>,text:"Customers",active:"customers"},
+  {type:'tab',href:"/dashboard/admin",icon:<FaUser/>,text:"Admin",active:"admin"},
+  {type:'tab',href:"/dashboard",icon:<FaCompass/>,text:"Dashboard",active:"dashboard"},
+  {type:'tab',href:"/dashboard/orders",icon:<IoBag />,text:"Orders",active:"orders"},
+  {type:'group',icon:<FaTshirt />,text:"Products",items:[
+    {href:"/dashboard/categories",icon:<MdCategory/>,text:"Categories",active:"categories"},
+    {href:"/dashboard/productlist",icon:<FaTableList/>,text:"Product List",active:"productlist"},
+  ]},
+  {type:'tab',href:"/dashboard/coupons",icon:<BiSolidCoupon/>,text:"Coupons",active:"coupons"},
+  {type:'tab',href:"/dashboard/customers",icon:<HiUserGroup/>,text:"Customers",active:"customers"},
 ]
 
-function Sidebar({setOpen}:{setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {
+function Sidebar({setOpen,open}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {
   const path = usePathname()
 
   return (
-    <div className='h-full flex flex-col max-sm:bg-background'>
+    <>
+    <div className='h-full flex flex-col max-sm:bg-background sm:pt-4'>
         <div className='w-full p-4  flex gap-x-4'>
             <div className='sm:hidden' onClick={()=>{setOpen(prev=>!prev)}}><Menu/></div>
             <span className="font-extrabold">{LOGO}</span>
         </div>
+        <div className='w-full p-2'>
+         <UserCard/>
+        </div>
         {
-          path.split('/')[1] === 'admin' && (
+          path.split('/')[1] === 'dashboard' && (
             <div className='w-full flex flex-col justify-center items-center pr-2 pt-6'>
               <div className='flex flex-col gap-y-2 w-full pl-2'>
                   {
-                      links.map((item,index)=><NavTab key={index} item={item}/>)
+                    links.map((item,index)=> 
+                    item.type === 'tab'?                     
+                      <NavTab key={index} item={item} close={setOpen} />:     
+                      <CollapsibleTabs key={index} item={item} close={setOpen}/>
+                    )
                   }
               </div>
             </div>
@@ -47,16 +61,22 @@ function Sidebar({setOpen}:{setOpen:React.Dispatch<React.SetStateAction<boolean>
           <ModeToggle/>
         </div>
     </div>
+    {open&&<div onClick={()=>setOpen(false)} className='fixed sm:hidden -z-10 w-screen h-screen bg-black bg-opacity-45 top-0 left-0'/>}
+    </>
   )
 }
 
 export default Sidebar
 
-function NavTab({item}:{item:{href:string,icon:JSX.Element,text:string,active:string}}){
+export function NavTab({item,close}:{item:{href?:string,icon:JSX.Element,text:string,active?:string},close:React.Dispatch<React.SetStateAction<boolean>>}){
     const path = usePathname()
+    let active = path.split('/')[2]
+    if(item.active=='dashboard' && path.split('/').length === 2){
+        active = path.split('/')[1]
+    }
     return (
-        <Link href={item.href} className='w-full'>
-            <div className={`w-full flex transition-colors items-center gap-x-5 p-2 px-4 hover:bg-primary-foreground rounded-sm font-semibold text-sm hover:text-primary ${path.split('/')[2] === item.active ?'text-primary':""}`}>
+        <Link href={item.href || "/"} className='w-full' onClick={()=>close(false)}>
+            <div className={`w-full flex transition-colors items-center gap-x-5 p-2 px-4 hover:bg-primary-foreground rounded-sm font-semibold text-sm hover:text-primary ${active === item.active ?'text-primary':""}`}>
                 <div className='scale-150'>{item.icon}</div>
                 {item.text}
             </div>

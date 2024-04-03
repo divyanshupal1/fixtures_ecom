@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" style={{overflow:"hidden"}}>
+    <html lang="en">
       <body className={clsx(inter.className,"dark:bg-background")}>
         <ThemeProvider
           attribute="class"
