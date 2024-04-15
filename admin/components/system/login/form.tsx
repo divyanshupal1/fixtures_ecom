@@ -38,7 +38,7 @@ export function LoginForm() {
           console.log(data.data)
           setMsg("Successfully logged in")
           setUser(data.data)
-          router.push("/admin")
+          router.push("/dashboard")
           setLoading(2)
         }
         else{ 

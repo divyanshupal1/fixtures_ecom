@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className,"dark:bg-background")}>
+      <body className={clsx(inter.className,"dark:bg-background overflow-hidden")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system" 

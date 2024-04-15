@@ -20,7 +20,7 @@ export default function TaskPage() {
 
   return (
     <>
-      <div className=" h-full max-sm:h-[calc(100%-60px)] flex-1 flex-col justify-start items-start space-y-8 max-sm:space-y-5 p-2 sm:p-8 sm:py-0 sm:pt-5 sm:pb-3 md:flex">
+      <div className=" h-full grow w-full flex flex-col justify-start items-start space-y-8 max-sm:space-y-5 p-2 sm:p-8 sm:py-0 sm:pt-5 sm:pb-3 md:flex">
           <div className="flex max-sm:flex-col max-sm:items-start max-sm:gap-y-3  gap-x-3 justify-between items-center w-full">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Orders</h2>

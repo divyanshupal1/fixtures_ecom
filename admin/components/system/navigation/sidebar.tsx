@@ -15,6 +15,7 @@ import { FaTableList } from "react-icons/fa6";
 import UserCard from '../userCard';
 import { CollapsibleTabs } from './collapsibleTab';
 import { MdCategory } from 'react-icons/md';
+import { TbSquareRoundedPlusFilled } from "react-icons/tb";
 
 const links = [
   {type:'tab',href:"/dashboard/admin",icon:<FaUser/>,text:"Admin",active:"admin"},
@@ -23,6 +24,7 @@ const links = [
   {type:'group',icon:<FaTshirt />,text:"Products",items:[
     {href:"/dashboard/categories",icon:<MdCategory/>,text:"Categories",active:"categories"},
     {href:"/dashboard/productlist",icon:<FaTableList/>,text:"Product List",active:"productlist"},
+    {href:"/dashboard/addproduct",icon:<TbSquareRoundedPlusFilled/>,text:"Add Prodcut",active:"addproduct"},
   ]},
   {type:'tab',href:"/dashboard/coupons",icon:<BiSolidCoupon/>,text:"Coupons",active:"coupons"},
   {type:'tab',href:"/dashboard/customers",icon:<HiUserGroup/>,text:"Customers",active:"customers"},

@@ -2,12 +2,107 @@ import {create} from 'zustand'
 import axiosInstance from '@/lib/axiosInstance';
 import { productType } from '@/schema/orderSchema';
 
+type PaginationType = {
+    totalProducts: number,
+    limit: number,
+    page: number,
+    totalPages: number,
+    serialNumberStartFrom: number,
+    hasPrevPage: boolean,
+    hasNextPage: boolean,
+    prevPage: number | null,
+    nextPage: number | null
+}
+
 type productStoreType = {
-  products: productType[];
+    products: productType[];
+    pagination: PaginationType;
+    fetchProducts: (page?:number,limit?:number)=> Promise<boolean>;
+    fetchProductByID: (id:string)=> Promise<boolean>;
+    fetchProductsByCategory: (category:string,page:number,limit:number)=> Promise<boolean>;
 };
 
-export const useUserStore = create<productStoreType>((set) => ({
+export const useProductStore = create<productStoreType>((set) => ({
     products: [] as productType[],
+    pagination: {
+        totalProducts: 0,
+        limit: 10,
+        page: 1,
+        totalPages: 0,
+        serialNumberStartFrom: 0,
+        hasPrevPage: false,
+        hasNextPage: false,
+        prevPage: null,
+        nextPage: null
+    },
+    fetchProducts: async(page=1,limit=10)=>{
+        try{
+            const res = await axiosInstance.get(`/ecommerce/products?page=${page}&limit=${limit}`)
+            if(res.data.success){
+                const data = res.data.data
+                set({
+                    products: data.products,
+                    pagination:{
+                        totalProducts: data.totalProducts,
+                        limit: data.limit,
+                        page: data.page,
+                        totalPages: data.totalPages,
+                        serialNumberStartFrom: data.serialNumberStartFrom,
+                        hasPrevPage: data.hasPrevPage,
+                        hasNextPage: data.hasNextPage,
+                        prevPage: data.prevPage,
+                        nextPage: data.nextPage
+                    }
+                })
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    
+    },
+    fetchProductByID: async(id:string)=>{
+        try{
+            const res = await axiosInstance.get('/ecommerce/products/'+id)
+            if(res.data.success){
+                console.log(res.data)
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    },
+    fetchProductsByCategory: async (category:string,page:number,limit:number) => {
+        try{
+            const res = await axiosInstance.get(`/ecommerce/products/category/${category}?page=${page}&limit=${limit}`)
+            if(res.data.success){
+                const data = res.data.data
+                set({
+                    products: data.products,
+                    pagination:{
+                        totalProducts: data.totalProducts,
+                        limit: data.limit,
+                        page: data.page,
+                        totalPages: data.totalPages,
+                        serialNumberStartFrom: data.serialNumberStartFrom,
+                        hasPrevPage: data.hasPrevPage,
+                        hasNextPage: data.hasNextPage,
+                        prevPage: data.prevPage,
+                        nextPage: data.nextPage
+                    }
+                })
+            }
+            return true
+            }
+            catch(e){
+                console.log(e)
+                return false
+            } 
+    },
 }));
 
 

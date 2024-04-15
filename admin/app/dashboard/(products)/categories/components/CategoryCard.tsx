@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { MdArrowForward, MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useToast } from "@/components/ui/use-toast";
-
+import Link from "next/link";
 type CategoryCardProps = {
   id: string;
   dialog: {
@@ -54,7 +54,7 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
 
   return (
     <div className="relative group flex w-full justify-between items-center hover:pr-6 max-sm:pr-6 bg-card hover:bg-primary-foreground border  border-transparent drop-shadow-sm transition-all grow-0 rounded-md overflow-hidden">
-      <div className="absolute w-full h-full cursor-pointer -z-10"></div>
+      <Link href={`/dashboard/productlist?category=${id}&page=1`} className="absolute w-full h-full cursor-pointer -z-10"></Link>
       <div className="flex p-6 px-6 max-sm:flex-col">
         <div className="whitespace-nowrap text-base">{categories[id].name}</div>
         <div className="text-xs text-opacity-75 sm:hidden">

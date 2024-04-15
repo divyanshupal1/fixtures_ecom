@@ -73,9 +73,9 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="space-y-4 max-sm:space-y-2 flex flex-col  w-full h-full flex-shrink">
+    <div className="space-y-4 max-sm:space-y-2 flex flex-col  w-full h-full min-h-[calc(100vh-100px)]">
       <DataTableToolbar table={table} status={status} />
-      <div className="rounded-md border flex-grow overflow-y-scroll h-1 dark:border-neutral-200">
+      <div className="rounded-md border flex-grow h-auto dark:border-neutral-200">
         <Table className="border-collapse ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} page={page} limit={limit} data={data} />
+      <DataTablePagination table={table} page={page} limit={limit} data={data}/>
     </div>
   )
 }
