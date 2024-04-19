@@ -25,16 +25,16 @@ const Page = () => {
         stock: 0,
         description: '',
         mainImage: null,
-        subImages: [null,null,null,null]
+        // subImages: [null,null,null,null]
     })
     const modifyProduct = (key: string, value: any) => {
         setProduct({ ...product, [key]: value })
     }
-    const modifySubImages = (key: number, value: any) => {
-        let subImages = product.subImages
-        subImages[key] = value
-        setProduct({ ...product, subImages: subImages })
-    }
+    // const modifySubImages = (key: number, value: any) => {
+    //     let subImages = product.subImages
+    //     subImages[key] = value
+    //     setProduct({ ...product, subImages: subImages })
+    // }
 
     function addProduct() {
         axiosInstance.post('/products', product,{
@@ -98,12 +98,12 @@ const Page = () => {
                                 <Label className='text-base'>Sub Images</Label>
                                 <div className='w-full flex flex-col gap-y-4 '>
                                     <div className='flex gap-x-4 w-full'>
-                                        <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[0]} onChange={(img)=>modifySubImages(0,img)}/></div>
-                                        <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[1]} onChange={(img)=>modifySubImages(1,img)}/></div>                             
+                                        {/* <div className='w-1/2 h-44'><ImageSelector multiple scale={2} image={product.subImages[0]} onChange={(img)=>modifySubImages(0,img)}/></div> */}
+                                        {/* <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[1]} onChange={(img)=>modifySubImages(1,img)}/></div>                              */}
                                     </div>
                                     <div className='flex gap-x-4 w-full'>
-                                        <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[2]} onChange={(img)=>modifySubImages(2,img)}/></div>
-                                        <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[3]} onChange={(img)=>modifySubImages(3,img)}/></div>                             
+                                        {/* <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[2]} onChange={(img)=>modifySubImages(2,img)}/></div> */}
+                                        {/* <div className='w-1/2 h-44'><ImageSelector scale={2} image={product.subImages[3]} onChange={(img)=>modifySubImages(3,img)}/></div>                              */}
                                     </div>
                                 </div>
                             </div>
@@ -121,11 +121,11 @@ const Page = () => {
 
 
 
-const ImageSelector = ({image,onChange,scale}:{image:File|null|undefined,onChange:(i:File|null|undefined)=>void,scale:number}) => {
+const ImageSelector = ({image,multiple=false,onChange,scale}:{multiple?:boolean,image:File|null|undefined,onChange:(i:File|null|undefined)=>void,scale:number}) => {
     console.log(image)
     return (
             <div className='w-full h-full border-border overflow-hidden flex flex-col gap-y-6 justify-center items-center relative border-4 border-dotted rounded-xl'>
-                <Input type='file' className='h-full w-full opacity-0 absolute z-10' onChange={(e)=>{
+                <Input type='file' className='h-full w-full opacity-0 absolute z-10' multiple={multiple} onChange={(e)=>{
                     onChange(e.target.files?.item(0))
                 }}/>
                 {

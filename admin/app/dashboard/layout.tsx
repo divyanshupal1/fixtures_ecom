@@ -1,15 +1,30 @@
 "use client"
-
+import React from 'react'
 import Navbar from "@/components/system/navigation/navbar"
 import Sidebar from "@/components/system/navigation/sidebar"
 import { useState } from "react"
 import UserSession from "@/components/system/session"
-
+import { useCategoryStore } from '@/store/productStore'
 
 
 
 export default function StudentLayout({children}:{children:JSX.Element}) {
   const [open,setOpen]=useState(false)
+  
+  const {categories,fetchCategories} = useCategoryStore((state)=>({
+    categories:state.categories,
+    fetchCategories:state.fetchCategories
+  }))
+
+  
+  React.useEffect(()=>{
+    if(Object.keys(categories).length===0){
+      fetchCategories();
+    }
+},[categories,fetchCategories])
+
+
+
   return (
     <main className="flex h-screen flex-col ">
       <UserSession/>
