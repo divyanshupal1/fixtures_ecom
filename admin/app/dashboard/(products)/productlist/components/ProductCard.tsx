@@ -4,10 +4,55 @@
 import React from 'react';
 import { Checkbox } from "@/components/ui/checkbox";
 import { productType } from '@/schema/orderSchema';
-import { useCategoryStore } from '@/store/productStore';
+import { useCategoryStore, useProductStore } from '@/store/productStore';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useToast } from '@/components/ui/use-toast';
+import { cn } from '@/lib/utils';
 
 export function ProductCard({ product }: { product: productType; }) {
+  const router = useRouter();
   const { categories } = useCategoryStore((state) => ({ categories: state.categories }));
+  const {deleteProduct} = useProductStore((state)=>({
+    deleteProduct: state.deleteProduct  
+  }))
+  const [loading, setLoading] = React.useState(false);
+  const {toast} = useToast()
+
+  const handleEdit = () => {
+    router.push(`/dashboard/addproduct?id=${product._id}`)
+  }
+  const handleDelete = async()=>{
+    setLoading(true)
+    const res = await deleteProduct(product._id)
+    if(res){
+      setLoading(false)
+      toast({
+        title: "Product Deleted",
+        description: "The product has been deleted successfully",
+      })
+    }else{
+      setLoading(false)
+      toast({
+        title: "Product Deletion Failed",
+        description: "The product could not be deleted",
+        variant:"destructive"
+      })
+    }
+
+  }
   return (
     <div
       key={product._id}
@@ -51,8 +96,25 @@ export function ProductCard({ product }: { product: productType; }) {
           {new Date(product.updatedAt).toLocaleDateString()}
         </p>
       </div>
-      <div className="w-1/12 flex justify-center max-sm:absolute max-sm:bottom-[10px] max-sm:right-[20px]">
-        {/* <Actions /> */}
+      <div className="w-1/12 flex justify-center max-sm:absolute max-sm:bottom-[10px] max-sm:right-[40px] gap-x-3">
+        <Button size={"sm"} onClick={handleEdit}><div className='scale-150'><MdEdit/></div></Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+              <Button size={"sm"} variant={"destructive"} loading={loading} disabled={loading}><div className='scale-150'><MdDelete/></div></Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className='border-border'>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the product.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDelete} className={cn(buttonVariants({variant:"destructive"}), "relative")}>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
@@ -90,3 +152,4 @@ export function ProductHeader() {
   );
 }
 
+  

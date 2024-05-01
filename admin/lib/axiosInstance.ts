@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { MODE } from "@/constants";
 
 const axiosInstance = axios.create({

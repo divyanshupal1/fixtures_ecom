@@ -53,15 +53,13 @@ const Page = () => {
           </div>
           <div>
             <Button
-              className="gap-x-3 py-5"
-              variant={"default"}
+              className="flex flex-row"
               onClick={() => {
                 setCatId(null);
                 dialog.open();
               }}
             >
-              <div className="scale-125"><MdAdd /></div>
-              <span>New Category</span>
+              Create Category
             </Button>
           </div>
         </div>

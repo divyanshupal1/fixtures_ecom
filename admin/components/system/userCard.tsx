@@ -3,9 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { useUserStore } from '@/store/userStore'
 import { Skeleton } from '../ui/skeleton'
-  
+
 
 const UserCard = () => {
+
   const {user} = useUserStore((state)=>({user:state.user})) 
   return (
     <div className='w-full rounded-lg bg-secondary flex justify-start items-center gap-x-4 p-3 px-4'>

@@ -16,7 +16,7 @@ export const icons = {
     sup: `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M22 7h-2v1h3v1h-4V7c0-.55.45-1 1-1h2V5h-3V4h3c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM5.88 20h2.66l3.4-5.42h.12l3.4 5.42h2.66l-4.65-7.27L17.81 6h-2.68l-3.07 4.99h-.12L8.85 6H6.19l4.32 6.73L5.88 20z"></path></svg>`,
 }
 
-export default function WYSIWYS({value,setValue}:{value:string,setValue:(v:string)=>void}) {
+export default function WYSIWYG({value,setValue}:{value:string,setValue:(v:string)=>void}) {
     const toolbar = React.useRef<HTMLDivElement>(null);
     const quill = React.useRef<ReactQuill>(null);
     useEffect(() => {
@@ -34,8 +34,6 @@ export default function WYSIWYS({value,setValue}:{value:string,setValue:(v:strin
 
         
     }, []);
-
-    console.log(quill.current?.getEditorContents())
 
     return (
         <div className='w-full h-full border border-border rounded-md overflow-hidden'>

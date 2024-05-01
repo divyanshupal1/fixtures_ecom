@@ -32,7 +32,7 @@ export default function StudentLayout({children}:{children:JSX.Element}) {
         <Navbar open={open} setOpen={setOpen}/>
       </div>
       <div className="w-full h-full flex ">
-        <div className={`w-60  absolute top-0 transition-all duration-500 ease-in-out z-50 ${open?'left-[0%]':'max-sm:left-[-100%]'} max-sm:h-screen sm:relative`}>
+        <div className={`w-60  absolute top-0 transition-all duration-500 ease-in-out z-50 ${open?'left-[0%]':'max-sm:left-[-100%]'} max-sm:h-screen sm:relative overflow-y-scroll`}>
           <Sidebar setOpen={setOpen} open={open}/>
         </div>
         <div className="sm:w-[calc(100%-15rem)] w-full p-1 max-sm:p-0 max-sm:h-[calc(100vh-60px)]">

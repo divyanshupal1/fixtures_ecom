@@ -22,11 +22,11 @@ export const CategorySelector = ({ value,className, handleChange }: { value: str
       onValueChange={handleChange}
     >
       <SelectTrigger className={"w-full "+className}>
-        <SelectValue placeholder="Select a timezone" />
+        <SelectValue placeholder="Select a Category" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem key={"select"} value={"select"}>Select Category</SelectItem>
+          <SelectItem key={"select"} value={"select"}>Select a Category</SelectItem>
           {Object.keys(categories).map((categoryId) => (
             <SelectItem key={categoryId} value={categoryId}>
               {categories[categoryId].name}

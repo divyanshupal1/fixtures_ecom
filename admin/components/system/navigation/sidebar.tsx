@@ -16,6 +16,7 @@ import UserCard from '../userCard';
 import { CollapsibleTabs } from './collapsibleTab';
 import { MdCategory } from 'react-icons/md';
 import { TbSquareRoundedPlusFilled } from "react-icons/tb";
+import { useUserStore } from '@/store/userStore';
 
 const links = [
   {type:'tab',href:"/dashboard/admin",icon:<FaUser/>,text:"Admin",active:"admin"},
@@ -32,6 +33,11 @@ const links = [
 
 function Sidebar({setOpen,open}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {
   const path = usePathname()
+
+  const {logout} = useUserStore((state)=>({
+    logout:state.logout
+  }));
+
 
   return (
     <>
@@ -59,7 +65,9 @@ function Sidebar({setOpen,open}:{open:boolean,setOpen:React.Dispatch<React.SetSt
           )
         }
         <div className='w-full mt-auto p-4 flex gap-x-4 max-sm:hidden justify-between'>
-          <Button variant="ghost" className='rounded-md grow-0'><div className='mr-4 scale-125'><RiLogoutCircleRFill/></div> Logout</Button>
+          <Button onClick={()=>{
+            logout()
+          }} variant="ghost" className='rounded-md grow-0'><div className='mr-4 scale-125'><RiLogoutCircleRFill/></div> Logout</Button>
           <ModeToggle/>
         </div>
     </div>

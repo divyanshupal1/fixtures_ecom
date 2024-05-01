@@ -6,14 +6,15 @@ import axiosInstance from "@/lib/axiosInstance";
 // import useCurrentUser from "@/hooks/loggedUser";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useRouter } from 'next/navigation'
+import { useRouter ,redirect } from 'next/navigation'
 import { CheckCircle, Eye} from "lucide-react";
 import { EyeClosedIcon } from "@radix-ui/react-icons";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import axios from "axios";
 
 export function LoginForm() {
   // const {user,loading} = useCurrentUser();
-  const [user,setUser] = useState(null)
+
   const router = useRouter()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -35,10 +36,11 @@ export function LoginForm() {
       })
       .then((res) => res.data).then((data)=>{
         if(data.success) {
-          console.log(data.data)
-          setMsg("Successfully logged in")
-          setUser(data.data)
-          router.push("/dashboard")
+          axios.post("/api/v1/authorize", {accessToken: data.data.accessToken})
+          .then(()=>{
+            setMsg("Successfully logged in")
+            document.location.reload()
+          }); 
           setLoading(2)
         }
         else{ 
@@ -53,19 +55,7 @@ export function LoginForm() {
         setLoading(0)
       })
   }
-  const fetchUser = async () =>{
-    const response = await axiosInstance.get("users/current-user");
-    const data = await response.data;
-    if(data.success){
-      console.log(data.data)
-      router.push("/")
-    }
-    else{
-      console.log(data)
-    }
-  }
 
-  // console.log(user)
   return (
 
         <div className="w-[380px] max-sm:w-11/12 p-6 max-sm:p-3 max-sm:py-6 rounded-3xl -mt-10 max-sm:mt-[-200px] dark:bg-slate-900 bg-slate-100 bg-opacity-80 border drop-shadow-md">
