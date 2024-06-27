@@ -18,7 +18,7 @@ export function DatePickerWithRange({
   className,
   date,
   setDate,
-}: React.HTMLAttributes<HTMLDivElement> & {date:DateRange|undefined,setDate:React.Dispatch<React.SetStateAction<DateRange | undefined> | undefined>}) {
+}: React.HTMLAttributes<HTMLDivElement> & {className?:string,date:DateRange|undefined,setDate:React.Dispatch<React.SetStateAction<DateRange | undefined> | undefined>}) {
   
 
   return (

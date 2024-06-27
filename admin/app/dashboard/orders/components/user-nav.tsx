@@ -18,6 +18,7 @@ import { DatePickerWithRange } from "./date-picker"
 
 export function UserNav() {
   return (
-    <DatePickerWithRange className="flex items-center space-x-2" />
+    <></>
+    // <DatePickerWithRange className="flex items-center space-x-2" />
   )
 }

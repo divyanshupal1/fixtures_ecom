@@ -93,7 +93,7 @@ const Coupon = ({coupon,focused}:{coupon:couponType,focused:{get:string,set:(id:
       {
       <div className='hidden bg-accent bg-opacity-65 rounded-full absolute right-[10px] top-1/2 -translate-y-1/2 z-50 group-hover:flex flex-col gap-y-2 p-1.5'>
           <div className='w-9 h-9 flex justify-center items-center rounded-full bg-green-500' onClick={()=>focused.set(coupon._id)}><div className='scale-125'><MdEdit/></div></div>
-          <AlertCouponDelete id={coupon._id}/>
+          <AlertCouponDelete _id={coupon._id}/>
       </div>
       
       }
@@ -115,13 +115,13 @@ import {
 } from "@/components/ui/alert-dialog"
 
 
-export function AlertCouponDelete({id}:{id:string}) {
+function AlertCouponDelete({_id}:{_id:string}) {
   const {deleteCoupon} = useCouponStore((state)=>({
     deleteCoupon:state.deleteCoupon
   }))
   const {toast} = useToast()
   const handleDelete = async ()=>{
-    const res = await deleteCoupon(id)
+    const res = await deleteCoupon(_id)
     if(res){
       toast({
         title:"Coupon Deleted",      
@@ -175,7 +175,7 @@ import { DateRange } from 'react-day-picker'
 import { addDays, set } from 'date-fns'
 import { useToast } from '@/components/ui/use-toast'
 
-export function AddCoupon({isOpen,close,id}:{isOpen:boolean,close:()=>void,id:{get:string,set:(id:string)=>void}}) {
+function AddCoupon({isOpen,close,id}:{isOpen:boolean,close:()=>void,id:{get:string,set:(id:string)=>void}}) {
 
   const {toast} = useToast()
 
