@@ -63,6 +63,12 @@ export function LoginForm() {
             <div className="text-lg font-bold leading-4 p-4">Login</div>
           </div>
           <div className="space-y-5 mt-3 p-4">
+            <form onSubmit={(e)=>{
+              e.preventDefault()
+              SignMeIN()
+            }}
+            className="space-y-5"
+            >
             <div className="space-y-2">
               <Label htmlFor="name">Username or Email</Label>
               <Input id="name" name="username" placeholder="Username" className="py-5 bg-primary-foreground" value={username} onChange={(e)=>setUsername(e.target.value)} />
@@ -76,7 +82,7 @@ export function LoginForm() {
               <Input id="password" name="password" type={showPassword?"text":"password"} className="py-5 bg-primary-foreground" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
             </div>
             <div className="space-y-2 gap-x-4 w-full flex pt-5 justify-center">
-              <Button className="px-8 py-5 w-full rounded-full cursor-pointer" onClick={SignMeIN} disabled={loading!=0&&true}>
+              <Button className="px-8 py-5 w-full rounded-full cursor-pointer" type="submit" disabled={loading!=0&&true}>
                 {
                   loading==0?"Login":
                   loading==1?<div className="scale-125"><AiOutlineLoading3Quarters className="animate-spin"/></div>:
@@ -85,6 +91,7 @@ export function LoginForm() {
                 }
               </Button>
             </div>
+            </form>
             {msg&& <div className="space-y-2"><div className="text-sm text-center text-red-700 font-medium">{msg}</div></div>}
           </div>
 

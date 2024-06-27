@@ -27,8 +27,7 @@ const links = [
     {href:"/dashboard/productlist",icon:<FaTableList/>,text:"Product List",active:"productlist"},
     {href:"/dashboard/addproduct",icon:<TbSquareRoundedPlusFilled/>,text:"Add Prodcut",active:"addproduct"},
   ]},
-  {type:'tab',href:"/dashboard/coupons",icon:<BiSolidCoupon/>,text:"Coupons",active:"coupons"},
-  {type:'tab',href:"/dashboard/customers",icon:<HiUserGroup/>,text:"Customers",active:"customers"},
+  {type:'tab',href:"/dashboard/coupons",icon:<BiSolidCoupon/>,text:"Coupons",active:"coupons"}
 ]
 
 function Sidebar({setOpen,open}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {

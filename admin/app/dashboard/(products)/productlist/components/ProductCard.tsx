@@ -69,7 +69,7 @@ export function ProductCard({ product }: { product: productType; }) {
       </div>
       <div className="w-3/12 max-sm:w-full h-full flex flex-col justify-start pt-2 pl-2 overflow-hidden text-ellipsis whitespace-nowrap">
         <p className="font-semibold">{product.name}</p>
-        <p className="max-sm:hidden">{product.description}</p>
+        <p className="max-sm:hidden" dangerouslySetInnerHTML={{__html:product.description}}></p>
       </div>
       <div className="w-[11%] flex justify-center max-sm:w-full max-sm:inline">
         <p className="text-sm font-semibold">

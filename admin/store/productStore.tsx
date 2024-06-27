@@ -13,7 +13,6 @@ type PaginationType = {
     prevPage: number | null,
     nextPage: number | null
 }
-
 type productStoreType = {
     products: productType[];
     pagination: PaginationType;
@@ -24,7 +23,6 @@ type productStoreType = {
     updateProduct: (id:string,product:FormData)=> Promise<boolean>;
     deleteProduct: (id:string)=> Promise<boolean>;
 };
-
 export const useProductStore = create<productStoreType>((set) => ({
     products: [] as productType[],
     pagination: {
@@ -109,7 +107,7 @@ export const useProductStore = create<productStoreType>((set) => ({
         try{
             const res = await axiosInstance.post('/ecommerce/products',product, {
                 headers: {
-                  "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data",
                 }
             })
             if(res.data.success){
@@ -126,7 +124,7 @@ export const useProductStore = create<productStoreType>((set) => ({
         try{
             const res = await axiosInstance.patch('/ecommerce/products/'+id,product, {
                 headers: {
-                  "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data",
                 }
             })
             if(res.data.success){
@@ -165,9 +163,9 @@ export type categoryType={
     _id: string,
     name: string,
     owner: {
-      _id: string,
-      username: string,
-      email: string
+        _id: string,
+        username: string,
+        email: string
     },
     __v: 0,
     createdAt: string,
@@ -184,8 +182,8 @@ const sortCategories = (categories:Record<string,categoryType>)=>{
     return Object.keys(categories)
     .sort((a, b) => categories[a].name.localeCompare(categories[b].name))
     .reduce((acc:Record<string,categoryType>, key) => {
-      acc[key] = categories[key];
-      return acc;
+        acc[key] = categories[key];
+        return acc;
     }, {});
 }
 export const useCategoryStore = create<categoryStoreType>((set) => ({
@@ -195,9 +193,9 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
             const res = await axiosInstance.get('/ecommerce/categories')
             if(res.data.success){
                 const categories = res.data.data.reduce((acc:Record<string,categoryType>, curr:categoryType) => {
-                  const { _id} = curr;
-                  acc[_id] = curr;
-                  return acc;
+                    const { _id} = curr;
+                    acc[_id] = curr;
+                    return acc;
                 }, {});
                 const sortedData = sortCategories(categories)
                 set({categories: sortedData})
@@ -256,6 +254,93 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
                     categories[id] = res.data.data
                     categories = sortCategories(categories)
                     return {categories:categories}
+                })
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    }
+}));
+
+export type couponType = {
+    __v: 0,
+    _id: string,
+    couponCode: string,
+    createdAt: string,
+    discountValue: number,
+    expiryDate: string,
+    isActive: boolean,
+    minimumCartValue: number,
+    name: string,
+    owner: string,
+    startDate: string,
+    type: string,
+    updatedAt: string
+}
+export type couponStoreType = {
+    coupons: couponType[];
+    fetchCoupons: ()=> Promise<boolean>;
+    deleteCoupon: (id:string)=> Promise<boolean>;
+    createCoupon: (coupon:{name:string,couponCode:string,type:string,discountValue:number,minimumCartValue:number,expiryDate:string,startDate:string})=> Promise<boolean>;
+    updateCoupon: (id:string,coupon:{name:string,couponCode:string,type:string,discountValue:number,minimumCartValue:number,expiryDate:string,startDate:string})=> Promise<boolean>;
+}
+export const useCouponStore = create<couponStoreType>((set) => ({
+    coupons: [],
+    fetchCoupons: async()=>{
+        try{
+            const res = await axiosInstance.get('/ecommerce/coupons?page=1&limit=100')
+            if(res.data.success){
+                set({coupons: res.data.data.coupons})
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    },
+    deleteCoupon: async(id:string)=>{
+        try{
+            const res = await axiosInstance.delete('/ecommerce/coupons/'+id)
+            if(res.data.success){
+                set((state)=>{
+                    const coupons = state.coupons.filter((coupon)=>coupon._id!==id)
+                    return {coupons}
+                })
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    },
+    createCoupon: async(coupon:{name:string,couponCode:string,type:string,discountValue:number,minimumCartValue:number,expiryDate:string,startDate:string})=>{
+        try{
+            const res = await axiosInstance.post('/ecommerce/coupons',coupon)
+            if(res.data.success){
+                set((state)=>{
+                    const coupons = [...state.coupons,res.data.data]
+                    return {coupons}
+                })
+            }
+            return true
+        }
+        catch(e){
+            console.log(e)
+            return false
+        }
+    },
+    updateCoupon: async(id:string,coupon:{name:string,couponCode:string,type:string,discountValue:number,minimumCartValue:number,expiryDate:string,startDate:string})=>{
+        try{
+            const res = await axiosInstance.patch('/ecommerce/coupons/'+id,coupon)
+            if(res.data.success){
+                set((state)=>{
+                    const coupons = state.coupons.map((coupon)=>coupon._id===id?res.data.data:coupon)
+                    return {coupons}
                 })
             }
             return true
