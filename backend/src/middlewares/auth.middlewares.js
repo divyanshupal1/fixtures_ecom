@@ -67,7 +67,7 @@ export const verifyPermission = (roles = []) =>
     if (!req.user?._id) {
       throw new ApiError(401, "Unauthorized request");
     }
-    if (roles.includes(req.user?.role)) {
+    if (roles.includes(req.user?.role)|| req.user?.role=='SUPERADMIN') {
       next();
     } else {
       throw new ApiError(403, "You are not allowed to perform this action");

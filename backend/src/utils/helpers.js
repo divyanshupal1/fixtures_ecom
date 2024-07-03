@@ -106,6 +106,26 @@ export const getLocalPath = (fileName) => {
   return `public/images/${fileName}`;
 };
 
+export const getSubImages = (req,existing=[]) => {
+  const subImages = existing
+  Array.from({ length: 4 }).forEach((_, index) => {
+    if(req.files[`subImage${index+1}`]){
+      const image = req.files[`subImage${index+1}`][0];
+      const imageUrl = getStaticFilePath(req, image?.filename);
+      const imageLocalPath = getLocalPath(image?.filename);
+      subImages.splice(index,0,{url:imageUrl,localPath:imageLocalPath})
+    }
+  });
+  if(subImages.length>4){
+    let i = subImages.length
+    for(i;i>3;i--){
+      subImages[i]?.localPath != undefined && removeLocalFile(subImages[i].localPath)
+      subImages.pop()
+    }
+  }
+  return subImages 
+}
+
 /**
  *
  * @param {string} localPath

@@ -8,6 +8,7 @@ import {
   getMongoosePaginationOptions,
   getStaticFilePath,
   removeLocalFile,
+  getSubImages,
 } from "../../../utils/helpers.js";
 import { MAXIMUM_SUB_IMAGE_COUNT } from "../../../constants.js";
 import { Category } from "../../../models/apps/ecommerce/category.models.js";
@@ -53,19 +54,22 @@ const createProduct = asyncHandler(async (req, res) => {
   );
   const mainImageLocalPath = getLocalPath(req.files?.mainImage[0]?.filename);
 
+  const subImages = getSubImages(req)
+
+
   // Check if user has uploaded any subImages if yes then extract the file path
   // else assign an empty array
   /**
    * @type {{ url: string; localPath: string; }[]}
    */
-  const subImages =
-    req.files.subImages && req.files.subImages?.length
-      ? req.files.subImages.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
-      : [];
+  // const subImages =
+  //   req.files.subImages && req.files.subImages?.length
+  //     ? req.files.subImages.map((image) => {
+  //         const imageUrl = getStaticFilePath(req, image.filename);
+  //         const imageLocalPath = getLocalPath(image.filename);
+  //         return { url: imageUrl, localPath: imageLocalPath };
+  //       })
+  //     : [];
 
   const owner = req.user._id;
 
@@ -109,45 +113,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   /**
    * @type {{ url: string; localPath: string; }[]}
    */
-  let subImages =
-    // If user has uploaded new sub images then we have to create an object with new url and local path in the array format
-    req.files?.subImages && req.files.subImages?.length
-      ? req.files.subImages.map((image) => {
-          const imageUrl = getStaticFilePath(req, image.filename);
-          const imageLocalPath = getLocalPath(image.filename);
-          return { url: imageUrl, localPath: imageLocalPath };
-        })
-      : []; // if there are no new sub images uploaded we want to keep an empty array
-
-  const existedSubImages = product.subImages.length; // total sub images already present in the project
-  const newSubImages = subImages.length; // Newly uploaded sub images
-  const totalSubImages = existedSubImages + newSubImages;
-
-  if (totalSubImages > MAXIMUM_SUB_IMAGE_COUNT) {
-    // We want user to only add at max 4 sub images
-    // If the existing sub images + new sub images count exceeds 4
-    // We want to throw an error
-
-    // Before throwing an error we need to do some cleanup
-
-    // remove the  newly uploaded sub images by multer as there is not updation happening
-    subImages?.map((img) => removeLocalFile(img.localPath));
-    if (product.mainImage.url !== mainImage.url) {
-      // If use has uploaded new main image remove the newly uploaded main image as there is no updation happening
-      removeLocalFile(mainImage.localPath);
-    }
-    throw new ApiError(
-      400,
-      "Maximum " +
-        MAXIMUM_SUB_IMAGE_COUNT +
-        " sub images are allowed for a product. There are already " +
-        existedSubImages +
-        " sub images attached to the product."
-    );
-  }
-
-  // If above checks are passed. We need to merge the existing sub images and newly uploaded sub images
-  subImages = [...product.subImages, ...subImages];
+  let subImages = getSubImages(req,product.subImages)
 
   const updatedProduct = await Product.findByIdAndUpdate(
     productId,
@@ -210,7 +176,19 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
     },
   ]);
 
-  const products = await Product.find({ category})
+  // const products = await Product.find({ category})
+
+  const products = await Product.aggregatePaginate(
+    productAggregate,
+    getMongoosePaginationOptions({
+      page,
+      limit,
+      customLabels: {
+        totalDocs: "totalProducts",
+        docs: "products",
+      },
+    })
+  );
 
 
   return res

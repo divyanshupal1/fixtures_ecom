@@ -14,7 +14,8 @@ const createCategory = asyncHandler(async (req, res) => {
     .json(new ApiResponse(400, null, "Category already exists"));
   }
 
-  const category = await Category.create({ name, owner: req.user._id });
+  const {owner} = await Category.create({ name, owner: req.user._id });
+  const category = await Category.findOne({name, owner: req.user._id}).populate("owner", "username email")
 
   return res
     .status(201)
@@ -30,7 +31,7 @@ const getAllCategories = asyncHandler(async (req, res) => {
 
 const getCategoryById = asyncHandler(async (req, res) => {
   const { categoryId } = req.params;
-  const category = await Category.findById(categoryId);
+  const category = await Category.findById(categoryId).populate("owner", "username email");
   if (!category) {
     throw new ApiError(404, "Category does not exist");
   }
@@ -50,19 +51,21 @@ const updateCategory = asyncHandler(async (req, res) => {
   }
 
   if(req.user.role === "SUPERADMIN") {
-    const updatedCategory = await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
-    if (!updatedCategory) {
+    const {_id} = await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
+    if (!_id) {
       throw new ApiError(404, "Category does not exist");
     }
+    const updatedCategory = await Category.findById(_id).populate("owner", "username email");
     return res
-      .status(200)
-      .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
+    .status(200)
+    .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
   }
 
-  const updatedCategory = await Category.findOneAndUpdate({ _id: categoryId, owner: req.user._id }, { name }, { new: true });
-  if (!updatedCategory) {
+  const {_id} = await Category.findOneAndUpdate({ _id: categoryId, owner: req.user._id }, { name }, { new: true });
+  if (!_id) {
     throw new ApiError(404, "Category does not exist");
   }
+  const updatedCategory = await Category.findOne({name, owner: req.user._id}).populate("owner", "username email")
   return res
     .status(200)
     .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));

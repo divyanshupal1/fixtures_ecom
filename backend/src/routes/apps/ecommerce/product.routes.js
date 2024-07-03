@@ -37,9 +37,20 @@ router
         maxCount: 1,
       },
       {
-        // frontend will send at max 4 `subImages` keys with file object which we will save in the backend
-        name: "subImages",
-        maxCount: MAXIMUM_SUB_IMAGE_COUNT, // maximum number of subImages is 4
+        name: "subImage1",
+        maxCount: 1,
+      },
+      {
+        name: "subImage2",
+        maxCount: 1,
+      },
+      {
+        name: "subImage3",
+        maxCount: 1,
+      },
+      {
+        name: "subImage4",
+        maxCount: 1,
       },
     ]),
     createProductValidator(),
@@ -52,15 +63,27 @@ router
   .get(mongoIdPathVariableValidator("productId"), validate, getProductById)
   .patch(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     upload.fields([
       {
         name: "mainImage",
         maxCount: 1,
       },
       {
-        name: "subImages",
-        maxCount: MAXIMUM_SUB_IMAGE_COUNT, // maximum number of subImages is 4
+        name: "subImage1",
+        maxCount: 1,
+      },
+      {
+        name: "subImage2",
+        maxCount: 1,
+      },
+      {
+        name: "subImage3",
+        maxCount: 1,
+      },
+      {
+        name: "subImage4",
+        maxCount: 1,
       },
     ]),
     mongoIdPathVariableValidator("productId"),
@@ -70,7 +93,7 @@ router
   )
   .delete(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     mongoIdPathVariableValidator("productId"),
     validate,
     deleteProduct
@@ -84,7 +107,7 @@ router
   .route("/remove/subimage/:productId/:subImageId")
   .patch(
     verifyJWT,
-    verifyPermission([UserRolesEnum.ADMIN]),
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
     mongoIdPathVariableValidator("productId"),
     mongoIdPathVariableValidator("subImageId"),
     validate,

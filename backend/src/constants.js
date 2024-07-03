@@ -36,7 +36,7 @@ export const AvailablePaymentProviders = Object.values(PaymentProviderEnum);
  */
 export const CouponTypeEnum = {
   FLAT: "FLAT",
-  // PERCENTAGE: "PERCENTAGE",
+  PERCENTAGE: "PERCENTAGE",
 };
 
 export const AvailableCouponTypes = Object.values(CouponTypeEnum);
