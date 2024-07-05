@@ -2,6 +2,28 @@ import {create} from 'zustand'
 import axiosInstance from '@/lib/axiosInstance';
 import { productType } from '@/schema/orderSchema';
 
+
+export type ProductVariant = {
+    name: string;
+    price: number;
+    stock: number;
+    description: string;
+    mainImage: string;
+    subImages?: string[];
+}
+
+export type Product = {
+    name: string;
+    category?: string;
+    price: number;
+    stock: number;
+    description: string;
+    mainImage: string;
+    subImages?: string[];
+    variants?: ProductVariant[];
+};
+
+
 type PaginationType = {
     totalProducts: number,
     limit: number,
@@ -17,10 +39,10 @@ type productStoreType = {
     products: productType[];
     pagination: PaginationType;
     fetchProducts: (page?:number,limit?:number)=> Promise<boolean>;
-    fetchProductByID: (id:string)=> Promise<boolean|productType>;
+    fetchProductByID: (id:string)=> Promise<boolean|Product>;
     fetchProductsByCategory: (category:string,page:number,limit:number)=> Promise<boolean>;
-    addProduct: (product:FormData)=> Promise<boolean>;
-    updateProduct: (id:string,product:FormData)=> Promise<boolean>;
+    addProduct: (product:Product)=> Promise<boolean>;
+    updateProduct: (id:string,product:Product)=> Promise<boolean>;
     deleteProduct: (id:string)=> Promise<boolean>;
 };
 export const useProductStore = create<productStoreType>((set) => ({
@@ -103,13 +125,9 @@ export const useProductStore = create<productStoreType>((set) => ({
                 return false
             } 
     },
-    addProduct: async(product:FormData)=>{
+    addProduct: async(product:Product)=>{
         try{
-            const res = await axiosInstance.post('/ecommerce/products',product, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                }
-            })
+            const res = await axiosInstance.post('/ecommerce/products',product)
             if(res.data.success){
                 return true
             }
@@ -120,13 +138,9 @@ export const useProductStore = create<productStoreType>((set) => ({
             return false        
         }
     },
-    updateProduct: async(id:string,product:FormData)=>{
+    updateProduct: async(id:string,product:Product)=>{
         try{
-            const res = await axiosInstance.patch('/ecommerce/products/'+id,product, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                }
-            })
+            const res = await axiosInstance.patch('/ecommerce/products/'+id,product)
             if(res.data.success){
                 return true
             }

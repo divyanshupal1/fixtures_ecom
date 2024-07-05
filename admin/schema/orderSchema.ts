@@ -43,28 +43,32 @@ export const orderListSchema = z.object({
   updatedAt: z.string(),
   address: addressSchema,
 });
+const imageSchema = z.object({
+  _id: z.string(),
+  localPath: z.string(),
+  url: z.string(),
+});
+
 export const productSchema = z.object({
   __v: z.number(),
   _id: z.string(),
   category: z.string(),
   createdAt: z.string(),
   description: z.string(),
-  mainImage: z.object({
-    _id: z.string(),
-    localPath: z.string(),
-    url: z.string(),
-  }),
+  mainImage: imageSchema,
   name: z.string(),
   owner: z.string(),
   price: z.number(),
   stock: z.number(),
-  subImages: z.array(
-    z.object({
-      _id: z.string(),
-      localPath: z.string(),
-      url: z.string(),
-    })
-  ),
+  subImages: z.array(imageSchema),
+  variants: z.array(z.object({
+    name: z.string(),
+    price: z.number(),
+    stock: z.number(),
+    description: z.string(),
+    mainImage: imageSchema,
+    subImages: z.array(imageSchema),
+  })),
   updatedAt: z.string(),
 });
 export const itemSchema = z.object({

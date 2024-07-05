@@ -52,6 +52,11 @@
 
 /* width */
 @media screen and (min-width: 600px) {
+  
+  .small-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
 
   ::-webkit-scrollbar {
     width: 8px;
@@ -109,4 +114,12 @@
 }
 .dark .ql-snow .ql-picker.ql-size .ql-picker-label::before,.dark .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   color: white !important;
+}
+
+
+.dark .ql-snow .ql-stroke{
+  stroke:white;
+}
+.dark .ql-snow .ql-fill {
+  fill: white;
 }

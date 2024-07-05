@@ -7,7 +7,7 @@ import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Shop from './components/Shop';
 import ProductPage from './components/ProductPage';
-import Login from './components/Login';
+import Login, { LoginCard } from './components/Login';
 import Signup from './components/Signup';
 import Cart from './components/Cart';
 import './App.css';
@@ -69,7 +69,7 @@ const App = () => {
           <LottieLoader />
         ) : (
           <>
-            {showLoginPopup && <Login toggleSignupPopup={() => setShowSignupPopup(!showSignupPopup)} setIsLoggedIn={setIsLoggedIn} toggleCartDrawer={toggleCart} />}
+            {showLoginPopup && <LoginCard toggleSignupPopup={() => setShowSignupPopup(!showSignupPopup)} setIsLoggedIn={setIsLoggedIn} toggleCartDrawer={toggleCart} />}
             {showSignupPopup && <Signup toggleLoginPopup={() => setShowLoginPopup(!showLoginPopup)} />}
             {cartOpen && <Cart cartItems={cartItems} removeFromCart={removeFromCart} />}
           </>

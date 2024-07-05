@@ -7,6 +7,7 @@ import {
   getProductsByCategory,
   removeProductSubImage,
   updateProduct,
+  groupProducts
 } from "../../../controllers/apps/ecommerce/product.controllers.js";
 import {
   verifyPermission,
@@ -18,7 +19,7 @@ import {
   updateProductValidator,
 } from "../../../validators/apps/ecommerce/product.validators.js";
 import { validate } from "../../../validators/validate.js";
-import { MAXIMUM_SUB_IMAGE_COUNT, UserRolesEnum } from "../../../constants.js";
+import { UserRolesEnum } from "../../../constants.js";
 import { mongoIdPathVariableValidator } from "../../../validators/common/mongodb.validators.js";
 
 const router = Router();
@@ -29,30 +30,6 @@ router
   .post(
     verifyJWT,
     verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
-    // In product form we will received one main image file type
-    // And max 4 sub images
-    upload.fields([
-      {
-        name: "mainImage",
-        maxCount: 1,
-      },
-      {
-        name: "subImage1",
-        maxCount: 1,
-      },
-      {
-        name: "subImage2",
-        maxCount: 1,
-      },
-      {
-        name: "subImage3",
-        maxCount: 1,
-      },
-      {
-        name: "subImage4",
-        maxCount: 1,
-      },
-    ]),
     createProductValidator(),
     validate,
     createProduct
@@ -64,28 +41,6 @@ router
   .patch(
     verifyJWT,
     verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
-    upload.fields([
-      {
-        name: "mainImage",
-        maxCount: 1,
-      },
-      {
-        name: "subImage1",
-        maxCount: 1,
-      },
-      {
-        name: "subImage2",
-        maxCount: 1,
-      },
-      {
-        name: "subImage3",
-        maxCount: 1,
-      },
-      {
-        name: "subImage4",
-        maxCount: 1,
-      },
-    ]),
     mongoIdPathVariableValidator("productId"),
     updateProductValidator(),
     validate,
@@ -113,5 +68,13 @@ router
     validate,
     removeProductSubImage
   );
+router
+  .route('/archive/variants')
+  .post(
+    verifyJWT,
+    verifyPermission([UserRolesEnum.ADMIN,UserRolesEnum.SUPERADMIN]),
+    validate,
+    groupProducts
+  )
 
 export default router;

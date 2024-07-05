@@ -14,7 +14,7 @@ export default function Page() {
     return (
     <div className='w-full h-full mb-4'>
         <Suspense fallback={<div>Loading...</div>}>
-            <PageComponent />
+            <PageComponent/>
         </Suspense>
     </div>
     );

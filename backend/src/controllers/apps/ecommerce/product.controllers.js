@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { Product } from "../../../models/apps/ecommerce/product.models.js";
 import { ApiError } from "../../../utils/ApiError.js";
 import { ApiResponse } from "../../../utils/ApiResponse.js";
@@ -15,8 +15,7 @@ import { Category } from "../../../models/apps/ecommerce/category.models.js";
 
 const getAllProducts = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
-  const productAggregate = Product.aggregate([{ $match: {} }]);
-
+  const productAggregate = Product.aggregate([]);
   const products = await Product.aggregatePaginate(
     productAggregate,
     getMongoosePaginationOptions({
@@ -34,8 +33,27 @@ const getAllProducts = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, products, "Products fetched successfully"));
 });
 
+const groupProducts = asyncHandler(async (req, res) => {
+  var {products}=req.body;
+  products = products.map((product)=>  new mongoose.Types.ObjectId(product));
+  const update = await Product.updateMany(
+    {_id:{$in:products}},
+    {
+      $set:{
+        variants:products
+      }
+    }
+  );
+  return res
+    .status(200)
+    .json(new ApiResponse(200, update, "Variants updated successfully"));
+})
+
+
+
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, description, category, price, stock } = req.body;
+  const { name, description, category, price, stock, mainImage, subImages,variants } = req.body;
+  console.log(req.body)
 
   const categoryToBeAdded = await Category.findById(category);
 
@@ -44,32 +62,9 @@ const createProduct = asyncHandler(async (req, res) => {
   }
 
   // Check if user has uploaded a main image
-  if (!req.files?.mainImage || !req.files?.mainImage.length) {
+  if (!mainImage) {
     throw new ApiError(400, "Main image is required");
   }
-
-  const mainImageUrl = getStaticFilePath(
-    req,
-    req.files?.mainImage[0]?.filename
-  );
-  const mainImageLocalPath = getLocalPath(req.files?.mainImage[0]?.filename);
-
-  const subImages = getSubImages(req)
-
-
-  // Check if user has uploaded any subImages if yes then extract the file path
-  // else assign an empty array
-  /**
-   * @type {{ url: string; localPath: string; }[]}
-   */
-  // const subImages =
-  //   req.files.subImages && req.files.subImages?.length
-  //     ? req.files.subImages.map((image) => {
-  //         const imageUrl = getStaticFilePath(req, image.filename);
-  //         const imageLocalPath = getLocalPath(image.filename);
-  //         return { url: imageUrl, localPath: imageLocalPath };
-  //       })
-  //     : [];
 
   const owner = req.user._id;
 
@@ -79,12 +74,10 @@ const createProduct = asyncHandler(async (req, res) => {
     stock,
     price,
     owner,
-    mainImage: {
-      url: mainImageUrl,
-      localPath: mainImageLocalPath,
-    },
+    mainImage,
     subImages,
     category,
+    variants
   });
   return res
     .status(201)
@@ -93,7 +86,7 @@ const createProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = asyncHandler(async (req, res) => {
   const { productId } = req.params;
-  const { name, description, category, price, stock } = req.body;
+  const { name, description, category, price, stock, mainImage ,subImages,variants} = req.body;
 
   const product = await Product.findById(productId);
 
@@ -102,18 +95,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Product does not exist");
   }
 
-  const mainImage = req.files?.mainImage?.length
-    ? {
-        // If user has uploaded new main image then we have to create an object with new url and local path in the project
-        url: getStaticFilePath(req, req.files?.mainImage[0]?.filename),
-        localPath: getLocalPath(req.files?.mainImage[0]?.filename),
-      }
-    : product.mainImage; // if there is no new main image uploaded we will stay with the old main image of the product
-
-  /**
-   * @type {{ url: string; localPath: string; }[]}
-   */
-  let subImages = getSubImages(req,product.subImages)
 
   const updatedProduct = await Product.findByIdAndUpdate(
     productId,
@@ -126,6 +107,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         category,
         mainImage,
         subImages,
+        variants
       },
     },
     {
@@ -133,10 +115,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     }
   );
 
-  // Once the product is updated. Do some cleanup
-  if (product.mainImage.url !== mainImage.url) {
-    // If user is uploading new main image remove the previous one because we don't need that anymore
-    removeLocalFile(product.mainImage.localPath);
+  if (product.mainImage !== mainImage) {
+    removeLocalFile('public/images/ecommerce/'+product.mainImage.split('/').pop());
   }
 
   return res
@@ -174,9 +154,28 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
         category: new mongoose.Types.ObjectId(categoryId),
       },
     },
+    {
+      $project:{
+        _id:1,
+        name:1,
+        price:1,
+        mainImage:1,
+        category:1,
+        description:1,
+        owner:1,
+        stock:1,
+        subImages:1,
+        createdAt:1,
+        updatedAt:1,
+        variants:{
+          name:1,
+          price:1,
+          mainImage:1,
+          subImages:1
+        }
+      }
+    }
   ]);
-
-  // const products = await Product.find({ category})
 
   const products = await Product.aggregatePaginate(
     productAggregate,
@@ -253,13 +252,6 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Product does not exist");
   }
 
-  const productImages = [product.mainImage, ...product.subImages];
-
-  productImages.map((image) => {
-    // remove images associated with the product that is being deleted
-    removeLocalFile(image.localPath);
-  });
-
   return res
     .status(200)
     .json(
@@ -279,4 +271,5 @@ export {
   getProductsByCategory,
   updateProduct,
   removeProductSubImage,
+  groupProducts
 };

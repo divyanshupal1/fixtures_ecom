@@ -36,7 +36,7 @@ export default function StudentLayout({children}:{children:JSX.Element}) {
           <Sidebar setOpen={setOpen} open={open}/>
         </div>
         <div className="sm:w-[calc(100%-15rem)] w-full p-1 max-sm:p-0 max-sm:h-[calc(100vh-60px)]">
-            <div className="w-full h-full rounded-xl max-sm:rounded-none bg-secondary dark:bg-slate-800 dark:border-border px-2 max-sm:p-0 overflow-hidden pb-2 overflow-y-scroll">
+            <div className="w-full h-full rounded-xl max-sm:rounded-none bg-secondary dark:bg-slate-800 dark:border-border px-2 max-sm:p-0 overflow-hidden pb-2 overflow-y-scroll mb-2">
               <div className=" h-auto rounded-xl flex flex-col justify-start items-start space-y-2 md:flex  ">
                 {children}
               </div>

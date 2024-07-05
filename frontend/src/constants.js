@@ -1,0 +1,1 @@
+export const MODE = "prod"  // demo // local // prod

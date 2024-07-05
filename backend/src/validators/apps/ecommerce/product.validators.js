@@ -47,7 +47,7 @@ const updateProductValidator = () => {
       .withMessage("Stock is required")
       .isNumeric()
       .withMessage("Stock must be a number"),
-    ...mongoIdRequestBodyValidator("category")
+    // ...mongoIdRequestBodyValidator("category")
   ];
 };
 

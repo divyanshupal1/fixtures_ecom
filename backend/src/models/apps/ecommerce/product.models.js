@@ -16,10 +16,7 @@ const productSchema = new Schema(
     },
     mainImage: {
       required: true,
-      type: {
-        url: String,
-        localPath: String,
-      },
+      type: String,
     },
     name: {
       required: true,
@@ -38,14 +35,37 @@ const productSchema = new Schema(
       type: Number,
     },
     subImages: {
-      type: [
-        {
-          url: String,
-          localPath: String,
-        },
-      ],
+      type: [String],
       default: [],
     },
+    variants: [
+      {
+        name: {
+          required: true,
+          type: String,
+        },
+        description: {
+          required: true,
+          type: String,
+        },
+        price: {
+          required: true,
+          type: Number,
+        },
+        mainImage: {
+          required: true,
+          type: String,
+        },
+        stock: {
+          required: true,
+          type: Number,
+        },
+        subImages: {
+          type: [String],
+          default: [],  
+        },
+      }
+    ]
   },
   { timestamps: true }
 );

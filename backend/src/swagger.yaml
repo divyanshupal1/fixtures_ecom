@@ -11183,6 +11183,28 @@ paths:
         schema:
           type: string
           example: 64801f2a81acfc368d253158
+  /ecommerce/products/variants:
+    post:
+      tags:
+        
+        - 🛒 Ecommerce
+        
+      summary: Create variant
+      description: >-
+        The API allows an authenticated user with the role of `ADMIN` to create
+        a new variant for a product.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  example: ["dsfsdf"]
+            example:
+              products: ["DELIVERED"]
+
 tags:
   - name: 🔐 Authentication
   - name: 🛒 Ecommerce

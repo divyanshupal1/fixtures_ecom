@@ -23,15 +23,21 @@ const file = fs.readFileSync(path.resolve(__dirname, "./swagger.yaml"), "utf8");
 const swaggerDocument = YAML.parse(file);
 
 const app = express();
-
 const httpServer = createServer(app);
 
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+
+
+
 // global middlewares
-var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:3000"]
+var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:8080","http://localhost:3000"]
 app.use(
   cors({
     origin: function (origin, callback) {
-      
+      console.log("Request Origin: "+origin)
       if (whitelist.indexOf(origin) !== -1 || !origin) {
         console.log("Allowed by cors: "+origin)
 	      callback(null, true)
@@ -82,10 +88,7 @@ const limiter = rateLimit({
 // Apply the rate limiting middleware to all requests
 app.use(limiter);
 
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(express.static("public")); // configure static file to save images locally
-app.use(cookieParser());
+
 
 
 app.use(
@@ -111,6 +114,7 @@ import couponRouter from "./routes/apps/ecommerce/coupon.routes.js";
 import orderRouter from "./routes/apps/ecommerce/order.routes.js";
 import productRouter from "./routes/apps/ecommerce/product.routes.js";
 import ecomProfileRouter from "./routes/apps/ecommerce/profile.routes.js";
+import assetRouter from "./routes/apps/ecommerce/upload.routes.js";
 
 import { avoidInProduction } from "./middlewares/auth.middlewares.js";
 
@@ -126,6 +130,7 @@ app.use("/api/v1/ecommerce/profile", ecomProfileRouter);
 app.use("/api/v1/ecommerce/cart", cartRouter);
 app.use("/api/v1/ecommerce/orders", orderRouter);
 app.use("/api/v1/ecommerce/coupons", couponRouter);
+app.use("/api/v1/ecommerce/assets",assetRouter)
 
 
 

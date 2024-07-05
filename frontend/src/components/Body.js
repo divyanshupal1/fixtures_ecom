@@ -11,7 +11,7 @@ const Body = ({addToCart}) =>{
   const rating=13000;
 
     return (
-      <div className="container">
+      <div className="">
       <Header2 />
         
         <div className="quant">

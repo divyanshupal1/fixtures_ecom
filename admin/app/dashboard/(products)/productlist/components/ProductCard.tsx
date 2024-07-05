@@ -4,7 +4,7 @@
 import React from 'react';
 import { Checkbox } from "@/components/ui/checkbox";
 import { productType } from '@/schema/orderSchema';
-import { useCategoryStore, useProductStore } from '@/store/productStore';
+import { Product, useCategoryStore, useProductStore } from '@/store/productStore';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -19,10 +19,27 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { HiDotsVertical } from "react-icons/hi";
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 
-export function ProductCard({ product }: { product: productType; }) {
+type DetailedProduct = Product & { 
+  _id: string
+  mainImage: string
+  updatedAt: string
+  category: string
+  variants: Product[] 
+} 
+
+export function ProductCard({ product,selectHandle,selected }: { product: DetailedProduct, selectHandle: (id:string)=>void ,selected:boolean}) {
   const router = useRouter();
   const { categories } = useCategoryStore((state) => ({ categories: state.categories }));
   const {deleteProduct} = useProductStore((state)=>({
@@ -30,11 +47,12 @@ export function ProductCard({ product }: { product: productType; }) {
   }))
   const [loading, setLoading] = React.useState(false);
   const {toast} = useToast()
-
+  const [deleteAlertActive,setDeleteAlertActive]=React.useState(false)
   const handleEdit = () => {
     router.push(`/dashboard/addproduct?id=${product._id}`)
   }
   const handleDelete = async()=>{
+    setDeleteAlertActive(false)
     setLoading(true)
     const res = await deleteProduct(product._id)
     if(res){
@@ -58,12 +76,26 @@ export function ProductCard({ product }: { product: productType; }) {
       key={product._id}
       className="w-full drop-shadow-md h-[100px] max-sm:h-auto bg-white dark:bg-primary-foreground p-2 px-6 max-sm:px-2 rounded-md flex items-center max-sm:flex-col max-sm:justify-center relative"
     >
-      <div className="w-[3%] flex justify-start max-sm:hidden">
-        <Checkbox />
+      <AlertDialog open={deleteAlertActive}>
+        <AlertDialogContent className='border-border'>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the product.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={()=>setDeleteAlertActive(false)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDelete} className={cn(buttonVariants({variant:"destructive"}), "relative")}>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <div className="w-[3%] flex justify-start max-sm:absolute max-sm:top-2 max-sm:left-2 max-sm:bg-primary-foreground max-sm:rounded-br-md max-sm:pb-1.5 max-sm:pr-1.5 max-sm:w-auto">
+        <Checkbox checked={selected} onCheckedChange={()=>selectHandle(product._id)}/>
       </div>
       <div className="w-1/12 max-sm:w-full h-5/6 max-sm:h-auto flex justify-start ml-3 max-sm:ml-0">
         <img
-          src={product.mainImage.url}
+          src={product.mainImage}
           className="h-full rounded-md"
           alt="product-image" />
       </div>
@@ -82,6 +114,12 @@ export function ProductCard({ product }: { product: productType; }) {
           {product.stock}
         </p>
       </div>
+      <div className="w-[11%] flex justify-center max-sm:w-full max-sm:inline">
+        <p className="text-sm font-semibold">
+          <span className="sm:hidden pl-2">Variants : </span>
+          {product.variants.length}
+        </p>
+      </div>
       <div className="w-2/12 flex justify-center max-sm:w-full items-center max-sm:justify-start">
         <span className="sm:hidden pl-2 text-sm font-semibold">
           Category :{" "}
@@ -96,25 +134,14 @@ export function ProductCard({ product }: { product: productType; }) {
           {new Date(product.updatedAt).toLocaleDateString()}
         </p>
       </div>
-      <div className="w-1/12 flex justify-center max-sm:absolute max-sm:bottom-[10px] max-sm:right-[40px] gap-x-3">
-        <Button size={"sm"} onClick={handleEdit}><div className='scale-150'><MdEdit/></div></Button>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-              <Button size={"sm"} variant={"destructive"} loading={loading} disabled={loading}><div className='scale-150'><MdDelete/></div></Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className='border-border'>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the product.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete} className={cn(buttonVariants({variant:"destructive"}), "relative")}>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+      <div className="w-1/12 flex justify-center max-sm:absolute max-sm:bottom-[10px] max-sm:right-[10px] gap-x-3">
+        <DropdownMenu>
+          <DropdownMenuTrigger><HiDotsVertical/></DropdownMenuTrigger>
+          <DropdownMenuContent className='max-w-[100px]'>
+            <DropdownMenuItem  onClick={handleEdit} ><div className='scale-100 mr-3'><MdEdit/></div> Edit </DropdownMenuItem>
+            <DropdownMenuItem  onClick={()=>setDeleteAlertActive(true)} ><div className='scale-100 mr-3'><MdDelete/></div> Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
@@ -125,10 +152,7 @@ export function ProductHeader() {
   return (
     <div className="w-full rounded-md flex items-center  p-3 px-6 sticky top-0 z-20 backdrop-blur-md max-sm:hidden">
       <div className="w-[3%] flex justify-start">
-        <Checkbox />
-      </div>
-      <div className="w-1/12 flex justify-center">
-        <p className="text-sm font-semibold">Image</p>
+        {/* <Checkbox onse /> */}
       </div>
       <div className="w-3/12 flex pl-6 justify-start">
         <p className="text-sm font-semibold">Details</p>
@@ -138,6 +162,9 @@ export function ProductHeader() {
       </div>
       <div className="w-[11%] flex justify-center">
         <p className="text-sm font-semibold">Stock</p>
+      </div>
+      <div className="w-[11%] flex justify-center">
+        <p className="text-sm font-semibold">Variants</p>
       </div>
       <div className="w-2/12 flex justify-center">
         <p className="text-sm font-semibold">Category</p>
