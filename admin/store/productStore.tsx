@@ -23,6 +23,14 @@ export type Product = {
     variants?: ProductVariant[];
 };
 
+export type DetailedProduct = Product & { 
+    _id: string
+    mainImage: string
+    updatedAt: string
+    category: string
+    variants: Product[] 
+} 
+
 
 type PaginationType = {
     totalProducts: number,
@@ -36,7 +44,7 @@ type PaginationType = {
     nextPage: number | null
 }
 type productStoreType = {
-    products: productType[];
+    products: DetailedProduct[];
     pagination: PaginationType;
     fetchProducts: (page?:number,limit?:number)=> Promise<boolean>;
     fetchProductByID: (id:string)=> Promise<boolean|Product>;
@@ -46,7 +54,7 @@ type productStoreType = {
     deleteProduct: (id:string)=> Promise<boolean>;
 };
 export const useProductStore = create<productStoreType>((set) => ({
-    products: [] as productType[],
+    products: [] as DetailedProduct[],
     pagination: {
         totalProducts: 0,
         limit: 10,

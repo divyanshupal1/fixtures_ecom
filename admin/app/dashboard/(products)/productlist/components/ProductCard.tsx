@@ -4,7 +4,7 @@
 import React from 'react';
 import { Checkbox } from "@/components/ui/checkbox";
 import { productType } from '@/schema/orderSchema';
-import { Product, useCategoryStore, useProductStore } from '@/store/productStore';
+import { Product, useCategoryStore, useProductStore,DetailedProduct } from '@/store/productStore';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -31,13 +31,6 @@ import { HiDotsVertical } from "react-icons/hi";
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 
-type DetailedProduct = Product & { 
-  _id: string
-  mainImage: string
-  updatedAt: string
-  category: string
-  variants: Product[] 
-} 
 
 export function ProductCard({ product,selectHandle,selected }: { product: DetailedProduct, selectHandle: (id:string)=>void ,selected:boolean}) {
   const router = useRouter();
