@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 
 // global middlewares
-var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:8080","http://localhost:3000"]
+var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:8080","http://localhost:3000","https://fixtures-ecom-new.vercel.app"]
 app.use(
   cors({
     origin: function (origin, callback) {
