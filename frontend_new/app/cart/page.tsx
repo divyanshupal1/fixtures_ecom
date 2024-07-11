@@ -158,7 +158,7 @@ const ProductCard = ({item}:{item:CartItem}) => {
         <img className="h-20 w-20 object-contain" src={item.product.mainImage} alt="imac image" />
       </a>
 
-      <label for="counter-input" className="sr-only">Choose quantity:</label>
+      <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>
       <div className="flex items-center justify-between md:order-3 md:justify-end">
         <div className="flex items-center">
           <button type="button" onClick={decrement} id="decrement-button-5" data-input-counter-decrement="counter-input-5" className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
