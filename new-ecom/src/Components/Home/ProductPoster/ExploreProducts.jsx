@@ -10,6 +10,12 @@ const ExploreProducts = ({ numOfProducts = -1, customization }) => {
     fetchProducts:state.fetchProducts
   }))
 
+  useEffect(() => {
+    if (!products) {
+      fetchProducts(productsData);
+    }
+  }, [products]);
+
 
   if (!products) {
     return <div>Loading...</div>;
