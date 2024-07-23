@@ -12,7 +12,7 @@ const ExploreProducts = ({ numOfProducts = -1, customization }) => {
 
   useEffect(() => {
     if (!products) {
-      fetchProducts(productsData);
+      fetchProducts();
     }
   }, [products]);
 
