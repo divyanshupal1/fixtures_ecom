@@ -4,7 +4,7 @@
   display: flex;
   gap: 80px;
   margin: var(--page-margin);
-  height: 750px;
+  // height: 750px; this caused the footer error
 }
 
 @include large {

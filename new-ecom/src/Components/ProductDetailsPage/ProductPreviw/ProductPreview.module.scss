@@ -1,106 +1,120 @@
 @import "../../../Styles/mixins.scss";
 
+// Container for images
 .images {
   display: flex;
   gap: 30px;
   user-select: none;
-}
 
-@media (max-width: 1400px) {
-  .images {
+  @media (max-width: 1400px) {
     flex-direction: column-reverse;
   }
 }
 
+// Container for other images (thumbnails)
 .otherImages {
   display: flex;
   flex-direction: column;
   gap: 14px;
   height: 540px;
-}
 
-@media (max-width: 1400px) {
-  .otherImages {
+  @media (max-width: 1400px) {
     height: auto;
-  }
-}
-
-@media (max-width: 1400px) {
-  .otherImages {
     max-width: 500px;
     flex-direction: row;
   }
-}
 
-@include small {
-  .otherImages {
+  @include small {
     max-width: 100%;
   }
 }
 
+// Individual image holder for thumbnails
 .otherImages .imgHolder {
-  background-color: var(--very-light-gray2);
+  background: linear-gradient(145deg, var(--very-light-gray2), var(--light-gray));
   @include center-x-y;
   aspect-ratio: 1/1;
   width: 125px;
   cursor: pointer;
-}
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 
-@media (max-width: 1400px) {
-  .otherImages .imgHolder {
+  &:hover {
+    transform: scale(1.1);  // Slightly increase the scale for a more noticeable effect
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);  // Increase shadow for a deeper effect
+    background: linear-gradient(145deg, var(--light-gray), var(--very-light-gray2));  // Reverse the gradient on hover
+  }
+
+
+  @media (max-width: 1400px) {
     width: calc((25% - 14px) + (14px / 4));
     height: auto;
   }
 }
 
+// Thumbnail image styling
 .otherImages .imgHolder img {
   aspect-ratio: 1/1;
   width: 80%;
   object-fit: contain;
   border-radius: 4px;
-}
+  transition: opacity 0.3s ease;
 
-@media (max-width: 1400px) {
-  .otherImages .imgHolder img {
+  &:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 1400px) {
     width: 80%;
     height: 80%;
   }
 }
 
+// Main preview image container
 .previewImgHolder {
   width: 500px;
   height: 540px;
   max-height: 540px;
   min-height: 540px;
-  border-radius: 4px;
+  border-radius: 8px;
   flex: 1;
   background-color: var(--very-light-gray2);
-}
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
 
-@include large {
-  .previewImgHolder {
+  @include large {
     height: 500px;
     max-height: 500px;
     min-height: 500px;
     @include center-x-y;
   }
-}
 
-@media (max-width: 480px) {
-  .previewImgHolder {
+  @media (max-width: 480px) {
     height: 410px;
     max-height: 410px;
     min-height: 410px;
   }
-}
 
-@include small {
-  .previewImgHolder {
+  @include small {
     width: 100%;
+  }
+
+  &:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   }
 }
 
+// Main preview image styling
 .previewImgHolder>img {
   background-color: var(--very-light-gray2);
   object-fit: contain;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.95;
+  }
 }

@@ -33,20 +33,23 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
 
   const { toast } = useToast();
   const [name, setName] = React.useState("");
+  const [svgImage,setSvgImage]= React.useState("");
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (id != null) {
       setName(categories[id].name);
+      setSvgImage(categories[id].svgImage);
     } else {
       setName("");
+      setSvgImage("");
     }
   }, [id, categories]);
 
   async function handleSubmit() {
     if (name.length > 0) {
       setLoading(true);
-      let success = id != null ? await updateCategory(id!, name) : await createCategory(name);
+      let success = id != null ? await updateCategory(id!, name,svgImage) : await createCategory(name,svgImage);
       if (success) {
         setName("");
         dialog.close();
@@ -68,12 +71,12 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
   }
 
   return (
-    <Dialog open={dialog.state}>
+    <Dialog open={dialog?.state}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{id != null ? "Edit category" : "Create a new category"}</DialogTitle>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center flex-col gap-1">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
               Name
@@ -86,6 +89,19 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
               value={name}
               className={name.length > 0 ? "border-primary" : "border-red-500 border-2 outline-none"}
               onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="link" className="sr-only">
+              svgImage
+            </Label>
+            <Input
+              id="link"
+              type="text"
+              placeholder="SVG Image Code"
+              required
+              value={svgImage}
+              className={svgImage?.length > 0 ? "border-primary" : "border-red-500 border-2 outline-none"}
+              onChange={(e) => setSvgImage(e.target.value)} />
           </div>
         </div>
         <DialogFooter className="justify-end">
