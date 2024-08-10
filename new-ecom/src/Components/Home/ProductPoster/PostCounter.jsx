@@ -16,7 +16,7 @@ const PostCounter = () => {
 
       <div className={s.timeUnit}>
         <span>{timeData.hours}</span>
-        <span>House</span>
+        <span>Hours</span>
       </div>
 
       <div className={s.timeUnit}>

@@ -21,6 +21,10 @@ const Nav = () => {
         </li>
 
         <li>
+          <NavLink to="/more-categories">Categories</NavLink>
+        </li>
+
+        <li>
           <NavLink to="/about">About</NavLink>
         </li>
 

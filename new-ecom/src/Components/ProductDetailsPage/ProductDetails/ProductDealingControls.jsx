@@ -16,8 +16,8 @@ const ProductDealingControls = () => {
     setQuantity((prevNumber) => +prevNumber + 1);
   }
 
-  function decreaseQuantity() {
-    setQuantity((prevNumber) => +prevNumber - 1);
+   function decreaseQuantity() {
+    setQuantity((prevNumber) => (prevNumber > 1 ? prevNumber - 1 : 1));
   }
 
   function handleBuyProduct() {
@@ -33,7 +33,7 @@ const ProductDealingControls = () => {
 
         <input
           type="number"
-          onChange={(e) => setQuantity(e.target.value)}
+          onChange={(e) => setQuantity(e.target.value>= 1 ? e.target.value : '')}
           value={quantity}
           min={1}
           max={1000}

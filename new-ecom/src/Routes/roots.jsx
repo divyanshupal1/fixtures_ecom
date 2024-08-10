@@ -12,6 +12,7 @@ import ProductsCategoryPage from "../Components/ProductsCategory/ProductsCategor
 import ProductsPage from "../Components/ProductsPage/ProductsPage";
 import SearchPage from "../Components/Search/SearchPage";
 import SignUp from "../Components/SignUp/SignUp";
+import MoreCategories from "../Components/MoreCategories/MoreCategories";
 import WishList from "../Components/WishList/WishList";
 
 export const ROUTES_CONFIG = [
@@ -29,5 +30,6 @@ export const ROUTES_CONFIG = [
   { path: "/login", element: <LogIn /> },
   { path: "/profile", element: <AccountPage /> },
   { path: "/search", element: <SearchPage /> },
+  { path: "/more-categories", element: <MoreCategories /> },
   { path: "*", element: <NotFoundPage /> },
 ];

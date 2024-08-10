@@ -4,11 +4,13 @@ import { useSearchParams } from "react-router-dom";
 import { updateState } from "../../../Features/globalSlice";
 import s from "./ProductPreview.module.scss";
 
-const ProductPreview = ({ data, handleZoomInEffect , setOptions, previewImg}) => {
+const ProductPreview = ({ data, handleZoomInEffect, setOptions, previewImg }) => {
+  const { mainImage, name, subImages } = data;
 
-  // const [searchParams] = useSearchParams();
-  const { mainIMage, name, subImages } = data;
-  const hasOtherImages = subImages?.length !== 0 && subImages;
+  // Combine the cover image with the subImages array
+  const allImages = [mainImage, ...(subImages || [])];
+  
+  const hasOtherImages = allImages.length > 1;
 
   function setZoomInPreview(value = false) {
     setOptions((prev) => ({ ...prev, isZoomInPreviewActive: value }));
@@ -18,11 +20,10 @@ const ProductPreview = ({ data, handleZoomInEffect , setOptions, previewImg}) =>
     setOptions((prev) => ({ ...prev, previewImg: img }));
   }
 
-
   return (
     <section className={s.images}>
       {hasOtherImages && (
-        <PreviewImages data={subImages} setPreviewImg={setPreviewImg} />
+        <PreviewImages data={allImages} setPreviewImg={setPreviewImg} />
       )}
 
       <div className={s.previewImgHolder}>
@@ -46,9 +47,9 @@ const PreviewImages = ({ data, setPreviewImg }) => {
         <div
           key={i}
           className={s.imgHolder}
-          onClick={() => setPreviewImg(data[i])}
+          onClick={() => setPreviewImg(img)}
         >
-          <img src={img} alt="product's image" />
+          <img src={img} alt={`product's image ${i + 1}`} />
         </div>
       ))}
     </div>
