@@ -2,10 +2,16 @@
 
 .categoriesSlider {
   display: flex;
-  overflow: auto hidden;
-  scrollbar-width: none;
+  overflow: hidden; /* Hide overflow to prevent scrollbars */
   margin-bottom: 180px;
   position: relative;
+
+  // Scrollbar styles
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers */
+  }
 }
 
 @include small {
@@ -14,47 +20,69 @@
   }
 }
 
-.categoriesSlider::-webkit-scrollbar {
-  display: none;
-}
-
-// [Category Cards]
-.categoriesSlider>* {
+// Style for category cards
+.categoriesSlider > * {
   flex: 0 0 auto;
-  width: calc(((100% / 6) - 30px) + (30px / 6));
+  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Default width for 6 items */
   margin-right: 30px;
 }
 
+// Adjust card width for different screen sizes
 @media (max-width: 1500px) {
-  .categoriesSlider>* {
-    width: calc(((100% / 5) - 30px) + (30px / 5));
+  .categoriesSlider > * {
+    width: calc(((100% / 5) - 30px) + (30px / 5)); /* Adjusted for 5 items */
   }
 }
 
 @include large {
-  .categoriesSlider>* {
-    width: calc(((100% / 4) - 30px) + (30px / 4));
+  .categoriesSlider > * {
+    width: calc(((100% / 4) - 30px) + (30px / 4)); /* Adjusted for 4 items */
   }
 }
 
 @include medium {
-  .categoriesSlider>* {
-    width: calc(((100% / 3) - 30px) + (30px / 3));
+  .categoriesSlider > * {
+    width: calc(((100% / 3) - 30px) + (30px / 3)); /* Adjusted for 3 items */
   }
 }
 
 @media (max-width: 760px) {
-  .categoriesSlider>* {
-    width: calc(((100% / 2) - 30px) + (30px / 2));
+  .categoriesSlider > * {
+    width: calc(((100% / 2) - 30px) + (30px / 2)); /* Adjusted for 2 items */
   }
 }
 
 @media (max-width: 470px) {
-  .categoriesSlider>* {
-    width: 100%;
+  .categoriesSlider > * {
+    width: 100%; /* Full width for mobile */
   }
 }
 
-.categoriesSlider>*:last-child {
+// Remove margin for the last item
+.categoriesSlider > *:last-child {
   margin-right: 0;
+}
+
+// Style for "More Categories" link
+.moreCategoriesLink {
+  flex: 0 0 auto;
+  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Same width as category cards */
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--button-bg-hover);
+    color: var(--button-text-hover);
+  }
 }

@@ -184,6 +184,7 @@ export const useProductStore = create<productStoreType>((set) => ({
 export type categoryType={
     _id: string,
     name: string,
+    svgImage:string,
     owner: {
         _id: string,
         username: string,
@@ -197,8 +198,8 @@ type categoryStoreType = {
     categories: Record<string,categoryType>;
     fetchCategories: ()=> Promise<boolean>;
     deleteCategory: (id:string)=> Promise<boolean>;
-    createCategory: (name:string)=> Promise<boolean>;
-    updateCategory: (id:string,name:string)=> Promise<boolean>;
+    createCategory: (name:string,svgImage:string)=> Promise<boolean>;
+    updateCategory: (id:string,name:string,svgImage:string)=> Promise<boolean>;
 }
 const sortCategories = (categories:Record<string,categoryType>)=>{
     return Object.keys(categories)
@@ -247,11 +248,12 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
             return false
         }
     },
-    createCategory: async(name:string)=>{
+    createCategory: async(name:string, svgImage:string)=>{
         try{
-            const res = await axiosInstance.post('/ecommerce/categories',{name})
+            console.log("Hello",name,svgImage);
+            const res = await axiosInstance.post('/ecommerce/categories',{name,svgImage})
             if(res.data.success){
-                // console.log(res.data)
+                console.log(res.data)
                 set((state)=>{
                     let categories = {...state.categories}
                     categories[res.data.data._id] = res.data.data
@@ -266,9 +268,9 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
             return false
         }
     },
-    updateCategory: async(id:string,name:string)=>{
+    updateCategory: async(id:string,name:string,svgImage:string)=>{
         try{
-            const res = await axiosInstance.patch('/ecommerce/categories/'+id,{name})
+            const res = await axiosInstance.patch('/ecommerce/categories/'+id,{name,svgImage})
             if(res.data.success){
                 // console.log(res.data)
                 set((state)=>{
@@ -372,4 +374,141 @@ export const useCouponStore = create<couponStoreType>((set) => ({
             return false
         }
     }
+}));
+
+export type carouselType = {
+  _id: string;
+  carouselName: string;
+  carouselImg: string;
+  logoImg: string;
+  discountText: string;
+  __v: 0;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type carouselStoreType = {
+  carousels: Record<string, carouselType>;
+  fetchCarousels: () => Promise<boolean>;
+  deleteCarousel: (id: string) => Promise<boolean>;
+  createCarousel: (
+    carouselName: string,
+    carouselImg: string,
+    logoImg: string,
+    discountText: string
+  ) => Promise<boolean>;
+  updateCarousel: (
+    id: string,
+    carouselName: string,
+    carouselImg: string,
+    logoImg: string,
+    discountText: string
+  ) => Promise<boolean>;
+};
+
+const sortCarousels = (carousels: Record<string, carouselType>) => {
+  return Object.keys(carousels)
+    .sort((a, b) =>
+      carousels[a].carouselName.localeCompare(carousels[b].carouselName)
+    )
+    .reduce((acc: Record<string, carouselType>, key) => {
+      acc[key] = carousels[key];
+      return acc;
+    }, {});
+};
+
+export const useCarouselStore = create<carouselStoreType>((set) => ({
+  carousels: {},
+  fetchCarousels: async () => {
+    try {
+      const res = await axiosInstance.get("/ecommerce/carousel");
+      if (res.data.success) {
+        const carousels = res.data.data.reduce(
+          (acc: Record<string, carouselType>, curr: carouselType) => {
+            const { _id } = curr;
+            acc[_id] = curr;
+            return acc;
+          },
+          {}
+        );
+        const sortedData = sortCarousels(carousels);
+        set({ carousels: sortedData });
+      }
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  },
+  deleteCarousel: async (id: string) => {
+    try {
+      const res = await axiosInstance.delete("/ecommerce/carousel/" + id);
+      if (res.data.success) {
+        set((state) => {
+          const carousels = { ...state.carousels };
+          delete carousels[id];
+          return { carousels };
+        });
+      }
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  },
+  createCarousel: async (
+    carouselName: string,
+    carouselImg: string,
+    logoImg: string,
+    discountText: string
+  ) => {
+    try {
+      const res = await axiosInstance.post("/ecommerce/carousel", {
+        carouselName,
+        carouselImg,
+        logoImg,
+        discountText,
+      });
+      if (res.data.success) {
+        set((state) => {
+          let carousels = { ...state.carousels };
+          carousels[res.data.data._id] = res.data.data;
+          carousels = sortCarousels(carousels);
+          return { carousels: carousels };
+        });
+      }
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  },
+  updateCarousel: async (
+    id: string,
+    carouselName: string,
+    carouselImg: string,
+    logoImg: string,
+    discountText: string
+  ) => {
+    try {
+      const res = await axiosInstance.patch("/ecommerce/carousel/" + id, {
+        carouselName,
+        carouselImg,
+        logoImg,
+        discountText,
+      });
+      if (res.data.success) {
+        set((state) => {
+          let carousels = { ...state.carousels };
+          carousels[id] = res.data.data;
+          carousels = sortCarousels(carousels);
+          return { carousels: carousels };
+        });
+      }
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  },
 }));

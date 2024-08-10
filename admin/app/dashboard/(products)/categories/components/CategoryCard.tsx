@@ -17,6 +17,7 @@ import { MdArrowForward, MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
+
 type CategoryCardProps = {
   id: string;
   dialog: {
@@ -28,7 +29,6 @@ type CategoryCardProps = {
 };
 
 export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
-
   const { deleteCategory, categories } = useCategoryStore((state) => ({
     deleteCategory: state.deleteCategory,
     categories: state.categories,
@@ -40,7 +40,7 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
     const success = await deleteCategory(categories[id]._id);
     if (!success) {
       toast({
-        title: `Error deleting category`,
+        title: `Error delet g category`,
         description: `An error occured while deleting category`,
         variant: "destructive",
       });
@@ -54,13 +54,25 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
 
   return (
     <div className="relative group flex w-full justify-between items-center hover:pr-6 max-sm:pr-6 bg-card hover:bg-primary-foreground border  border-transparent drop-shadow-sm transition-all grow-0 rounded-md overflow-hidden">
-      <Link href={`/dashboard/productlist?category=${id}&page=1`} className="absolute w-full h-full cursor-pointer -z-10"></Link>
-      <div className="flex p-6 px-6 max-sm:flex-col">
-        <div className="whitespace-nowrap text-base">{categories[id].name}</div>
-        <div className="text-xs text-opacity-75 sm:hidden">
+      <Link
+        href={`/dashboard/productlist?category=${id}&page=1`}
+        className="absolute w-full h-full cursor-pointer -z-10"
+      ></Link>
+      <div className="flex p-6 px-6 max-sm:flex-col w-[80%]">
+        <div className="whitespace-nowrap text-base w-[45%]">
+          {categories[id].name}
+        </div>
+        <div className="flex justify-center items-center w-full">
+          <div
+            className="whitespace-nowrap text-base w-[35%]"
+            dangerouslySetInnerHTML={{ __html: categories[id].svgImage }}
+          ></div>
+        </div>
+        <div className="text-xs text-opacity-75 sm:hidden w-[20%]">
           {categories[id].owner.username}
         </div>
       </div>
+
       <div className="flex items-center">
         <div className="ml-6 text-sm text-opacity-75 mr-6 max-sm:hidden">
           {categories[id].owner.username}
@@ -81,7 +93,7 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
           </Button>
         </div>
         <div className="block group-hover:block sm:hidden ml-2">
-          <DeleteCategory handleDelete={handleDelete}/>
+          <DeleteCategory handleDelete={handleDelete} />
         </div>
         <div className="hidden sm:group-hover:block ml-4">
           <MdArrowForward />
@@ -91,34 +103,29 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
   );
 };
 
-
-const DeleteCategory = ({handleDelete}:{handleDelete:()=>void})=>{
-  return (
+const DeleteCategory = ({ handleDelete }: { handleDelete: () => void }) => {
+   return(
     <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant={"destructive"}
-            >
-              <div className="scale-125">
-                <MdDelete />
-              </div>
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                Once a category is deleted it cannot be recovered another
-                category with the same name can be created.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete}>
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-  )
-}
+      <AlertDialogTrigger asChild>
+        <Button variant={"destructive"}>
+          <div className="scale-125">
+            <MdDelete />
+          </div>
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Once a category is deleted it cannot be recovered another category
+            with the same name can be created.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};

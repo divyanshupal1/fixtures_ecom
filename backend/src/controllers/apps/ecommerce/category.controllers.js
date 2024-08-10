@@ -6,16 +6,15 @@ import { asyncHandler } from "../../../utils/asyncHandler.js";
 import { getMongoosePaginationOptions } from "../../../utils/helpers.js";
 
 const createCategory = asyncHandler(async (req, res) => {
-  const { name } = req.body;
+  const { name, svgImage } = req.body;
 
-  const findCategory = await Category.findOne({name, owner: req.user._id});
+  const findCategory = await Category.findOne({name, owner: req.user._id, svgImage});
   if (findCategory) {
     return res.status(200)
     .json(new ApiResponse(400, null, "Category already exists"));
   }
-
-  const {owner} = await Category.create({ name, owner: req.user._id });
-  const category = await Category.findOne({name, owner: req.user._id}).populate("owner", "username email")
+  const {owner} = await Category.create({ name, owner: req.user._id, svgImage });
+  const category = await Category.findOne({name, owner: req.user._id, svgImage}).populate("owner", "username email")
 
   return res
     .status(201)
@@ -42,16 +41,16 @@ const getCategoryById = asyncHandler(async (req, res) => {
 
 const updateCategory = asyncHandler(async (req, res) => {
   const { categoryId } = req.params;
-  const { name } = req.body;
+  const { name, svgImage } = req.body;
 
-  const findCategory = await Category.findOne({name, owner: req.user._id});
+  const findCategory = await Category.findOne({name, owner: req.user._id, svgImage});
   if (findCategory) {
     return res.status(200)
     .json(new ApiResponse(400, null, "Category already exists"));
   }
 
   if(req.user.role === "SUPERADMIN") {
-    const {_id} = await Category.findByIdAndUpdate(categoryId, { name }, { new: true });
+    const {_id} = await Category.findByIdAndUpdate(categoryId, { name, svgImage }, { new: true });
     if (!_id) {
       throw new ApiError(404, "Category does not exist");
     }
@@ -61,11 +60,11 @@ const updateCategory = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
   }
 
-  const {_id} = await Category.findOneAndUpdate({ _id: categoryId, owner: req.user._id }, { name }, { new: true });
+  const {_id} = await Category.findOneAndUpdate({ _id: categoryId, owner: req.user._id }, { name, svgImage }, { new: true });
   if (!_id) {
     throw new ApiError(404, "Category does not exist");
   }
-  const updatedCategory = await Category.findOne({name, owner: req.user._id}).populate("owner", "username email")
+  const updatedCategory = await Category.findOne({name, owner: req.user._id, svgImage}).populate("owner", "username email")
   return res
     .status(200)
     .json(new ApiResponse(200, updatedCategory, "Category updated successfully"));
