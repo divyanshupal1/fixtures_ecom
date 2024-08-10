@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 
 // global middlewares
-var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:8080","https://new-ecom-pi.vercel.app/"]
+var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:3000","http://localhost:8080","https://new-ecom-pi.vercel.app"]
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -134,7 +134,17 @@ app.use("/api/v1/ecommerce/orders", orderRouter);
 app.use("/api/v1/ecommerce/coupons", couponRouter);
 app.use("/api/v1/ecommerce/assets",assetRouter)
 // app.use('/dashboard', proxy('http://localhost:3001'))
-app.use('/', proxy('http://localhost:3000'))
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      docExpansion: "none", // keep all the sections collapsed by default
+    },
+    customSiteTitle: "Fixtures_backend",
+  })
+);
+app.use('/', proxy('http://localhost:4173'))
 
 
 
@@ -176,16 +186,7 @@ app.delete("/api/v1/reset-db", avoidInProduction, async (req, res) => {
 
 // * API DOCS
 // ? Keeping swagger code at the end so that we can load swagger on "/" route
-// app.use(
-//   "/",
-//   swaggerUi.serve,
-//   swaggerUi.setup(swaggerDocument, {
-//     swaggerOptions: {
-//       docExpansion: "none", // keep all the sections collapsed by default
-//     },
-//     customSiteTitle: "Fixtures_backend",
-//   })
-// );
+
 
 // common error handling middleware
 app.use(errorHandler);
