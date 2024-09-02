@@ -136,6 +136,17 @@ app.use("/api/v1/ecommerce/coupons", couponRouter);
 app.use("/api/v1/ecommerce/assets",assetRouter);
 app.use("/api/v1/ecommerce/carousel",carouselRouter);
 // app.use('/dashboard', proxy('http://localhost:3001'))
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      docExpansion: "none", // keep all the sections collapsed by default
+    },
+    customSiteTitle: "FreeAPI docs",
+  })
+);
+
 app.use('/', proxy('http://localhost:3010'))
 
 
@@ -178,16 +189,7 @@ app.delete("/api/v1/reset-db", avoidInProduction, async (req, res) => {
 
 // * API DOCS
 // ? Keeping swagger code at the end so that we can load swagger on "/" route
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      docExpansion: "none", // keep all the sections collapsed by default
-    },
-    customSiteTitle: "FreeAPI docs",
-  })
-);
+
 
 // common error handling middleware
 app.use(errorHandler);
