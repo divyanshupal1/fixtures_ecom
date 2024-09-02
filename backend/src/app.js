@@ -178,7 +178,16 @@ app.delete("/api/v1/reset-db", avoidInProduction, async (req, res) => {
 
 // * API DOCS
 // ? Keeping swagger code at the end so that we can load swagger on "/" route
-
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      docExpansion: "none", // keep all the sections collapsed by default
+    },
+    customSiteTitle: "FreeAPI docs",
+  })
+);
 
 // common error handling middleware
 app.use(errorHandler);
