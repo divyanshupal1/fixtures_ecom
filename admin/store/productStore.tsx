@@ -29,6 +29,7 @@ export type DetailedProduct = Product & {
     updatedAt: string
     category: string
     variants: Product[] 
+    barcode?: string;  // Optional barcode property
 } 
 
 
