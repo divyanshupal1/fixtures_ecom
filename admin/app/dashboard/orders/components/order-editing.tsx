@@ -44,7 +44,7 @@ import  useOrderById  from "@/hooks/useOrderById"
 export function ProfileForm({order_id}:{order_id:string}) {
   
   const {order_data,loading,error} = useOrderById(order_id)
-
+  console.log(order_data,error,loading)
   if(order_data==undefined || loading || error )
   return (
     <div className="w-full h-full flex">
@@ -119,18 +119,18 @@ export function ProfileForm({order_id}:{order_id:string}) {
                           item={
                             <div className="flex gap-x-4">
                               <div>
-                                <img src={item.product.mainImage.url} className="w-36 rounded-sm" alt={`product_thumbnail`} />
+                                {/* <img src={item.product.mainImage} className="w-36 rounded-sm" alt={`product_thumbnail`} /> */}
                               </div>
                               <div>
-                                <div className="text-lg font-semibold line-clamp-2">{order_data.items[0].product.name}</div>
-                                <div className="text-base">Price : Rs. {item.product.price}</div>
+                                {/* <div className="text-lg font-semibold line-clamp-2">{order_data.items[0].product.name}</div> */}
+                                {/* <div className="text-base">Price : Rs. {item.product.price}</div> */}
                                 <div className="text-sm">Qty: {item.quantity}</div>
                               </div>
                             </div>
                           }
                           item2={
                             <div>
-                              <div className="text-base">Rs. {item.product.price*item.quantity}</div>
+                              {/* <div className="text-base">Rs. {item.product.price*item.quantity}</div> */}
                             </div>
                           }
                         />
@@ -139,11 +139,11 @@ export function ProfileForm({order_id}:{order_id:string}) {
                   })
                 }
               </div>
-              <Row item={"Sub total :"} item2={`Rs. ${order_data.orderPrice}`} border={false}/>
+              {/* <Row item={"Sub total :"} item2={`Rs. ${order_data.orderPrice}`} border={false}/>
               <Row item={"Charges (inc. delivery and other)  :"} item2={`Rs. ${0}`} border={false}/>
               <Row item={`Discount (${order_data.coupon?.couponCode})`} item2={`- Rs. ${order_data.orderPrice-order_data.discountedOrderPrice}`} border={false}/>
               <Row item={`Tax :`} item2={`Rs. ${0}`} border={false}/>
-              <Row item={`Order Total :`} item2={`Rs. ${order_data.discountedOrderPrice}`} border={false}/>
+              <Row item={`Order Total :`} item2={`Rs. ${order_data.discountedOrderPrice}`} border={false}/> */}
             </div>
           </div>
         
