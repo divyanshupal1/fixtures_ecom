@@ -15,6 +15,8 @@ import { MdCancel, MdDelete } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import axiosInstance from "@/lib/axiosInstance";
 
+import JsBarcode from 'jsbarcode';
+import jsPDF from 'jspdf';
 
 const initialProduct: Product = {
   name: "",
@@ -26,45 +28,111 @@ const initialProduct: Product = {
   variants: []
 };
 
-
 const Page = () => {
-
   const router = useRouter();
   const searchParams = useSearchParams();
   let edit = searchParams.get("id") || undefined;
-  const { toast } = useToast()
-
-  const { addProduct, fetchProductByID, updateProduct } = useProductStore((state) => ({
+  const { toast } = useToast();
+  const { addProduct, fetchProductByID, updateProduct } = useProductStore(state => ({
     addProduct: state.addProduct,
     fetchProductByID: state.fetchProductByID,
     updateProduct: state.updateProduct,
-  }))
+  }));
 
-  const [loading, setLoading] = React.useState(false);
+
+ const [loading, setLoading] = React.useState(false);
   const [active, setActive] = React.useState(-1);
   const [product, setProduct] = React.useState<Product>(initialProduct);
-  // const [variants, setVariant] = React.useState<Product[]>([]);
 
   const submitProduct = async () => {
     setLoading(true);
     let productForm = product;
-    const res = edit? await updateProduct(edit,productForm) :await addProduct(productForm);
+    const res = edit ? await updateProduct(edit, productForm) : await addProduct(productForm);
+    
     if (res) {
       toast({
-        title: `Product ${edit?"edited":"added"} successfully`,
-        description: `Product ${product.name} ${edit?"edited":"added"} successfully`,
+        title: `Product ${edit ? "edited" : "added"} successfully`,
+        description: `Product ${product.name} ${edit ? "edited" : "added"} successfully`,
       });
-      clear()
+  
+      // Generate MRP tag PDF
+      generatePdf(product);
+  
+      clear();
       setLoading(false);
     } else {
       toast({
-        title: `Error ${edit?"editing":"adding"} product`,
-        description: `An error occured while ${edit?"editing":"adding"} product`,
+        title: `Error ${edit ? "editing" : "adding"} product`,
+        description: `An error occurred while ${edit ? "editing" : "adding"} product`,
         variant: "destructive",
       });
       setLoading(false);
     }
-  }
+  };
+
+  const generatePdf = (product: { 
+    name: any; 
+    category?: any; 
+    price: any; 
+    stock?: number; 
+    description?: string; 
+    mainImage?: string; 
+    subImages?: string[]; 
+    variants?: ProductVariant[]; 
+    barcode?: any; 
+    color?: any; 
+    size?: any; 
+    packedDate?: any; 
+  }) => {
+    const doc = new jsPDF({
+      orientation: 'landscape',
+      unit: 'in',
+      format: [2, 1.2]  // Size adjusted for better layout and visibility
+    });
+  
+    const margin = 0.1; // Margin for the content
+    const lineHeight = 0.2;
+    const barcodeCanvas = document.createElement('canvas');
+    JsBarcode(barcodeCanvas, product.barcode || '305000002020136', { format: 'CODE128' });
+    const barcodeDataUrl = barcodeCanvas.toDataURL('image/png');
+  
+    // Set document properties for better text management
+    doc.setTextColor(128, 128, 128); // Set text color to grey
+  
+    // Product Name
+    doc.setFontSize(4.5);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${product.name}`, margin, lineHeight);
+  
+    // Product Price
+    doc.setFontSize(6);
+    doc.text(`MRP: ${product.price}`, margin, margin + 1.5 * lineHeight);
+  
+    // Category and Product ID
+    doc.setFontSize(5);
+    doc.setFont("helvetica", "normal");
+    let categoryText = `Category: ${product.category || 'N/A'}`;
+    let productIdText = `Product ID: ${product.barcode || 'N/A'}`;
+  
+    // Calculate text width to place Product ID right after Category
+    let categoryTextWidth = doc.getTextWidth(categoryText);
+    doc.text(categoryText, margin, margin + 2.0 * lineHeight);
+    doc.text(productIdText, margin + categoryTextWidth + 0.1, margin + 2.5 * lineHeight); // Adjusted for proper alignment
+  
+    // Barcode image
+    doc.addImage(barcodeDataUrl, 'PNG', margin, margin + 2.5 * lineHeight, 1.6, 0.3);
+  
+    // Adding current date
+    const currentDate = new Date().toLocaleDateString(); // Gets the current date in local date format
+    doc.setFontSize(4);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Date: ${currentDate}`, margin, margin + 4.5 * lineHeight); // Positioned right below the barcode
+  
+    // Save the PDF with the product name as the filename
+    doc.save(`${product.name}_MRP_Tag.pdf`);
+  };
+
+  
   const clear = () => {
     edit ? router.push("/dashboard/addproduct") :
     ()=>{
@@ -106,23 +174,22 @@ const Page = () => {
 
   useEffect(() => {
     if (edit) {
-      fetchProductByID(edit).then((res) => {
-        console.log(res)
+      fetchProductByID(edit).then(res => {
         if (typeof res !== 'boolean') {
           setProduct({
-            name:res.name,
-            category:res.category,
-            price:res.price,
-            stock:res.stock,
-            description:res.description,
-            mainImage:res.mainImage,
-            subImages:res.subImages,
-            variants: res.variants 
+            name: res.name,
+            category: res.category,
+            price: res.price,
+            stock: res.stock,
+            description: res.description,
+            mainImage: res.mainImage,
+            subImages: res.subImages,
+            variants: res.variants
           });
         }
-      })
+      });
     }
-  }, [edit,fetchProductByID])
+  }, [edit, fetchProductByID]);
 
   
   return (
