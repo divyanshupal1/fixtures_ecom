@@ -22,6 +22,7 @@ const initialProduct: Product = {
   name: "",
   category: "",
   price: 0,
+  mrp: 0, // Added MRP field
   stock: 0,
   description: "",
   mainImage: "",
@@ -39,8 +40,7 @@ const Page = () => {
     updateProduct: state.updateProduct,
   }));
 
-
- const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [active, setActive] = React.useState(-1);
   const [product, setProduct] = React.useState<Product>(initialProduct);
 
@@ -54,10 +54,7 @@ const Page = () => {
         title: `Product ${edit ? "edited" : "added"} successfully`,
         description: `Product ${product.name} ${edit ? "edited" : "added"} successfully`,
       });
-  
-      // Generate MRP tag PDF
-      generatePdf(product);
-  
+    
       clear();
       setLoading(false);
     } else {
@@ -69,69 +66,6 @@ const Page = () => {
       setLoading(false);
     }
   };
-
-  const generatePdf = (product: { 
-    name: any; 
-    category?: any; 
-    price: any; 
-    stock?: number; 
-    description?: string; 
-    mainImage?: string; 
-    subImages?: string[]; 
-    variants?: ProductVariant[]; 
-    barcode?: any; 
-    color?: any; 
-    size?: any; 
-    packedDate?: any; 
-  }) => {
-    const doc = new jsPDF({
-      orientation: 'landscape',
-      unit: 'in',
-      format: [2, 1.2]  // Size adjusted for better layout and visibility
-    });
-  
-    const margin = 0.1; // Margin for the content
-    const lineHeight = 0.2;
-    const barcodeCanvas = document.createElement('canvas');
-    JsBarcode(barcodeCanvas, product.barcode || '305000002020136', { format: 'CODE128' });
-    const barcodeDataUrl = barcodeCanvas.toDataURL('image/png');
-  
-    // Set document properties for better text management
-    doc.setTextColor(128, 128, 128); // Set text color to grey
-  
-    // Product Name
-    doc.setFontSize(4.5);
-    doc.setFont("helvetica", "bold");
-    doc.text(`${product.name}`, margin, lineHeight);
-  
-    // Product Price
-    doc.setFontSize(6);
-    doc.text(`MRP: ${product.price}`, margin, margin + 1.5 * lineHeight);
-  
-    // Category and Product ID
-    doc.setFontSize(5);
-    doc.setFont("helvetica", "normal");
-    let categoryText = `Category: ${product.category || 'N/A'}`;
-    let productIdText = `Product ID: ${product.barcode || 'N/A'}`;
-  
-    // Calculate text width to place Product ID right after Category
-    let categoryTextWidth = doc.getTextWidth(categoryText);
-    doc.text(categoryText, margin, margin + 2.0 * lineHeight);
-    doc.text(productIdText, margin + categoryTextWidth + 0.1, margin + 2.5 * lineHeight); // Adjusted for proper alignment
-  
-    // Barcode image
-    doc.addImage(barcodeDataUrl, 'PNG', margin, margin + 2.5 * lineHeight, 1.6, 0.3);
-  
-    // Adding current date
-    const currentDate = new Date().toLocaleDateString(); // Gets the current date in local date format
-    doc.setFontSize(4);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Date: ${currentDate}`, margin, margin + 4.5 * lineHeight); // Positioned right below the barcode
-  
-    // Save the PDF with the product name as the filename
-    doc.save(`${product.name}_MRP_Tag.pdf`);
-  };
-
   
   const clear = () => {
     edit ? router.push("/dashboard/addproduct") :
@@ -144,7 +78,7 @@ const Page = () => {
   const addVariant = () => {
     if(!product.variants) return
     let variants = product.variants || []
-    variants.push({name:"",price:0,stock:0,description:"",mainImage:"",subImages:[]})
+    variants.push({name:"",price:0,mrp:0,stock:0,description:"",mainImage:"",subImages:[]})
     setProduct((prev)=>({...prev,variants:variants}))
   }
 
@@ -180,6 +114,7 @@ const Page = () => {
             name: res.name,
             category: res.category,
             price: res.price,
+            mrp: res.mrp, // Fetching MRP when editing product
             stock: res.stock,
             description: res.description,
             mainImage: res.mainImage,
@@ -288,7 +223,6 @@ function AddProductForm({product,setProduct,index}:{
   index:number
 }) {
 
-
   const uploadImage = async (img:File | null | undefined | string,key:keyof Product,index?:number) => {
     console.log("Uploading Image")
     let imageForm = new FormData();
@@ -313,121 +247,135 @@ function AddProductForm({product,setProduct,index}:{
 
   return (
     <div className="flex flex-col md:flex-row justify-between">
-    <div className="dets flex flex-col  bg-opacity-20 p-4 w-full md:w-1/2 space-y-5 ">
-      <div className="flex flex-col gap-3">
-        <Label className="text-base">Product Name</Label>
-        <Textarea
-          placeholder="Product Name"
-          value={product.name}
-          onChange={(e) => setProduct("name", e.target.value)}
-        />
-      </div>
-      {index==-1 && <div className="flex flex-col gap-3">
-        <Label className="text-base">Category</Label>
-        <CategorySelector
-          value={product?.category||""}
-          handleChange={(val) => setProduct("category", val)}
-        />
-      </div>}
-      <div className="flex gap-x-5 w-full">
-        <div className="flex flex-col gap-3 w-1/2">
-          <Label className="text-base">Price</Label>
-          <Input
-            type="number"
-            placeholder="Price"
-            value={product.price}
-            onChange={(e) => setProduct("price",Number(e.target.value))}
+      <div className="dets flex flex-col  bg-opacity-20 p-4 w-full md:w-1/2 space-y-5 ">
+        <div className="flex flex-col gap-3">
+          <Label className="text-base">Product Name</Label>
+          <Textarea
+            placeholder="Product Name"
+            value={product.name}
+            onChange={(e) => setProduct("name", e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-3 w-1/2">
-          <Label className="text-base">Stock</Label>
-          <Input
-            type="number"
-            placeholder="Stock"
-            value={product.stock}
-            onChange={(e) => setProduct("stock", Number(e.target.value))}
+        {index==-1 && <div className="flex flex-col gap-3">
+          <Label className="text-base">Category</Label>
+          <CategorySelector
+            value={product?.category||""}
+            handleChange={(val) => setProduct("category", val)}
           />
-        </div>
-      </div>
-      <div className="w-full flex flex-col gap-3 h-max grow">
-        <Label className="text-base">Description</Label>
-        {/* <WYSIWYS value={description} setValue={setDescription}/> */}
-        <WYSIWYG
-          value={product.description}
-          setValue={(val) =>setProduct("description", val) }
-        />
-        {/* <Textarea className='h-96' placeholder="Product Description" /> */}
-      </div>
-    </div>
-    <div className="dets flex flex-col bg-opacity-40 p-4 w-full md:w-1/2 space-y-5">
-      <div className="w-full flex flex-col gap-3">
-        <Label className="text-base">Main image</Label>
-        <div className="h-72 w-full">
-          
-          <ImageSelector
-            image={product.mainImage}
-            onChange={(img) => uploadImage(img,"mainImage")}
-            scale={3}
-          />
-        </div>
-      </div>
-      <div className="flex flex-col gap-3 h-full">
-        <Label className="text-base">Sub Images <span className="text-xs opacity-70">( Maximum 4 allowed )</span> </Label>
-        <div className={`w-full h-full flex flex-col gap-y-4 relative `}>
-          <div className="flex gap-x-4 w-full">
-            <div className='w-1/2 h-44'>
-              <ImageSelector
-                image={product.subImages && product?.subImages[0]||""}
-                onChange={(img) => uploadImage(img,"subImages",0)}
-                scale={3}
-              />
-            </div>
-            <div className='w-1/2 h-44'>
-              <ImageSelector
-                image={product.subImages && product?.subImages[1]||""}
-                onChange={(img) => uploadImage(img,"subImages",1)}
-                scale={3}
-              />
-            </div>
+        </div>}
+        <div className="flex gap-x-5 w-full">
+          <div className="flex flex-col gap-3 w-1/3">
+            <Label className="text-base">Price</Label>
+            <Input
+              type="number"
+              placeholder="Price"
+              value={product.price}
+              onChange={(e) => setProduct("price",Number(e.target.value))}
+            />
           </div>
-          <div className="flex gap-x-4 w-full">
-            <div className='w-1/2 h-44'>
-              <ImageSelector
-                image={product.subImages && product?.subImages[2]||""}
-                onChange={(img) => uploadImage(img,"subImages",2)}
-                scale={3}
-              />
-            </div>
-            <div className='w-1/2 h-44'>
-              <ImageSelector
-                image={product.subImages && product?.subImages[3]||""}
-                onChange={(img) => uploadImage(img,"subImages",3)}
-                scale={3}
-              />
-            </div>
+          <div className="flex flex-col gap-3 w-1/3">
+            <Label className="text-base">MRP</Label> {/* Added MRP label */}
+            <Input
+              type="number"
+              placeholder="MRP"
+              value={product.mrp}
+              onChange={(e) => setProduct("mrp", Number(e.target.value))} // Handle MRP field change
+            />
+          </div>
+          <div className="flex flex-col gap-3 w-1/3">
+            <Label className="text-base">Stock</Label>
+            <Input
+              type="number"
+              placeholder="Stock"
+              value={product.stock}
+              onChange={(e) => setProduct("stock", Number(e.target.value))}
+            />
           </div>
         </div>
+        <div className="w-full flex flex-col gap-3 h-max grow">
+          <Label className="text-base">Description</Label>
+          {/* <WYSIWYS value={description} setValue={setDescription}/> */}
+          <WYSIWYG
+            value={product.description}
+            setValue={(val) =>setProduct("description", val) }
+          />
+          {/* <Textarea className='h-96' placeholder="Product Description" /> */}
+        </div>
+      </div>
+      <div className="dets flex flex-col bg-opacity-40 p-4 w-full md:w-1/2 space-y-5">
+        <div className="w-full flex flex-col gap-3">
+          <Label className="text-base">Main image</Label>
+          <div className="h-72 w-full">
+            
+            <ImageSelector
+              image={product.mainImage}
+              onChange={(img) => uploadImage(img,"mainImage")}
+              scale={3}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 h-full">
+          <Label className="text-base">Sub Images <span className="text-xs opacity-70">( Maximum 4 allowed )</span> </Label>
+          <div className={`w-full h-full flex flex-col gap-y-4 relative `}>
+            <div className="flex gap-x-4 w-full">
+              <div className='w-1/2 h-44'>
+                <ImageSelector
+                  image={product.subImages && product?.subImages[0]||""}
+                  onChange={(img) => uploadImage(img,"subImages",0)}
+                  scale={3}
+                />
+              </div>
+              <div className='w-1/2 h-44'>
+                <ImageSelector
+                  image={product.subImages && product?.subImages[1]||""}
+                  onChange={(img) => uploadImage(img,"subImages",1)}
+                  scale={3}
+                />
+              </div>
+            </div>
+            <div className="flex gap-x-4 w-full">
+              <div className='w-1/2 h-44'>
+                <ImageSelector
+                  image={product.subImages && product?.subImages[2]||""}
+                  onChange={(img) => uploadImage(img,"subImages",2)}
+                  scale={3}
+                />
+              </div>
+              <div className='w-1/2 h-44'>
+                <ImageSelector
+                  image={product.subImages && product?.subImages[3]||""}
+                  onChange={(img) => uploadImage(img,"subImages",3)}
+                  scale={3}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   )
 }
 
-
-
-
-const ImagePreview = ({ image, border = true }: { image:string, border?: boolean }) => {
-  console.log(typeof image," img")
+const ImagePreview = ({
+  image,
+  border = true,
+}: {
+  image: string;
+  border?: boolean;
+}) => {
+  console.log(typeof image, " img");
   return (
-    <div className={`w-full h-full ${border ? "border-4 border-border border-dotted rounded-xl p-1" : ""}`}>
-      {typeof image == 'string' && <img
-        src={image}
-        alt="Main Image"
-        className="w-full h-full"
-      />}
+    <div
+      className={`w-full h-full ${
+        border ? "border-4 border-border border-dotted rounded-xl p-1" : ""
+      }`}
+    >
+      {typeof image == "string" && (
+        <img src={image} alt="Main Image" className="w-full h-full" />
+      )}
     </div>
-  )
-}
+  );
+};
 const InputImagePlaceholder = ({ scale }: { scale?: number }) => {
   return (
     <>
@@ -436,5 +384,5 @@ const InputImagePlaceholder = ({ scale }: { scale?: number }) => {
       </div>
       <p className="w-1/2 text-center">Drag and drop or click to upload</p>
     </>
-  )
-}
+  );
+};
