@@ -18,7 +18,8 @@ export default defineConfig({
     "process.env": {},
   },
   server:{
-    port:9000
+    port:3010,
+    strictPort:true,
   }
   
   

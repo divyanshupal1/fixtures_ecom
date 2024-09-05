@@ -12,8 +12,8 @@ const useOrderById = (id:string) => {
     const fetchData = async () => {
       try {
           const response = await axiosInstance.get("/ecommerce/orders/"+id);
-          const data = detailedOrderParser(response.data.data.order);
-          setData(data);
+          // const data = detailedOrderParser(response.data.data.order);
+          setData(response.data.data.order);
           setLoading(false); 
       } catch (error) {
         setError(error);

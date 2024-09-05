@@ -35,7 +35,16 @@ app.use(cookieParser());
 
 
 // global middlewares
-var whitelist = ["https://ecom.mymedicos.in","https://fixtures-ecom.vercel.app","http://localhost:8080","http://localhost:3010","http://localhost:3000","https://new-ecom-pi.vercel.app/"]
+var whitelist = [
+  "https://acquaso.com",
+  "https://www.acquaso.com",
+  "https://admin.acquaso.com",
+  "https://fixtures-ecom.vercel.app",
+  "http://localhost:8080",
+  "http://localhost:3010",
+  "http://localhost:3000",
+  "https://new-ecom-pi.vercel.app/"
+]
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -136,6 +145,7 @@ app.use("/api/v1/ecommerce/coupons", couponRouter);
 app.use("/api/v1/ecommerce/assets",assetRouter);
 app.use("/api/v1/ecommerce/carousel",carouselRouter);
 // app.use('/dashboard', proxy('http://localhost:3001'))
+app.use('/', proxy('http://localhost:3010'))
 app.use(
   "/api-docs",
   swaggerUi.serve,
@@ -147,7 +157,7 @@ app.use(
   })
 );
 
-app.use('/', proxy('http://localhost:3010'))
+
 
 
 
