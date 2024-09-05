@@ -6,6 +6,7 @@ import { productType } from '@/schema/orderSchema';
 export type ProductVariant = {
     name: string;
     price: number;
+    mrp: number;
     stock: number;
     description: string;
     mainImage: string;
@@ -16,11 +17,19 @@ export type Product = {
     name: string;
     category?: string;
     price: number;
+    mrp: number;
     stock: number;
     description: string;
     mainImage: string;
     subImages?: string[];
     variants?: ProductVariant[];
+};
+
+export type CarouselMain = {
+    name: string;
+    description: string;
+    carouselImage: string;
+    logoImages: string;
 };
 
 export type DetailedProduct = Product & { 

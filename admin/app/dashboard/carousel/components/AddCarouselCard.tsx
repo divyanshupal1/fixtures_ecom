@@ -1,6 +1,5 @@
-"use client";
-import React from "react";
-import { useCarouselStore } from "@/store/productStore";
+import React from 'react';
+import axios from 'axios';
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useToast } from "@/components/ui/use-toast";
+import { CarouselMain, useCarouselStore } from "@/store/productStore";
+import axiosInstance from "@/lib/axiosInstance";
 
 type AddCarouselProps = {
   id: string | null;
@@ -24,79 +25,61 @@ type AddCarouselProps = {
 };
 
 const AddCarouselCard = ({ id, dialog }: AddCarouselProps) => {
-  
-  const { createCarousel, updateCarousel, carousels } = useCarouselStore((state) => ({
+  const { createCarousel, updateCarousel } = useCarouselStore((state) => ({
     createCarousel: state.createCarousel,
-    updateCarousel:state.updateCarousel,
-    carousels:state.carousels,
+    updateCarousel: state.updateCarousel
   }));
 
   const { toast } = useToast();
   const [carouselName, setCarouselName] = React.useState("");
-  const [carouselImg, setCarouselImg] = React.useState("");
-  const [logoImg, setLogoImg] = React.useState("");
+  const [carouselImg, setCarouselImg] = React.useState<File | null>(null);
+  const [logoImg, setLogoImg] = React.useState<File | null>(null);
   const [discountText, setDiscountText] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    if (id != null) {
-      setCarouselName(carousels[id].carouselName);
-      setCarouselImg(carousels[id].carouselImg);
-      setLogoImg(carousels[id].logoImg);
-      setDiscountText(carousels[id].discountText);
-    } else {
-      setCarouselName("");
-      setCarouselImg("");
-      setLogoImg("");
-      setDiscountText("");
+  const uploadImage = async (img: File | null, key: keyof CarouselMain) => {
+    if (!img) return "";
+    console.log("Uploading Image");
+    let formData = new FormData();
+    formData.append("image", img);
+
+    try {
+      const res = await axiosInstance.post("/ecommerce/assets/image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      });
+      console.log(res.data.url);
+      return res.data.url;
+    } catch (error) {
+      console.error("Upload failed:", error);
+      return "";
     }
-  }, [id, carousels]);
+  };
 
   async function handleSubmit() {
-    if (
-      carouselName.length > 0 &&
-      carouselImg.length > 0 &&
-      logoImg.length > 0 &&
-      discountText.length > 0
-    ) {
-      setLoading(true);
-      const success =
-        id != null
-          ? await updateCarousel(
-              id!,
-              carouselName,
-              carouselImg,
-              logoImg,
-              discountText
-            )
-          : await createCarousel(
-              carouselName,
-              carouselImg,
-              logoImg,
-              discountText
-            );
+    setLoading(true);
+    if (carouselName && carouselImg && logoImg && discountText) {
+      const carouselImgUrl = await uploadImage(carouselImg, "carouselImage");
+      const logoImgUrl = await uploadImage(logoImg, "logoImages");
 
-      if (success) {
-        setCarouselName("");
-        setCarouselImg("");
-        setLogoImg("");
-        setDiscountText("");
-        dialog.close();
-        setLoading(false);
-        toast({
-          title: `${id != null ? "Updated" : "Created"} carousel`,
-          description: `Carousel ${
-            id != null ? "updated" : "created"
-          } successfully`,
-        });
+      if (carouselImgUrl && logoImgUrl) {
+        const success = id ? await updateCarousel(id, carouselName, carouselImgUrl, logoImgUrl, discountText)
+          : await createCarousel(carouselName, carouselImgUrl, logoImgUrl, discountText);
+
+        if (success) {
+          setCarouselName("");
+          setCarouselImg(null);
+          setLogoImg(null);
+          setDiscountText("");
+          dialog.close();
+          setLoading(false);
+          toast({
+            title: id ? "Updated Carousel" : "Created Carousel",
+            description: `Carousel ${id ? "updated" : "created"} successfully`,
+          });
+        }
       } else {
-        toast({
-          title: `Error ${id != null ? "updating" : "creating"} carousel`,
-          description: `An error occured while ${
-            id != null ? "updating" : "creating"
-          } carousel`,
-          variant: "destructive",
-        });
         setLoading(false);
       }
     } else {
@@ -105,107 +88,60 @@ const AddCarouselCard = ({ id, dialog }: AddCarouselProps) => {
         description: "All fields are required",
         variant: "destructive",
       });
+      setLoading(false);
     }
   }
 
   return (
-    <Dialog open={dialog?.state}>
+    <Dialog open={dialog.state}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>
-            {id != null ? "Edit carousel" : "Create a new carousel"}
-          </DialogTitle>
+          <DialogTitle>{id ? "Edit Carousel" : "Create New Carousel"}</DialogTitle>
         </DialogHeader>
-        <div className="flex items-center flex-col gap-1">
+        <div className="flex flex-col items-center gap-1">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="carouselName" className="sr-only">
-              Carousel Name
-            </Label>
+            <Label htmlFor="carouselName">Carousel Name</Label>
             <Input
               id="carouselName"
               type="text"
-              placeholder="Carousel Name"
+              placeholder="Enter Carousel Name"
               required
               value={carouselName}
-              className={
-                carouselName.length > 0
-                  ? "border-primary"
-                  : "border-red-500 border-2 outline-none"
-              }
               onChange={(e) => setCarouselName(e.target.value)}
             />
-          </div>
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="carouselImg" className="sr-only">
-              Carousel Image URL
-            </Label>
+            <Label htmlFor="carouselImg">Carousel Image</Label>
             <Input
               id="carouselImg"
-              type="text"
-              placeholder="Carousel Image URL"
+              type="file"
               required
-              value={carouselImg}
-              className={
-                carouselImg.length > 0
-                  ? "border-primary"
-                  : "border-red-500 border-2 outline-none"
-              }
-              onChange={(e) => setCarouselImg(e.target.value)}
+              onChange={(e) => setCarouselImg(e.target.files ? e.target.files[0] : null)}
             />
-          </div>
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="logoImg" className="sr-only">
-              Logo Image URL
-            </Label>
+            <Label htmlFor="logoImg">Logo Image</Label>
             <Input
               id="logoImg"
-              type="text"
-              placeholder="Logo Image URL"
+              type="file"
               required
-              value={logoImg}
-              className={
-                logoImg.length > 0
-                  ? "border-primary"
-                  : "border-red-500 border-2 outline-none"
-              }
-              onChange={(e) => setLogoImg(e.target.value)}
+              onChange={(e) => setLogoImg(e.target.files ? e.target.files[0] : null)}
             />
-          </div>
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="discountText" className="sr-only">
-              Discount Text
-            </Label>
+            <Label htmlFor="discountText">Discount Text</Label>
             <Input
               id="discountText"
               type="text"
-              placeholder="Discount Text"
+              placeholder="Enter Discount Text"
               required
               value={discountText}
-              className={
-                discountText.length > 0
-                  ? "border-primary"
-                  : "border-red-500 border-2 outline-none"
-              }
               onChange={(e) => setDiscountText(e.target.value)}
             />
           </div>
         </div>
         <DialogFooter className="justify-end">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => dialog.close()}
-          >
-            Close
-          </Button>
+          <Button type="button" variant="secondary" onClick={dialog.close}>Close</Button>
           <Button onClick={handleSubmit} disabled={loading}>
             {loading ? (
               <div className="animate-spin px-6">
                 <AiOutlineLoading3Quarters />
               </div>
-            ) : (
-              "Create"
-            )}
+            ) : "Submit"}
           </Button>
         </DialogFooter>
       </DialogContent>
