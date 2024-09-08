@@ -191,25 +191,27 @@ export const useProductStore = create<productStoreType>((set) => ({
 }));
 
 
-export type categoryType={
+export type categoryType = {
     _id: string,
     name: string,
-    svgImage:string,
+    svgImage: string,
+    hsCode: string, // Add the hsCode property here
     owner: {
         _id: string,
         username: string,
         email: string
     },
-    __v: 0,
+    __v: number, // Adjusted __v to number for consistency
     createdAt: string,
     updatedAt: string
 }
+
 type categoryStoreType = {
     categories: Record<string,categoryType>;
     fetchCategories: ()=> Promise<boolean>;
     deleteCategory: (id:string)=> Promise<boolean>;
-    createCategory: (name:string,svgImage:string)=> Promise<boolean>;
-    updateCategory: (id:string,name:string,svgImage:string)=> Promise<boolean>;
+    createCategory: (name:string,svgImage:string,hsCode: string)=> Promise<boolean>;
+    updateCategory: (id:string,name:string,svgImage:string,hsCode: string)=> Promise<boolean>;
 }
 const sortCategories = (categories:Record<string,categoryType>)=>{
     return Object.keys(categories)
@@ -219,6 +221,7 @@ const sortCategories = (categories:Record<string,categoryType>)=>{
         return acc;
     }, {});
 }
+
 export const useCategoryStore = create<categoryStoreType>((set) => ({
     categories: {},
     fetchCategories: async()=>{
@@ -244,7 +247,6 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
         try{
             const res = await axiosInstance.delete('/ecommerce/categories/'+id)
             if(res.data.success){
-                // console.log(res.data)
                 set((state)=>{
                     const categories = {...state.categories}
                     delete categories[id]
@@ -258,12 +260,10 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
             return false
         }
     },
-    createCategory: async(name:string, svgImage:string)=>{
+    createCategory: async(name:string, svgImage:string, hsCode: string)=>{ // Updated function
         try{
-            console.log("Hello",name,svgImage);
-            const res = await axiosInstance.post('/ecommerce/categories',{name,svgImage})
+            const res = await axiosInstance.post('/ecommerce/categories',{name, svgImage, hsCode}) // Updated API call
             if(res.data.success){
-                console.log(res.data)
                 set((state)=>{
                     let categories = {...state.categories}
                     categories[res.data.data._id] = res.data.data
@@ -278,11 +278,10 @@ export const useCategoryStore = create<categoryStoreType>((set) => ({
             return false
         }
     },
-    updateCategory: async(id:string,name:string,svgImage:string)=>{
+    updateCategory: async(id:string, name:string, svgImage:string, hsCode: string)=>{ // Updated function
         try{
-            const res = await axiosInstance.patch('/ecommerce/categories/'+id,{name,svgImage})
+            const res = await axiosInstance.patch('/ecommerce/categories/'+id,{name, svgImage, hsCode}) // Updated API call
             if(res.data.success){
-                // console.log(res.data)
                 set((state)=>{
                     let categories = {...state.categories}
                     categories[id] = res.data.data
