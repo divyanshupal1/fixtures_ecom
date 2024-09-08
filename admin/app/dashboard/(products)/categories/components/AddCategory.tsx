@@ -136,7 +136,6 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
           </div>
           <div className="grid flex-1 gap-2">
             <Label htmlFor="hsCode" className="sr-only">
-              HS Code
             </Label>
             <Input
               id="hsCode"

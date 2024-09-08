@@ -62,9 +62,10 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
         <div className="whitespace-nowrap text-base w-[30%]">
           {categories[id].name}
         </div>
-        <div className="whitespace-nowrap text-base w-[15%]">
-          HS Code: {categories[id].hsCode}
+        <div className="whitespace-nowrap text-base bg-[#1e293b] text-white rounded-[5px] px-5 py-2">
+          {categories[id].hsCode}
         </div>
+
         <div className="flex justify-center items-center w-full">
           <div
             className="whitespace-nowrap text-base w-[35%]"
@@ -107,7 +108,7 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
 };
 
 const DeleteCategory = ({ handleDelete }: { handleDelete: () => void }) => {
-   return(
+  return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant={"destructive"}>
