@@ -14,6 +14,13 @@ const createProductValidator = () => {
       .withMessage("Price is required")
       .isNumeric()
       .withMessage("Price must be a number"),
+    body("mrp")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("Mrp is required")
+      .isNumeric()
+      .withMessage("Mrp must be a number"),
     body("stock")
       .optional()
       .trim()
@@ -40,6 +47,13 @@ const updateProductValidator = () => {
       .withMessage("Price is required")
       .isNumeric()
       .withMessage("Price must be a number"),
+    body("mrp")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("Mrp is required")
+      .isNumeric()
+      .withMessage("Mrp must be a number"),
     body("stock")
       .optional()
       .trim()
