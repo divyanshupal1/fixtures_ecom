@@ -84,33 +84,42 @@ export function ProductCard({
       unit: "in",
       format: [2, 1.2],
     });
-
+  
     const margin = 0.1;
     const lineHeight = 0.2;
     const barcodeCanvas = document.createElement("canvas");
-
-    // Generate a random barcode number
-    const randomBarcode = Math.floor(
-      100000000000000 + Math.random() * 900000000000000
-    ).toString();
-    JsBarcode(barcodeCanvas, randomBarcode, { format: "CODE128" });
+  
+    // Extract digits from the product._id
+    let digitsOnly = product._id.replace(/\D/g, '');
+  
+    // If the digits are fewer than 15, pad with random digits
+    if (digitsOnly.length < 15) {
+      const paddingLength = 15 - digitsOnly.length;
+      const randomPadding = Math.floor(Math.random() * Math.pow(10, paddingLength)).toString().padStart(paddingLength, '0');
+      digitsOnly += randomPadding;
+    } else if (digitsOnly.length > 15) {
+      // In case digitsOnly is more than 15 digits, trim it down to 15
+      digitsOnly = digitsOnly.slice(0, 15);
+    }
+  
+    JsBarcode(barcodeCanvas, digitsOnly, { format: "CODE128" });
     const barcodeDataUrl = barcodeCanvas.toDataURL("image/png");
-
+  
     doc.setTextColor(128, 128, 128);
-
+  
     doc.setFontSize(4.45);
     doc.setFont("helvetica", "bold");
     doc.text(`${product.name}`, margin, lineHeight);
-
+  
     doc.setFontSize(6);
     doc.text(`MRP: ${product.price}`, margin, margin + 1.5 * lineHeight);
-
+  
     doc.setFontSize(5);
     doc.setFont("helvetica", "bold");
     let categoryText = `${categories[product.category]?.name || "N/A"}`;
-    let productIdText = randomBarcode; // Use the generated random barcode as the product ID
+    let productIdText = digitsOnly; // Use the digits-only product ID
     doc.text(categoryText, margin, margin + 3 * lineHeight);
-
+  
     let categoryTextWidth = doc.getTextWidth(categoryText);
     doc.text(categoryText, margin, margin + 2.0 * lineHeight);
     doc.text(
@@ -118,7 +127,7 @@ export function ProductCard({
       margin + categoryTextWidth + 0.1,
       margin + 2.5 * lineHeight
     );
-
+  
     doc.addImage(
       barcodeDataUrl,
       "PNG",
@@ -127,21 +136,18 @@ export function ProductCard({
       1.6,
       0.3
     );
-
-    const currentDate = new Date().toLocaleDateString();
-    doc.setFontSize(4);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Date: ${currentDate}`, margin, margin + 4.5 * lineHeight);
-
+  
     doc.setFontSize(5);
     doc.text(
-      `Thank you for purchasing from Aquaso.com, Visit Again :)`,
+      `for more details visit acquaso.com`,
       margin,
       margin + 5.0 * lineHeight
     );
-
+  
     doc.save(`${product.name}_MRP_Tag.pdf`);
   };
+  
+  
 
   return (
     <div

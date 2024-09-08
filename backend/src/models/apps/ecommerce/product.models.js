@@ -30,6 +30,10 @@ const productSchema = new Schema(
       default: 0,
       type: Number,
     },
+    mrp: {
+      default: 0,
+      type: Number,
+    },
     stock: {
       default: 0,
       type: Number,
@@ -50,6 +54,10 @@ const productSchema = new Schema(
         },
         price: {
           required: true,
+          type: Number,
+        },
+        mrp: {
+          default: 0,
           type: Number,
         },
         mainImage: {

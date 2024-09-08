@@ -52,7 +52,7 @@ const groupProducts = asyncHandler(async (req, res) => {
 
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, description, category, price, stock, mainImage, subImages,variants } = req.body;
+  const { name, description, category, price, mrp, stock, mainImage, subImages,variants } = req.body;
   console.log(req.body)
 
   const categoryToBeAdded = await Category.findById(category);
@@ -73,6 +73,7 @@ const createProduct = asyncHandler(async (req, res) => {
     description,
     stock,
     price,
+    mrp,
     owner,
     mainImage,
     subImages,
@@ -86,7 +87,7 @@ const createProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = asyncHandler(async (req, res) => {
   const { productId } = req.params;
-  const { name, description, category, price, stock, mainImage ,subImages,variants} = req.body;
+  const { name, description, category, price, mrp, stock, mainImage ,subImages,variants} = req.body;
 
   const product = await Product.findById(productId);
 
@@ -104,6 +105,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         description,
         stock,
         price,
+        mrp,
         category,
         mainImage,
         subImages,
@@ -170,6 +172,7 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
         variants:{
           name:1,
           price:1,
+          mrp:1,
           mainImage:1,
           subImages:1
         }
