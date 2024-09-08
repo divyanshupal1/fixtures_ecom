@@ -15,6 +15,11 @@ const categorySchema = new Schema(
       type: String,
       required: false,
     },
+    hsCode: {  // New field added here
+      type: String,
+      required: false,
+      maxlength: 4,  // Ensures hsCode is at most 4 characters long
+    },
   },
   { timestamps: true }
 );
