@@ -40,8 +40,8 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
     const success = await deleteCategory(categories[id]._id);
     if (!success) {
       toast({
-        title: `Error delet g category`,
-        description: `An error occured while deleting category`,
+        title: `Error deleting category`,
+        description: `An error occurred while deleting category`,
         variant: "destructive",
       });
     } else {
@@ -53,14 +53,17 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
   };
 
   return (
-    <div className="relative group flex w-full justify-between items-center hover:pr-6 max-sm:pr-6 bg-card hover:bg-primary-foreground border  border-transparent drop-shadow-sm transition-all grow-0 rounded-md overflow-hidden">
+    <div className="relative group flex w-full justify-between items-center hover:pr-6 max-sm:pr-6 bg-card hover:bg-primary-foreground border border-transparent drop-shadow-sm transition-all grow-0 rounded-md overflow-hidden">
       <Link
         href={`/dashboard/productlist?category=${id}&page=1`}
         className="absolute w-full h-full cursor-pointer -z-10"
       ></Link>
       <div className="flex p-6 px-6 max-sm:flex-col w-[80%]">
-        <div className="whitespace-nowrap text-base w-[45%]">
+        <div className="whitespace-nowrap text-base w-[30%]">
           {categories[id].name}
+        </div>
+        <div className="whitespace-nowrap text-base w-[15%]">
+          HS Code: {categories[id].hsCode}
         </div>
         <div className="flex justify-center items-center w-full">
           <div
@@ -117,7 +120,7 @@ const DeleteCategory = ({ handleDelete }: { handleDelete: () => void }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            Once a category is deleted it cannot be recovered another category
+            Once a category is deleted it cannot be recovered. Another category
             with the same name can be created.
           </AlertDialogDescription>
         </AlertDialogHeader>
