@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useToast } from "@/components/ui/use-toast";
+import axiosInstance from "@/lib/axiosInstance";
+import { ImageSelector } from "../../addproduct/component";
 
 type AddCategoryProps = {
   id: string | null;
@@ -22,6 +24,22 @@ type AddCategoryProps = {
     close: () => void;
   };
 };
+
+
+const uploadImage = async (img:File | null | undefined | string) => {
+  console.log("Uploading Image")
+  let imageForm = new FormData();
+  imageForm.append("image", img!);
+  const res = await axiosInstance.post("/ecommerce/assets/image", imageForm ,{
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
+  if (res){
+    return res.data.url
+  }
+  else return ""
+}
 
 export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
   const { createCategory, updateCategory, categories } = useCategoryStore(
@@ -89,6 +107,13 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
     }
   }
 
+  const handleImageChange = (img: File|null|string|undefined) => {
+    if (img) {
+      uploadImage(img).then((url) => {
+        setSvgImage(url);
+    });
+  }}
+
   return (
     <Dialog open={dialog?.state}>
       <DialogContent className="sm:max-w-md">
@@ -120,18 +145,10 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
             <Label htmlFor="svgImage" className="sr-only">
               SVG Image
             </Label>
-            <Input
-              id="svgImage"
-              type="text"
-              placeholder="SVG Image Code"
-              required
-              value={svgImage}
-              className={
-                svgImage?.length > 0
-                  ? "border-primary"
-                  : "border-red-500 border-2 outline-none"
-              }
-              onChange={(e) => setSvgImage(e.target.value)}
+            <ImageSelector
+              scale={1}
+              image={svgImage || ""}
+              onChange={(img) => handleImageChange(img)}
             />
           </div>
           <div className="grid flex-1 gap-2">
@@ -181,4 +198,5 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
       </DialogContent>
     </Dialog>
   );
-};
+
+}

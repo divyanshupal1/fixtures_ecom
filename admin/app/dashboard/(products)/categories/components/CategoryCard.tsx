@@ -67,10 +67,7 @@ export const CategoryCard = ({ id, dialog, setId }: CategoryCardProps) => {
         </div>
 
         <div className="flex justify-center items-center w-full">
-          <div
-            className="whitespace-nowrap text-base w-[35%]"
-            dangerouslySetInnerHTML={{ __html: categories[id].svgImage }}
-          ></div>
+          <img src={categories[id].svgImage} className="w-auto h-full max-h-[100px]" alt="image"/>
         </div>
         <div className="text-xs text-opacity-75 sm:hidden w-[20%]">
           {categories[id].owner.username}
