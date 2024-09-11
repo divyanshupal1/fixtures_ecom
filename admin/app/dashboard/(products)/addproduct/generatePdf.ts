@@ -19,10 +19,10 @@ export const generatePdf = (product: {
   const doc = new jsPDF({
     orientation: 'landscape',
     unit: 'in',
-    format: [2, 1.2],  // Size adjusted for better layout and visibility
+    format: [2, 1.2],  
   });
 
-  const margin = 0.1; // Margin for the content
+  const margin = 0.1; 
   const lineHeight = 0.2;
   const barcodeCanvas = document.createElement('canvas');
   JsBarcode(barcodeCanvas, product.barcode || '305000002020136', { format: 'CODE128' });

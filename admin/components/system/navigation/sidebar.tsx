@@ -2,7 +2,7 @@
 import {Menu} from 'lucide-react'
 import { FaTshirt, FaCompass, FaUser   } from "react-icons/fa";
 import { BiSolidCoupon } from "react-icons/bi";
-import { MdViewCarousel } from "react-icons/md";
+import { MdViewCarousel, MdViewColumn } from "react-icons/md";
 import { HiUserGroup } from "react-icons/hi2";
 import { IoBag } from "react-icons/io5";
 import { usePathname } from 'next/navigation'
