@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useToast } from '@/components/ui/use-toast';
+import axiosInstance from '@/lib/axiosInstance';
+import { ImageSelector } from '../../addproduct/component';
 
 type AddCategoryProps = {
   id:string|null,
@@ -21,6 +23,23 @@ type AddCategoryProps = {
     open:()=>void,
     close:()=>void
   }
+}
+
+const uploadImage = async (img:File | null | undefined | string) => {
+  console.log("Uploading Image")
+  let imageForm = new FormData();
+  imageForm.append("image", img!);
+
+  const res = await axiosInstance.post("/ecommerce/assets/image", imageForm ,{
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
+  if (res){
+    console.log(res.data.url)
+    return res.data.url
+  }
+  else return ""
 }
 
 export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
@@ -70,6 +89,14 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
     }
   }
 
+  const onImageChange = async (i:File|string|null|undefined
+  ) => {
+    if (i) {
+      const url = await uploadImage(i);
+      setSvgImage(url);
+    }
+  }
+
   return (
     <Dialog open={dialog?.state}>
       <DialogContent className="sm:max-w-md">
@@ -77,7 +104,7 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
           <DialogTitle>{id != null ? "Edit category" : "Create a new category"}</DialogTitle>
         </DialogHeader>
         <div className="flex items-center flex-col gap-1">
-          <div className="grid flex-1 gap-2">
+          <div className="flex flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
               Name
             </Label>
@@ -90,18 +117,11 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
               className={name.length > 0 ? "border-primary" : "border-red-500 border-2 outline-none"}
               onChange={(e) => setName(e.target.value)} />
           </div>
-          <div className="grid flex-1 gap-2">
+          <div className="grid flex-1 gap-2 relative">
             <Label htmlFor="link" className="sr-only">
               svgImage
             </Label>
-            <Input
-              id="link"
-              type="text"
-              placeholder="SVG Image Code"
-              required
-              value={svgImage}
-              className={svgImage?.length > 0 ? "border-primary" : "border-red-500 border-2 outline-none"}
-              onChange={(e) => setSvgImage(e.target.value)} />
+            <ImageSelector image={svgImage || ""} onChange={(i)=>onImageChange(i)} scale={1}/>
           </div>
         </div>
         <DialogFooter className="justify-end">

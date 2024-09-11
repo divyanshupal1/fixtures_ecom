@@ -23,7 +23,7 @@ export default function TaskPage() {
             </div>
           </div>
           <div className="w-full h-auto  rounded-lg border dark:border-slate-600 overflow-hidden">
-              <div className="w-full flex justify-around rounded-t-lg border-b dark:border-slate-700 bg-neutral-300 dark:bg-slate-900 items-center *:p-2 *:border-r *:text-center *:flex-grow-0  *:dark:border-slate-700">
+              <div className="w-full flex justify-around rounded-t-lg border-b dark:border-slate-700 bg-neutral-300 dark:bg-slate-900 items-center *:p-2 *:border-r *:text-center *:overflow-hidden *:flex-grow-0  *:dark:border-slate-700">
                   <div className="w-[15%]">Order id</div>
                   <div className="w-[15%]">Date</div>
                   <div className="w-[15%]">Customer</div>
@@ -103,18 +103,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MdOutlineMoreHoriz, MdOutlineMoreVert } from "react-icons/md";
+import Link from "next/link"
 
 const RowActions = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="px-2"><MdOutlineMoreVert/></DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuItem>Details</DropdownMenuItem>
+        <DropdownMenuItem><Link href={'/dashboard/orders-new/invoice?id='+"asfsdfsd"}>Invoice</Link></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

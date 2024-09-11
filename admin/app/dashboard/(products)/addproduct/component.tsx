@@ -242,7 +242,7 @@ const Page = () => {
   );
 };
 
-const ImageSelector = ({
+export const ImageSelector = ({
   image,
   multiple = false,
   onChange,

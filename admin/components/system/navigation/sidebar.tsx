@@ -42,6 +42,13 @@ const links = [
     active: "orders",
   },
   {
+    type: "tab",
+    href: "/dashboard/orders-new",
+    icon: <IoBag />,
+    text: "Orders-new",
+    active: "orders-new",
+  },
+  {
     type: "group",
     icon: <FaTshirt />,
     text: "Products",
