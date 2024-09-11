@@ -5,7 +5,7 @@ import axios from 'axios';
 import { GridForm } from './gridform';
 import { GridView } from './gridview';
 
-export const GridPage: React.FC = () => {
+const GridPage = () => {
   const [grids, setGrids] = useState<any[]>([]);
 
   useEffect(() => {

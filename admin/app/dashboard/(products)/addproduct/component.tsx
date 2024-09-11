@@ -177,42 +177,7 @@ const Page = () => {
   );
 };
 
-export const ImageSelector = ({
-  image,
-  multiple = false,
-  onChange,
-  scale,
-  disabled = false,
-  imgRef
-}: {
-  multiple?: boolean;
-  image: string;
-  onChange?: (i: File | null | undefined|string) => void;
-  scale: number;
-  disabled?: boolean;
-  imgRef?: React.RefObject<HTMLInputElement>;
-}) => {
-  console.log(image,"image")
 
-  return (
-    <div className="w-full h-full border-border overflow-hidden flex flex-col gap-y-6 justify-center items-center relative border-4 border-dotted rounded-xl">
-      {!disabled && <Input
-        ref={imgRef}
-        type="file"
-        accept="image/png, image/jpeg"
-        className="h-full w-full opacity-0 absolute z-10"
-        onChange={(e) => {
-          onChange && onChange(e.target.files?.item(0));
-        }}
-      />}
-      {image ? (
-        <ImagePreview image={image} border={false} />
-      ) : (
-        <InputImagePlaceholder scale={scale} />
-      )}
-    </div>
-  );
-};
 
 export default Page;
 
@@ -355,6 +320,43 @@ function AddProductForm({product,setProduct,index}:{
     </div>
   )
 }
+
+export const ImageSelector = ({
+  image,
+  multiple = false,
+  onChange,
+  scale,
+  disabled = false,
+  imgRef
+}: {
+  multiple?: boolean;
+  image: string;
+  onChange?: (i: File | null | undefined|string) => void;
+  scale: number;
+  disabled?: boolean;
+  imgRef?: React.RefObject<HTMLInputElement>;
+}) => {
+  console.log(image,"image")
+
+  return (
+    <div className="w-full h-full border-border overflow-hidden flex flex-col gap-y-6 justify-center items-center relative border-4 border-dotted rounded-xl">
+      {!disabled && <Input
+        ref={imgRef}
+        type="file"
+        accept="image/png, image/jpeg"
+        className="h-full w-full opacity-0 absolute z-10"
+        onChange={(e) => {
+          onChange && onChange(e.target.files?.item(0));
+        }}
+      />}
+      {image ? (
+        <ImagePreview image={image} border={false} />
+      ) : (
+        <InputImagePlaceholder scale={scale} />
+      )}
+    </div>
+  );
+};
 
 const ImagePreview = ({
   image,

@@ -1,4 +1,5 @@
 import { Document, Page, Text, View, StyleSheet,Font  } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -29,7 +30,9 @@ const styles = StyleSheet.create({
 });
 // Font.register({family:'Times-Roman',src:""})
 
-export const MyInvoice = () => (
+const MyInvoice = () => (
+    <PDFViewer className='w-full h-screen'>
+
     <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.main}>
@@ -180,4 +183,6 @@ export const MyInvoice = () => (
             </View>        
         </Page>
     </Document>
+    </PDFViewer>
 );
+export default MyInvoice;

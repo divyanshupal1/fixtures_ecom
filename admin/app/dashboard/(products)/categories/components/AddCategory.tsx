@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useToast } from "@/components/ui/use-toast";
 import axiosInstance from "@/lib/axiosInstance";
-import { ImageSelector } from "../../addproduct/component";
+import dynamic from "next/dynamic";
 
 type AddCategoryProps = {
   id: string | null;
@@ -27,20 +27,7 @@ type AddCategoryProps = {
 };
 
 
-const uploadImage = async (img:File | null | undefined | string) => {
-  console.log("Uploading Image")
-  let imageForm = new FormData();
-  imageForm.append("image", img!);
-  const res = await axiosInstance.post("/ecommerce/assets/image", imageForm ,{
-    headers: {
-      "Content-Type": "multipart/form-data",
-    }
-  });
-  if (res){
-    return res.data.url
-  }
-  else return ""
-}
+
 
 export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
   const { createCategory, updateCategory, categories } = useCategoryStore(
@@ -114,6 +101,25 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
         setSvgImage(url);
     });
   }}
+  const uploadImage = async (img:File | null | undefined | string) => {
+    console.log("Uploading Image")
+    let imageForm = new FormData();
+    imageForm.append("image", img!);
+    const res = await axiosInstance.post("/ecommerce/assets/image", imageForm ,{
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    });
+    if (res){
+      return res.data.url
+    }
+    else return ""
+  }
+
+  const MyImageComponent = dynamic(() => import("@/components/imageSelector"), {
+    loading: () => <p>loading...</p>,
+    ssr: false,
+  })
 
   return (
     <Dialog open={dialog?.state}>
@@ -146,7 +152,7 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
             <Label htmlFor="svgImage" className="sr-only">
               SVG Image
             </Label>
-            <ImageSelector
+            <MyImageComponent
               scale={1}
               image={svgImage || ""}
               onChange={(img) => handleImageChange(img)}
