@@ -2,6 +2,7 @@
 import React from "react";
 import { useCategoryStore } from "@/store/productStore";
 import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
   DialogContent,
@@ -101,7 +102,7 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
     } else {
       toast({
         title: "Validation Error",
-        description: "Please ensure the HS Code is exactly 4 digits long",
+        description: "Please ensure the HS Code is exactly 8 digits long",
         variant: "destructive",
       });
     }
@@ -160,7 +161,7 @@ export const AddCategory = ({ id, dialog }: AddCategoryProps) => {
               placeholder="HS Code"
               required
               value={hsCode}
-              maxLength={4} // Restrict input to 4 digits
+              maxLength={8} // Restrict input to 4 digits
               pattern="\d{4}" // Ensure only digits are entered
               className={
                 hsCode.length === 4

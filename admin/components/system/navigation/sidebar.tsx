@@ -87,6 +87,13 @@ const links = [
     text: "Carousel",
     active: "carousel",
   },
+  {
+    type: "tab",
+    href: "/dashboard/grid",
+    icon: <MdViewColumn />,
+    text: "Grid",
+    active: "grid",
+  },
 ];
 
 function Sidebar({setOpen,open}:{open:boolean,setOpen:React.Dispatch<React.SetStateAction<boolean>>}) {

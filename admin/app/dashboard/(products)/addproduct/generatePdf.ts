@@ -25,39 +25,46 @@ export const generatePdf = (product: {
   const margin = 0.1; 
   const lineHeight = 0.2;
   const barcodeCanvas = document.createElement('canvas');
-  JsBarcode(barcodeCanvas, product.barcode || '305000002020136', { format: 'CODE128' });
-  const barcodeDataUrl = barcodeCanvas.toDataURL('image/png');
+  const ctx = barcodeCanvas.getContext('2d');
 
-  doc.setTextColor(128, 128, 128); // Set text color to grey
+  if (ctx) {
+    JsBarcode(barcodeCanvas, product.barcode || '305000002020136', { format: 'CODE128' });
+    const barcodeDataUrl = barcodeCanvas.toDataURL('image/png');
 
-  // Product Name
-  doc.setFontSize(4.5);
-  doc.setFont('helvetica', 'bold');
-  doc.text(`${product.name}`, margin, lineHeight);
+    doc.setTextColor(128, 128, 128); // Set text color to grey
 
-  // Product Price
-  doc.setFontSize(6);
-  doc.text(`MRP: ${product.price}`, margin, margin + 1.5 * lineHeight);
+    // Product Name
+    doc.setFontSize(4.5);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${product.name}`, margin, lineHeight);
 
-  // Category and Product ID
-  doc.setFontSize(5);
-  doc.setFont('helvetica', 'normal');
-  let categoryText = `Category: ${product.category || 'N/A'}`;
-  let productIdText = `Product ID: ${product.barcode || 'N/A'}`;
+    // Product Price
+    doc.setFontSize(6);
+    doc.text(`MRP: ${product.price}`, margin, margin + 1.5 * lineHeight);
 
-  let categoryTextWidth = doc.getTextWidth(categoryText);
-  doc.text(categoryText, margin, margin + 2.0 * lineHeight);
-  doc.text(productIdText, margin + categoryTextWidth + 0.1, margin + 2.5 * lineHeight); // Adjusted for proper alignment
+    // Category and Product ID
+    doc.setFontSize(5);
+    doc.setFont('helvetica', 'normal');
+    let categoryText = `Category: ${product.category || 'N/A'}`;
+    let productIdText = `Product ID: ${product.barcode || 'N/A'}`;
 
-  // Barcode image
-  doc.addImage(barcodeDataUrl, 'PNG', margin, margin + 2.5 * lineHeight, 1.6, 0.3);
+    let categoryTextWidth = doc.getTextWidth(categoryText);
+    doc.text(categoryText, margin, margin + 2.0 * lineHeight);
+    doc.text(productIdText, margin + categoryTextWidth + 0.1, margin + 2.5 * lineHeight); // Adjusted for proper alignment
 
-  // Adding current date
-  const currentDate = new Date().toLocaleDateString(); // Gets the current date in local date format
-  doc.setFontSize(4);
-  doc.setFont('helvetica', 'normal');
-  doc.text(`Date: ${currentDate}`, margin, margin + 4.5 * lineHeight); // Positioned right below the barcode
+    // Barcode image
+    doc.addImage(barcodeDataUrl, 'PNG', margin, margin + 2.5 * lineHeight, 1.6, 0.3);
 
-  // Save the PDF with the product name as the filename
-  doc.save(`${product.name}_MRP_Tag.pdf`);
+    // Adding current date
+    const currentDate = new Date().toLocaleDateString(); // Gets the current date in local date format
+    doc.setFontSize(4);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Date: ${currentDate}`, margin, margin + 4.5 * lineHeight); // Positioned right below the barcode
+
+    // Save the PDF with the product name as the filename
+    doc.save(`${product.name}_MRP_Tag.pdf`);
+  } else {
+    console.error("Failed to get the 2D context from the canvas");
+    // Handle the error appropriately here
+  }
 };
