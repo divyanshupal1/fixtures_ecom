@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { productsData } from "../../Data/productsData";
 import ProductCard from "../Shared/ProductsCards/ProductCard";
@@ -9,9 +9,10 @@ import useProductStore from "../../store/useProductStore";
 
 const ProductsCategory = ({ categoryId, customization }) => {
 
-  const {products,fetchProductsByCategory} = useProductStore((state)=>({ 
+  const {products,pagination,fetchProductsByCategory} = useProductStore((state)=>({ 
     products:state.categoryProducts,
-    fetchProductsByCategory:state.fetchProductsByCategory
+    fetchProductsByCategory:state.fetchProductsByCategory,
+    pagination:state.categoryPagination,
   }))
 
   useEffect(() => {
@@ -21,6 +22,29 @@ const ProductsCategory = ({ categoryId, customization }) => {
   console.log(products)
   const hasNoProducts = products?.length === 0;
   useScrollOnMount(200)
+
+  const observerTarget = useRef(null);
+  useEffect(() => {
+    let target = observerTarget.current;
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          pagination.hasNextPage && fetchProductsByCategory(categoryId,pagination.nextPage,pagination.limit,true);
+        }
+      },
+      { threshold: 1 }
+    );
+  
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+  
+    return () => {
+      if (target) {
+        observer.unobserve(target);
+      }
+    };
+  }, [fetchProductsByCategory, observerTarget, pagination,categoryId]);
 
   if (hasNoProducts)
     return (
@@ -41,6 +65,16 @@ const ProductsCategory = ({ categoryId, customization }) => {
           customization={customization}
         />
       ))}
+      <div className="w-full text-center flex justify-center items-center" ref={observerTarget}>
+        {
+          pagination.hasNextPage ?
+          <div className='animate-spin'>
+            <div className='scale-150'>Loading...</div>
+          </div>
+          :
+          <div></div>
+        }
+      </div>
     </div>
   );
 };
