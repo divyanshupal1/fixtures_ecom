@@ -1,4 +1,4 @@
-import { GridImage } from '../../../models/apps/ecommerce/grid.models'; // Ensure this path matches your file structure
+import { GridImage } from '../../../models/apps/ecommerce/grid.models.js'; // Ensure this path matches your file structure
 
 // Create a new Grid
 export async function createGrid(req, res) {

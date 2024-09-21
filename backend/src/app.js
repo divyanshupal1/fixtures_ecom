@@ -64,10 +64,10 @@ app.use((req, res, next) =>{
   const origin = req.headers.origin;
   if (whitelist.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-  }; // Replace this with your specific origin
+  };
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials
+  res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
 app.use(requestIp.mw());
@@ -127,6 +127,7 @@ import productRouter from "./routes/apps/ecommerce/product.routes.js";
 import ecomProfileRouter from "./routes/apps/ecommerce/profile.routes.js";
 import assetRouter from "./routes/apps/ecommerce/upload.routes.js";
 import carouselRouter from "./routes/apps/ecommerce/carousel.routes.js" 
+import gridRouter from "./routes/apps/ecommerce/grid.routes.js"
 
 import { avoidInProduction } from "./middlewares/auth.middlewares.js";
 
@@ -144,6 +145,7 @@ app.use("/api/v1/ecommerce/orders", orderRouter);
 app.use("/api/v1/ecommerce/coupons", couponRouter);
 app.use("/api/v1/ecommerce/assets",assetRouter);
 app.use("/api/v1/ecommerce/carousel",carouselRouter);
+app.use("/api/v1/ecommerce/grid",gridRouter);
 // app.use('/dashboard', proxy('http://localhost:3001'))
 app.use('/', proxy('http://localhost:3010'))
 app.use(

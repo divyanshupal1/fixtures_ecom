@@ -6,9 +6,9 @@ import {
   getGridById,
   updateGrid,
 } from "../../../controllers/apps/ecommerce/grid.controller.js";
-import {
-  gridRequestBodyValidator,
-} from "../../../validators/apps/ecommerce/grid.validator.js";
+// import {
+//   gridRequestBodyValidator,
+// } from "../../../validators/apps/ecommerce/grid.validators.js";
 import { validate } from "../../../validators/validate.js";
 import {
   verifyPermission,
@@ -24,31 +24,31 @@ router
   .post(
     verifyJWT,
     verifyPermission([UserRolesEnum.ADMIN, UserRolesEnum.SUPERADMIN]),
-    gridRequestBodyValidator(),
+    // gridRequestBodyValidator(),
     validate,
     createGrid
   )
   .get(getAllGrids);
 
 router
-  .route("/:gridId")
+  .route("/:id")
   .get(
-    mongoIdPathVariableValidator("gridId"), 
+    mongoIdPathVariableValidator("id"), 
     validate, 
     getGridById
   )
   .delete(
     verifyJWT,
     verifyPermission([UserRolesEnum.ADMIN, UserRolesEnum.SUPERADMIN]),
-    mongoIdPathVariableValidator("gridId"),
+    mongoIdPathVariableValidator("id"),
     validate,
     deleteGrid
   )
   .patch(
     verifyJWT,
     verifyPermission([UserRolesEnum.ADMIN, UserRolesEnum.SUPERADMIN]),
-    gridRequestBodyValidator(),
-    mongoIdPathVariableValidator("gridId"),
+    // gridRequestBodyValidator(),
+    mongoIdPathVariableValidator("id"),
     validate,
     updateGrid
   );

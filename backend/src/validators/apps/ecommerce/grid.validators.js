@@ -1,4 +1,4 @@
-import { GridImage } from '../../../models/apps/ecommerce/grid.models'; // Adjust the path as necessary
+import { GridImage } from '../../../models/apps/ecommerce/grid.models.js'; // Adjust the path as necessary
 
 // Validator for URL (simple regex pattern)
 function validateURL(url) {

@@ -7,6 +7,10 @@ const GridSchema = new Schema({
     type: String,
     required: true
   },
+  textColor:{
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true

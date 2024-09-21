@@ -13,9 +13,9 @@
   display: flex;
   align-items: flex-end;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
-  background-origin: content-box;
+  background-size: cover;
+  background-position: center;
+  // background-origin: content-box;
 }
 
 @include small {

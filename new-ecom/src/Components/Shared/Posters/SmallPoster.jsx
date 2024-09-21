@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import s from "./SmallPoster.module.scss";
 
-const SmallPoster = ({ title, description, posterUrl }) => {
+const SmallPoster = ({ title, description, posterUrl,url,textColor }) => {
   return (
     <div className={s.smallPoster}>
-      <img src={posterUrl} alt="product's poster" />
+      <img src={posterUrl} style={{width:"100%",height:"100%"}} alt="product's poster" />
       <div className={s.content}>
-        <b>{title}</b>
-        <p>{description}</p>
-        <Link to="/products" className={s.shopNow}>
+        <b style={{color:textColor}}>{title}</b>
+        <p style={{color:textColor}}>{description}</p>
+        <a href="/products" className={s.shopNow}>
           Shop Now
-        </Link>
+        </a>
       </div>
     </div>
   );

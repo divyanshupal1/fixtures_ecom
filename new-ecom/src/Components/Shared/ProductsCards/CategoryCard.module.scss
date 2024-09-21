@@ -5,9 +5,12 @@
   border: solid 1px #0000004D;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
+  justify-content: flex-end;
   padding: 20px;
+  min-height: 100px;
   transition: background-color .2s;
+  position: relative;
 }
 
 .card:hover {
