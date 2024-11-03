@@ -46,7 +46,7 @@ router
         (req, res) => {
             res.status(200).json({
                 message:"File uploaded successfully",
-                url:`${req.protocol}://${req.get("host")}/api/v1/ecommerce/assets/image/${req.files?.image[0]?.filename}`
+                url:`api/v1/ecommerce/assets/image/${req.files?.image[0]?.filename}`
             })
         }
 )

@@ -17,6 +17,7 @@ import axiosInstance from "@/lib/axiosInstance";
 
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
+import { imgUrl } from "@/constants";
 
 const initialProduct: Product = {
   name: "",
@@ -83,7 +84,6 @@ const Page = () => {
   }
 
   const removeVariant = (index:number) => {
-    console.log(index,"index")
     if(!product.variants) return    
     let vars = product.variants || []
     vars.splice(index,1)
@@ -103,8 +103,6 @@ const Page = () => {
     }
   }
 
-  console.log(product)
-  console.log(active)
 
   useEffect(() => {
     if (edit) {
@@ -189,7 +187,6 @@ function AddProductForm({product,setProduct,index}:{
 }) {
 
   const uploadImage = async (img:File | null | undefined | string,key:keyof Product,index?:number) => {
-    console.log("Uploading Image")
     let imageForm = new FormData();
     imageForm.append("image", img!);
 
@@ -199,7 +196,6 @@ function AddProductForm({product,setProduct,index}:{
       }
     });
     if (res){
-      console.log(res.data.url)
       if(index!=undefined){
         let vars = product.subImages || []
         vars[index] = res.data.url
@@ -336,7 +332,6 @@ export const ImageSelector = ({
   disabled?: boolean;
   imgRef?: React.RefObject<HTMLInputElement>;
 }) => {
-  console.log(image,"image")
 
   return (
     <div className="w-full h-full border-border overflow-hidden flex flex-col gap-y-6 justify-center items-center relative border-4 border-dotted rounded-xl">
@@ -365,7 +360,7 @@ const ImagePreview = ({
   image: string;
   border?: boolean;
 }) => {
-  console.log(typeof image, " img");
+
   return (
     <div
       className={`w-full h-full ${
@@ -373,7 +368,7 @@ const ImagePreview = ({
       }`}
     >
       {typeof image == "string" && (
-        <img src={image} alt="Main Image" className="w-full h-full" />
+        <img src={imgUrl+image} alt="Main Image" className="w-full h-full" />
       )}
     </div>
   );
@@ -384,7 +379,7 @@ const InputImagePlaceholder = ({ scale }: { scale?: number }) => {
       <div className={`scale-[${scale}]`}>
         <FiUploadCloud />
       </div>
-      <p className="w-1/2 text-center">Drag and drop or click to upload</p>
+      <p className="w-1/2 text-center">Drop or click to upload</p>
     </>
   );
 };

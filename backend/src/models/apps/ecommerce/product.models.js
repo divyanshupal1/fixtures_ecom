@@ -42,38 +42,16 @@ const productSchema = new Schema(
       type: [String],
       default: [],
     },
-    variants: [
-      {
-        name: {
-          required: true,
-          type: String,
-        },
-        description: {
-          required: true,
-          type: String,
-        },
-        price: {
-          required: true,
-          type: Number,
-        },
-        mrp: {
-          default: 0,
-          type: Number,
-        },
-        mainImage: {
-          required: true,
-          type: String,
-        },
-        stock: {
-          required: true,
-          type: Number,
-        },
-        subImages: {
-          type: [String],
-          default: [],  
-        },
-      }
-    ]
+    variants: {
+      ref: "Product",
+      required: false,
+      type: [Schema.Types.ObjectId],
+    },
+    variant:{
+      type:Boolean,
+      default:false,
+      required:false
+    }
   },
   { timestamps: true }
 );

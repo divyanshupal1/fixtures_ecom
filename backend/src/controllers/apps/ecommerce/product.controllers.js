@@ -15,7 +15,24 @@ import { Category } from "../../../models/apps/ecommerce/category.models.js";
 
 const getAllProducts = asyncHandler(async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
-  const productAggregate = Product.aggregate([]);
+  const productAggregate = Product.aggregate([
+    {
+      $match: {
+        $or: [
+          { variant: { $exists: false } },
+          { variant: { $ne: true } }
+        ]
+      }
+    },
+    {
+      $lookup:{
+      from:"products",
+      localField:"variants",
+      foreignField:"_id",
+      as:"variants"
+      }
+    }
+  ]);
   const products = await Product.aggregatePaginate(
     productAggregate,
     getMongoosePaginationOptions({
@@ -52,7 +69,7 @@ const groupProducts = asyncHandler(async (req, res) => {
 
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, description, category, price, mrp, stock, mainImage, subImages,variants } = req.body;
+  let { name, description, category, price, mrp, stock, mainImage, subImages,variants } = req.body;
   console.log(req.body)
 
   const categoryToBeAdded = await Category.findById(category);
@@ -67,6 +84,9 @@ const createProduct = asyncHandler(async (req, res) => {
   }
 
   const owner = req.user._id;
+  variants = variants.map(variant=>({...variant,category,owner,variant:true}));
+  const addedVariants = await Product.insertMany(variants); 
+  variants = addedVariants.map((variant)=>  variant._id);
 
   const product = await Product.create({
     name,
@@ -91,7 +111,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const product = await Product.findById(productId);
 
-  // Check the product existence
+
   if (!product) {
     throw new ApiError(404, "Product does not exist");
   }

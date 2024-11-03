@@ -33,6 +33,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { jsPDF } from "jspdf";
 import JsBarcode from "jsbarcode";
+import { imgUrl } from "@/constants";
 
 export function ProductCard({
   product,
@@ -187,7 +188,7 @@ export function ProductCard({
       </div>
       <div className="w-1/12 max-sm:w-full h-5/6 max-sm:h-auto flex justify-start ml-3 max-sm:ml-0">
         <img
-          src={product.mainImage}
+          src={imgUrl+product.mainImage}
           className="h-full rounded-md"
           alt="product-image"
         />

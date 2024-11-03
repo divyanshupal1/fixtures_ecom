@@ -131,6 +131,18 @@ import gridRouter from "./routes/apps/ecommerce/grid.routes.js"
 
 import { avoidInProduction } from "./middlewares/auth.middlewares.js";
 
+
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      docExpansion: "none", // keep all the sections collapsed by default
+    },
+    customSiteTitle: "FreeAPI docs",
+  })
+);
+
 app.use("/api/v1/healthcheck", healthcheckRouter);
 
 
@@ -148,16 +160,7 @@ app.use("/api/v1/ecommerce/carousel",carouselRouter);
 app.use("/api/v1/ecommerce/grid",gridRouter);
 // app.use('/dashboard', proxy('http://localhost:3001'))
 app.use('/', proxy('http://localhost:3010'))
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      docExpansion: "none", // keep all the sections collapsed by default
-    },
-    customSiteTitle: "FreeAPI docs",
-  })
-);
+
 
 
 
