@@ -27,7 +27,6 @@ const Nav = () => {
         <li>
           <NavLink to="/about">About</NavLink>
         </li>
-
         <li>
           {user?.username!=undefined ? (
             <NavLink to="/profile">Profile</NavLink>

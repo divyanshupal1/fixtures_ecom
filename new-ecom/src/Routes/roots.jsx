@@ -14,11 +14,13 @@ import SearchPage from "../Components/Search/SearchPage";
 import SignUp from "../Components/SignUp/SignUp";
 import MoreCategories from "../Components/MoreCategories/MoreCategories";
 import WishList from "../Components/WishList/WishList";
+import PrivacyPolicyPage from "../Components/Privacy/PrivacyPage"
 
 export const ROUTES_CONFIG = [
   { path: "/", element: <Home /> },
   { path: "/contact", element: <Contact /> },
   { path: "/about", element: <About /> },
+  { path: "/privacy", element: <PrivacyPolicyPage /> },
   { path: "/details", element: <ProductDetailsPage /> },
   { path: "/category", element: <ProductsCategoryPage /> },
   { path: "/products", element: <ProductsPage /> },
