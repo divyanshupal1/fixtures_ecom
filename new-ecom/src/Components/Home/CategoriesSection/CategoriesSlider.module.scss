@@ -1,22 +1,31 @@
-@import "../../../Styles/mixins";
+@import "../../../Styles/mixins.scss";
+
+.categoriesSection {
+  margin-bottom: 60px;
+}
+
+.wrapper {
+  margin-bottom: 40px;
+}
 
 .categoriesSlider {
   display: flex;
-  overflow: hidden; /* Hide overflow to prevent scrollbars */
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+  scroll-behavior: smooth; /* Smooth scrolling for better UX */
   margin-bottom: 180px;
   position: relative;
 
-  // Scrollbar styles
-  scrollbar-width: none; /* Hide scrollbar in Firefox */
-  
+  /* Hide scrollbar across browsers */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in WebKit browsers */
+    display: none; /* WebKit browsers */
   }
-}
 
-@include small {
-  .categoriesSlider {
-    margin-bottom: 100px;
+  /* Enable wrapping if necessary on small screens */
+  @media (max-width: 470px) {
+    flex-wrap: wrap;
+    justify-content: center; /* Center align items when wrapping */
   }
 }
 
@@ -25,42 +34,17 @@
   flex: 0 0 auto;
   width: calc(((100% / 6) - 30px) + (30px / 6)); /* Default width for 6 items */
   margin-right: 30px;
-}
 
-// Adjust card width for different screen sizes
-@media (max-width: 1500px) {
-  .categoriesSlider > * {
-    width: calc(((100% / 5) - 30px) + (30px / 5)); /* Adjusted for 5 items */
+  @media (max-width: 760px) {
+    width: calc(((100% / 2) - 20px) + (20px / 2)); /* Adjusted for 2 items */
+    margin-right: 20px;
   }
-}
 
-@include large {
-  .categoriesSlider > * {
-    width: calc(((100% / 4) - 30px) + (30px / 4)); /* Adjusted for 4 items */
-  }
-}
-
-@include medium {
-  .categoriesSlider > * {
-    width: calc(((100% / 3) - 30px) + (30px / 3)); /* Adjusted for 3 items */
-  }
-}
-
-@media (max-width: 760px) {
-  .categoriesSlider > * {
-    width: calc(((100% / 2) - 30px) + (30px / 2)); /* Adjusted for 2 items */
-  }
-}
-
-@media (max-width: 470px) {
-  .categoriesSlider > * {
+  @media (max-width: 470px) {
     width: 100%; /* Full width for mobile */
+    margin-right: 0; /* No margin for wrapping layout */
+    margin-bottom: 20px; /* Add spacing for wrapped items */
   }
-}
-
-// Remove margin for the last item
-.categoriesSlider > *:last-child {
-  margin-right: 0;
 }
 
 // Style for "More Categories" link
@@ -84,5 +68,11 @@
   &:hover {
     background-color: var(--button-bg-hover);
     color: var(--button-text-hover);
+  }
+
+  @media (max-width: 470px) {
+    width: 100%; /* Full width for mobile */
+    margin-right: 0;
+    margin-top: 10px;
   }
 }

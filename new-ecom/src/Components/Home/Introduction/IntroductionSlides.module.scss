@@ -3,22 +3,43 @@
 .slide {
   background-color: var(--black);
   display: flex !important;
+  flex-direction: column; /* Stack content for small screens */
+  align-items: center;
   justify-content: flex-end;
-  padding: 20px 50px;
+  padding: 20px;
   position: relative;
+
+  @include medium {
+    flex-direction: row; /* Restore horizontal layout for medium screens */
+    padding: 20px 50px;
+  }
 }
 
 .slide img {
-  width: 250px;
-  height: 100%;
+  width: 200px; /* Reduce image size for smaller screens */
+  height: auto; /* Maintain aspect ratio */
   object-fit: contain;
+
+  @include medium {
+    width: 250px;
+    height: 100%;
+  }
 }
 
 .content {
-  position: absolute;
-  left: 40px;
-  top: 50px;
-  width: 300px;
+  position: relative; /* Change positioning for small screens */
+  width: 100%; /* Full width for better spacing */
+  text-align: center; /* Center-align content for better readability */
+  margin-top: 20px;
+
+  @include medium {
+    position: absolute;
+    left: 40px;
+    top: 50px;
+    text-align: left;
+    width: 300px;
+    margin-top: 0;
+  }
 }
 
 @include medium {
@@ -39,67 +60,89 @@
 .nameProduct {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center align for small screens */
+  margin-bottom: 10px;
+
+  @include medium {
+    justify-content: flex-start; /* Align to the left for larger screens */
+  }
 }
 
 @include small {
   .nameProduct {
-    display: none;
+    display: none; /* Hide on very small screens */
   }
 }
 
 .nameProduct img {
-  width: 40px;
-  height: 40px;
-  margin-right: 20px;
+  width: 30px; /* Adjust logo size */
+  height: 30px;
+  margin-right: 10px;
+
+  @include medium {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+  }
 }
 
 .nameProduct strong {
   color: var(--secondary-white);
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 0.9rem;
+
+  @include medium {
+    font-size: 1rem;
+  }
 }
 
 .discount {
-  width: 400px;
+  width: auto; /* Allow flexibility in small screens */
   margin: 20px 0;
   color: var(--white);
-  letter-spacing: 1.92px;
-  font: 600 3rem/60px "Inter", sans-serif;
+  letter-spacing: 1.5px;
+  font: 600 2rem/40px "Inter", sans-serif;
+  text-align: center;
+
+  @include medium {
+    font: 600 3rem/60px "Inter", sans-serif;
+    text-align: left;
+  }
 }
 
 @include small {
   .discount {
     display: none;
-  }
-}
-
-@include medium {
-  .discount {
-    font-size: 2rem;
-    line-height: 40px;
   }
 }
 
 .shopNow {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center button for small screens */
   cursor: pointer;
-  padding: 2px;
-  font-size: 1rem;
+  padding: 8px 16px; /* Increase tappable area */
+  font-size: 0.9rem;
   color: var(--secondary-white);
-  width: fit-content;
+  width: auto;
   position: relative;
+  margin: 10px auto 0;
+
+  @include medium {
+    justify-content: flex-start;
+    margin: 0;
+  }
 
   &:hover::before {
     height: calc(100% + 10px);
-    opacity: .3;
-    transition: height .2s, opacity .2s;
+    opacity: 0.3;
+    transition: height 0.2s, opacity 0.2s;
   }
 }
 
 @include small {
   .shopNow {
-    font-size: .9rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -109,24 +152,23 @@
   position: absolute;
   left: 0;
   bottom: -5px;
-  width: calc(100% - 20px - 12px);
+  width: 100%; /* Full width for hover effect */
   height: 2px;
   background-color: var(--secondary-white);
-  transition: height .3s, opacity .2s .2s;
+  transition: height 0.3s, opacity 0.2s 0.2s;
 }
 
-.shopNow>svg {
+.shopNow > svg {
   fill: var(--secondary-white);
-  width: 20px;
-  height: 20px;
-  margin-left: 12px;
-  margin-top: 6px;
-  transform: scaleY(1.3);
-}
+  width: 18px; /* Reduce icon size */
+  height: 18px;
+  margin-left: 8px;
+  transform: scaleY(1);
 
-@include small {
-  .shopNow>svg {
-    margin-left: 6px;
-    transform: scaleY(1);
+  @include medium {
+    width: 20px;
+    height: 20px;
+    margin-left: 12px;
+    transform: scaleY(1.3);
   }
 }
