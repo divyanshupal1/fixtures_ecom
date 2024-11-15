@@ -155,7 +155,7 @@ const Footer = () => {
         </section>
 
         <p className={s.copyRights}>
-          <span>Copyright © Fixtures Ecom </span>
+          <span>Copyright © Acquaso </span>
         </p>
       </div>
 
