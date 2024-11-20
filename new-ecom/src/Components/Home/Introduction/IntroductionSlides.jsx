@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"; // Import Swiper container
-import { useCarouselStore } from "../../../store/useCarouselStore"; 
+import { useCarouselStore } from "../../../store/useCarouselStore";
 import SvgIcon from "../../Shared/MiniComponents/SvgIcon";
 import s from "./IntroductionSlides.module.scss";
 
@@ -10,7 +10,7 @@ const IntroductionSlides = () => {
     carousels: state.carousels,
     fetchCarousels: state.fetchCarousels,
   }));
-  
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -45,10 +45,12 @@ const IntroductionSlides = () => {
 
               <h2 className={s.discount}>{discountText}</h2>
 
-              <Link to="/products" className={s.shopNow}>
-                <span>Shop Now</span>
-                <SvgIcon name="arrowRightLong" />
-              </Link>
+              <div>
+                <Link to="/products" className={s.shopNow}>
+                  <span>Shop Now</span>
+                  <SvgIcon name="arrowRightLong" />
+                </Link>
+              </div>
             </div>
           </SwiperSlide>
         );

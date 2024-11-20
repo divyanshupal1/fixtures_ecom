@@ -10,11 +10,12 @@
 
 .categoriesSlider {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto; /* Allow horizontal scrolling on smaller screens */
+  flex-wrap: nowrap; /* Ensure items don't wrap by default */
+  overflow-x: auto; /* Allow horizontal scrolling */
   scroll-behavior: smooth; /* Smooth scrolling for better UX */
   margin-bottom: 180px;
   position: relative;
+  gap: 20px; /* Add consistent spacing */
 
   /* Hide scrollbar across browsers */
   scrollbar-width: none; /* Firefox */
@@ -22,36 +23,32 @@
     display: none; /* WebKit browsers */
   }
 
-  /* Enable wrapping if necessary on small screens */
   @media (max-width: 470px) {
-    flex-wrap: wrap;
-    justify-content: center; /* Center align items when wrapping */
+    flex-wrap: nowrap; /* Ensure no wrapping on smaller screens */
   }
 }
 
 // Style for category cards
 .categoriesSlider > * {
-  flex: 0 0 auto;
-  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Default width for 6 items */
-  margin-right: 30px;
+  flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
+  width: calc(100% / 5); /* Default width for 5 visible items */
+  margin-right: 20px; /* Space between items */
 
   @media (max-width: 760px) {
-    width: calc(((100% / 2) - 20px) + (20px / 2)); /* Adjusted for 2 items */
-    margin-right: 20px;
+    width: calc(100% / 3); /* Adjust for 3 visible items on smaller screens */
+    margin-right: 15px;
   }
 
   @media (max-width: 470px) {
-    width: 100%; /* Full width for mobile */
-    margin-right: 0; /* No margin for wrapping layout */
-    margin-bottom: 20px; /* Add spacing for wrapped items */
+    width: calc(100% / 2); /* Adjust for 2 visible items on mobile */
+    margin-right: 10px;
   }
 }
 
 // Style for "More Categories" link
 .moreCategoriesLink {
   flex: 0 0 auto;
-  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Same width as category cards */
-  margin-right: 30px;
+  min-width: 150px; /* Set a consistent width */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,8 +68,8 @@
   }
 
   @media (max-width: 470px) {
-    width: 100%; /* Full width for mobile */
-    margin-right: 0;
-    margin-top: 10px;
+    width: calc(100% / 2); /* Same width as category cards */
+    margin-right: 10px;
   }
 }
+
