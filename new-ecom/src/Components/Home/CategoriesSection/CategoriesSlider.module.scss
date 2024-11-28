@@ -1,75 +1,94 @@
-@import "../../../Styles/mixins.scss";
-
 .categoriesSection {
-  margin-bottom: 60px;
-}
-
-.wrapper {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .categoriesSlider {
   display: flex;
-  flex-wrap: nowrap; /* Ensure items don't wrap by default */
-  overflow-x: auto; /* Allow horizontal scrolling */
-  scroll-behavior: smooth; /* Smooth scrolling for better UX */
-  margin-bottom: 180px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 30px;
   position: relative;
-  gap: 20px; /* Add consistent spacing */
+  gap: 20px;
 
-  /* Hide scrollbar across browsers */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* WebKit browsers */
-  }
-
-  @media (max-width: 470px) {
-    flex-wrap: nowrap; /* Ensure no wrapping on smaller screens */
+    display: none;
   }
 }
 
-// Style for category cards
 .categoriesSlider > * {
-  flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
-  width: calc(100% / 5); /* Default width for 5 visible items */
-  margin-right: 20px; /* Space between items */
+  flex: 0 0 auto;
+  width: calc(100% / 5);
+  margin-right: 20px;
 
   @media (max-width: 760px) {
-    width: calc(100% / 3); /* Adjust for 3 visible items on smaller screens */
+    width: calc(100% / 3);
     margin-right: 15px;
   }
 
   @media (max-width: 470px) {
-    width: calc(100% / 2); /* Adjust for 2 visible items on mobile */
+    width: calc(100% / 2);
     margin-right: 10px;
   }
 }
 
-// Style for "More Categories" link
 .moreCategoriesLink {
-  flex: 0 0 auto;
-  min-width: 150px; /* Set a consistent width */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  justify-content: flex-end;
+  margin-top: 20px;
+  
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #E8E8E8;
+    border-radius: 100px;
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
 
-  &:hover {
-    background-color: var(--button-bg-hover);
-    color: var(--button-text-hover);
+    &:after {
+      content: '→';
+      font-size: 20px;
+      line-height: 1;
+      color: #000000;
+    }
   }
 
-  @media (max-width: 470px) {
-    width: calc(100% / 2); /* Same width as category cards */
-    margin-right: 10px;
+  &:hover a {
+    background-color: #DCDCDC;
   }
 }
 
+.moreCategoriesLinkk {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    border-radius: 100px;
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:after {
+      font-size: 20px;
+      line-height: 1;
+      color: #000000;
+    }
+  }
+
+  &:hover a {
+    background-color: #DCDCDC;
+  }
+}

@@ -36,21 +36,20 @@ const IntroductionSlides = () => {
 
         return (
           <SwiperSlide className={s.slide} key={id}>
-            <img src={carouselImg} alt="product preview" />
-            <div className={s.content}>
-              <div className={s.nameProduct}>
-                <img src={logoImg} alt="market logo" />
-                <strong>{carouselName}</strong>
-              </div>
+            <Link to="/products" className={s.shopNow}>
+              <img src={carouselImg} alt="product preview" />
+              <div className={s.content}>
+                <div className={s.nameProduct}>
+                  <img src={logoImg} alt="market logo" />
+                  <strong>{carouselName}</strong>
+                </div>
 
-              <h2 className={s.discount}>{discountText}</h2>
-
-              <div>
-                <Link to="/products" className={s.shopNow}>
-                  <span>Shop Now</span>
-                  <SvgIcon name="arrowRightLong" />
-                </Link>
+                <h2 className={s.discount}>{discountText}</h2>
               </div>
+            </Link>
+            <div>
+              <span>Shop Now</span>
+              <SvgIcon name="arrowRightLong" />
             </div>
           </SwiperSlide>
         );
