@@ -1,88 +1,94 @@
-@import "../../../Styles/mixins";
+.categoriesSection {
+  margin-bottom: 20px;
+  position: relative;
+}
 
 .categoriesSlider {
   display: flex;
-  overflow: hidden; /* Hide overflow to prevent scrollbars */
-  margin-bottom: 180px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  margin-bottom: 30px;
   position: relative;
+  gap: 20px;
 
-  // Scrollbar styles
-  scrollbar-width: none; /* Hide scrollbar in Firefox */
-  
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in WebKit browsers */
+    display: none;
   }
 }
 
-@include small {
-  .categoriesSlider {
-    margin-bottom: 100px;
-  }
-}
-
-// Style for category cards
 .categoriesSlider > * {
   flex: 0 0 auto;
-  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Default width for 6 items */
-  margin-right: 30px;
-}
+  width: calc(100% / 5);
+  margin-right: 20px;
 
-// Adjust card width for different screen sizes
-@media (max-width: 1500px) {
-  .categoriesSlider > * {
-    width: calc(((100% / 5) - 30px) + (30px / 5)); /* Adjusted for 5 items */
+  @media (max-width: 760px) {
+    width: calc(100% / 3);
+    margin-right: 15px;
+  }
+
+  @media (max-width: 470px) {
+    width: calc(100% / 2);
+    margin-right: 10px;
   }
 }
 
-@include large {
-  .categoriesSlider > * {
-    width: calc(((100% / 4) - 30px) + (30px / 4)); /* Adjusted for 4 items */
-  }
-}
-
-@include medium {
-  .categoriesSlider > * {
-    width: calc(((100% / 3) - 30px) + (30px / 3)); /* Adjusted for 3 items */
-  }
-}
-
-@media (max-width: 760px) {
-  .categoriesSlider > * {
-    width: calc(((100% / 2) - 30px) + (30px / 2)); /* Adjusted for 2 items */
-  }
-}
-
-@media (max-width: 470px) {
-  .categoriesSlider > * {
-    width: 100%; /* Full width for mobile */
-  }
-}
-
-// Remove margin for the last item
-.categoriesSlider > *:last-child {
-  margin-right: 0;
-}
-
-// Style for "More Categories" link
 .moreCategoriesLink {
-  flex: 0 0 auto;
-  width: calc(((100% / 6) - 30px) + (30px / 6)); /* Same width as category cards */
-  margin-right: 30px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  justify-content: flex-end;
+  margin-top: 20px;
+  
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #E8E8E8;
+    border-radius: 100px;
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
 
-  &:hover {
-    background-color: var(--button-bg-hover);
-    color: var(--button-text-hover);
+    &:after {
+      content: '→';
+      font-size: 20px;
+      line-height: 1;
+      color: #000000;
+    }
+  }
+
+  &:hover a {
+    background-color: #DCDCDC;
+  }
+}
+
+.moreCategoriesLinkk {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #ffffff;
+    border-radius: 100px;
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:after {
+      font-size: 20px;
+      line-height: 1;
+      color: #000000;
+    }
+  }
+
+  &:hover a {
+    background-color: #DCDCDC;
   }
 }

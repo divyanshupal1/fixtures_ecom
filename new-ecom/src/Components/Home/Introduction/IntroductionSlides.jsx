@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"; // Import Swiper container
-import { useCarouselStore } from "../../../store/useCarouselStore"; 
+import { useCarouselStore } from "../../../store/useCarouselStore";
 import SvgIcon from "../../Shared/MiniComponents/SvgIcon";
 import s from "./IntroductionSlides.module.scss";
 
@@ -10,7 +10,7 @@ const IntroductionSlides = () => {
     carousels: state.carousels,
     fetchCarousels: state.fetchCarousels,
   }));
-  
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,19 +36,20 @@ const IntroductionSlides = () => {
 
         return (
           <SwiperSlide className={s.slide} key={id}>
-            <img src={carouselImg} alt="product preview" />
-            <div className={s.content}>
-              <div className={s.nameProduct}>
-                <img src={logoImg} alt="market logo" />
-                <strong>{carouselName}</strong>
+            <Link to="/products" className={s.shopNow}>
+              <img src={carouselImg} alt="product preview" />
+              <div className={s.content}>
+                <div className={s.nameProduct}>
+                  <img src={logoImg} alt="market logo" />
+                  <strong>{carouselName}</strong>
+                </div>
+
+                <h2 className={s.discount}>{discountText}</h2>
               </div>
-
-              <h2 className={s.discount}>{discountText}</h2>
-
-              <Link to="/products" className={s.shopNow}>
-                <span>Shop Now</span>
-                <SvgIcon name="arrowRightLong" />
-              </Link>
+            </Link>
+            <div>
+              <span>Shop Now</span>
+              <SvgIcon name="arrowRightLong" />
             </div>
           </SwiperSlide>
         );

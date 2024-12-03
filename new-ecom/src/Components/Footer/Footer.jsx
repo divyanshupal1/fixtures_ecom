@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { appStore, googlePlay, qrCode } from "../../Assets/Images/Images";
 import SvgIcon from "../Shared/MiniComponents/SvgIcon";
 import ToolTip from "../Shared/MiniComponents/ToolTip";
 import s from "./Footer.module.scss";
-import RepoStarsForks from "./RepoStarsForks";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+
   function sendEmail(e) {
     e.preventDefault();
     setEmail("");
@@ -41,9 +40,8 @@ const Footer = () => {
 
           <section className={s.section2}>
             <b>Support</b>
-
             <ul>
-              <li>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</li>
+              <li>111 Bijoy Sarani, Dhaka, DH 1515, Bangladesh.</li>
               <li>
                 <a href="mailto:exclusive@gmail.com">exclusive@gmail.com</a>
               </li>
@@ -55,7 +53,6 @@ const Footer = () => {
 
           <section className={s.section3}>
             <b>Account</b>
-
             <ul>
               <li>
                 <Link to="/profile">My Account</Link>
@@ -77,7 +74,6 @@ const Footer = () => {
 
           <section className={s.section4}>
             <b>Quick Link</b>
-
             <ul>
               <li>
                 <Link to="/privacy">Privacy Policy</Link>
@@ -93,74 +89,14 @@ const Footer = () => {
               </li>
             </ul>
           </section>
-
-          <section className={s.section5}>
-            <b>Download App</b>
-            <p>Save $3 with App New User Only</p>
-
-            <div className={s.appInfo}>
-              <div className={s.qrCode}>
-                <img src={qrCode} alt="QR Code" />
-              </div>
-
-              <div className={s.downloadButtons}>
-                <button type="button">
-                  <img src={googlePlay} alt="Download app at Google play" />
-                </button>
-
-                <button type="button">
-                  <img src={appStore} alt="Download app at App store" />
-                </button>
-              </div>
-            </div>
-
-            <div className={s.socialMedia}>
-              <a
-                href="https://www.facebook.com/MoamalAlaa109"
-                target="_blank"
-                title="facebook"
-              >
-                <SvgIcon name="facebook" />
-                <ToolTip left="50%" top="40px" content="facebook" />
-              </a>
-
-              <a
-                href="https://twitter.com/MoamalAlaa7"
-                target="_blank"
-                title="twitter"
-              >
-                <SvgIcon name="twitter" />
-                <ToolTip left="50%" top="40px" content="twitter" />
-              </a>
-
-              <a
-                href="https://www.instagram.com/kubislav23/"
-                target="_blank"
-                title="instagram"
-              >
-                <SvgIcon name="instagram" />
-                <ToolTip left="50%" top="40px" content="instagram" />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/moamal-alaa-a4bb15237/"
-                target="_blank"
-                title="linkedin"
-              >
-                <SvgIcon name="linkedin" />
-                <ToolTip left="50%" top="40px" content="linkedin" />
-              </a>
-            </div>
-          </section>
         </section>
 
         <p className={s.copyRights}>
           <span>Copyright © Acquaso </span>
         </p>
       </div>
-
-      {/* <RepoStarsForks /> */}
     </footer>
   );
 };
+
 export default Footer;
