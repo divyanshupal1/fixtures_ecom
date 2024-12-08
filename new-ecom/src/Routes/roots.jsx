@@ -15,12 +15,18 @@ import SignUp from "../Components/SignUp/SignUp";
 import MoreCategories from "../Components/MoreCategories/MoreCategories";
 import WishList from "../Components/WishList/WishList";
 import PrivacyPolicyPage from "../Components/Privacy/PrivacyPage"
+import TermsAndConditionsPage from "../Components/TermsandConditions/TermsAndConditionsPage";
+import CancellationAndReturnPage from "../Components/Cancelliation/CancellationAndReturnPage";
+import ShippingAndDeliveryPage from "../Components/Shipping/ShippingAndDeliveryPage";
 
 export const ROUTES_CONFIG = [
   { path: "/", element: <Home /> },
   { path: "/contact", element: <Contact /> },
   { path: "/about", element: <About /> },
   { path: "/privacy", element: <PrivacyPolicyPage /> },
+  { path: "/termsandconditions", element: <TermsAndConditionsPage /> },
+  { path: "/cancellation", element: <CancellationAndReturnPage /> },
+  { path: "/shippinganddelivery", element: <ShippingAndDeliveryPage /> },
   { path: "/details", element: <ProductDetailsPage /> },
   { path: "/category", element: <ProductsCategoryPage /> },
   { path: "/products", element: <ProductsPage /> },

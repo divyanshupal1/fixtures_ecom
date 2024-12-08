@@ -20,7 +20,7 @@ const Header = () => {
     <header className={s.header}>
       <div className={s.container}>
         <h1>
-          <Link to="/">Fixtures</Link>
+          <Link to="/">Acquaso</Link>
         </h1>
 
         <div className={s.headerContent}>
