@@ -53,17 +53,10 @@ const CategoriesSlider = () => {
           <CategoryCard categoryData={categories[id]} key={id} />
         ))}
       </div>
-      {/* Conditionally render the "More Categories" link */}
-      {!showMore && (
-        <div className={s.moreCategoriesLinkk}>
-          <Link>឵឵឵឵឵឵ ឵ ឵ ឵឵</Link>
-        </div>
-      )}
-      {showMore && (
-        <span className={s.moreCategoriesLink}>
-          <Link to="/more-categories">Explore more</Link>
-        </span>
-      )}
+
+      <span className={s.moreCategoriesLink}>
+        <Link to="/more-categories">Explore more</Link>
+      </span>
     </div>
   );
 };
