@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { stereo } from "../../../Assets/Images/Images";
+import { posterImage } from "../../../Assets/Images/Images";
 import PostCounter from "./PostCounter";
 import s from "./ProductPoster.module.scss";
 
@@ -8,13 +8,13 @@ const ProductPoster = () => {
     <section className={s.productPoster}>
       <div className={s.content}>
         <span>Categories</span>
-        <p>Enhance Your Music Experience</p>
+        <p>Best in Class Bathroom Fittings‎ ‎ </p>
         <PostCounter />
         <Link to="/products">Buy Now!</Link>
       </div>
 
       <div className={s.productHolder}>
-        <img src={stereo} alt="Stereo" />
+        <img src={posterImage} className="w-full" alt="poster-image" />
       </div>
     </section>
   );

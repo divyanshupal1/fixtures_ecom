@@ -30,6 +30,7 @@ import womenShopping from "./women-shopping.webp";
 import usaFlag from "./usa-flag.png"
 import russiaFlag from "./russia-flag.png"
 import saudiFlag from "./saudi-flag.png"
+import posterImage from "./best-in-class.jpg"
 // import  from "."
 
 export {
@@ -52,6 +53,7 @@ export {
   member3Img,
   nagadCard,
   perfumeGucci,
+  posterImage,
   productImg1,
   productImg2,
   productImg3,

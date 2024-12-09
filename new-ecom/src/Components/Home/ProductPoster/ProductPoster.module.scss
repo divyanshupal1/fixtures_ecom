@@ -92,6 +92,13 @@
   min-width: 450px;
   max-width: 500px;
   object-fit: contain;
+  margin-top: 40px;
+  padding-bottom: 80px;
+
+  @include small {
+    padding-bottom: 0px;
+    margin-top: 50px;
+  }
 }
 
 @include large {
