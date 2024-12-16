@@ -1,26 +1,42 @@
+// Component
 import RateStars from "../../Shared/MidComponents/RateStars";
-import s from "./ProductFirstInfos.module.scss";
+import styles from "./ProductDetails.module.scss";
 
-const ProductFirstInfos = ({ data }) => {
-  const { name, price, description } = data;
+const ProductDetails = ({ data }) => {
+  const { name, price, description, rate, votes, inStock } = data;
 
   return (
-    <section className={s.firstInfos}>
-      <b className={s.productName}>{name?.toUpperCase()}</b>
+    <section className={styles.productDetails}>
+      <h1 className={styles.productName} aria-label={`Product name: ${name}`}>
+        {name?.toUpperCase()}
+      </h1>
 
-      <section className={s.rateAndReviews}>
-        {/* Uncomment the RateStars component and reviews span when data is available */}
-        {/* <RateStars rate={data.rate} /> */}
-        {/* <span className={s.reviews}>({data.votes} Reviews)</span> */}
-        <div className={s.verticalLine} />
-        {/* <span className={s.greenText}>In Stock</span> */}
-      </section>
+      <div className={styles.productMeta}>
+        {rate !== undefined && votes !== undefined && (
+          <div className={styles.rating}>
+            <RateStars rate={rate} />
+            <span className={styles.reviewCount} aria-label={`${votes} reviews`}>
+              ({votes} Reviews)
+            </span>
+          </div>
+        )}
+        <div className={styles.verticalDivider} aria-hidden="true" />
+        {inStock && <span className={styles.inStock}>In Stock</span>}
+      </div>
 
-      <span className={s.price}>₹{price}</span>
+      <p className={styles.price} aria-label={`Price: ₹${price}`}>
+        ₹{price}
+      </p>
 
-      <p className={s.description} dangerouslySetInnerHTML={{ __html: description }}></p>
+      <div
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: description }}
+        aria-label="Product description"
+      />
     </section>
   );
 };
 
-export default ProductFirstInfos;
+export default ProductDetails;
+
+

@@ -1,11 +1,14 @@
+// SCSS
 @import "../../../Styles/mixins.scss";
 
-.firstInfos {
+.productDetails {
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #eaeaea;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin: auto;
 }
 
 .productName {
@@ -14,7 +17,7 @@
   margin-bottom: 12px;
 }
 
-.rateAndReviews {
+.productMeta {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -25,33 +28,38 @@
     align-items: flex-start;
     gap: 10px;
   }
+}
 
-  .reviews {
-    font-size: 0.875rem;
-    color: #666;
-    font-weight: 500;
-  }
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  .verticalLine {
-    height: 20px;
-    border-right: solid 2px #e0e0e0;
+.reviewCount {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 500;
+}
 
-    @include very-small {
-      display: none;
-    }
-  }
+.verticalDivider {
+  height: 20px;
+  border-right: 2px solid #e0e0e0;
 
-  .greenText {
-    font-size: 0.875rem;
-    color: #00a859;
-    font-weight: 600;
+  @include very-small {
+    display: none;
   }
 }
 
+.inStock {
+  font-size: 0.875rem;
+  color: #00a859;
+  font-weight: 600;
+}
+
 .price {
-  display: block;
   font: 700 2rem "Inter", sans-serif;
-  color: #000000;
+  color: #000;
   margin-bottom: 16px;
 }
 
@@ -59,8 +67,8 @@
   font-size: 1rem;
   color: #4a4a4a;
   line-height: 1.6;
-  max-width: 600px;
-  margin-bottom: 20px;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 @include medium {
