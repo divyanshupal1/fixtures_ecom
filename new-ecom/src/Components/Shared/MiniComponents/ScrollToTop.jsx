@@ -8,6 +8,7 @@ import ToolTip from "./ToolTip";
 const ScrollToTop = () => {
   const scrollTopButtonRef = useRef();
   const SCROLL_REQUIRED = 1000;
+  const whatsappNumber = "7761893123"; // Replace with the actual WhatsApp number
 
   function handleScrollTopVisibility() {
     const classListMethod = window.scrollY < SCROLL_REQUIRED ? "add" : "remove";
@@ -16,17 +17,39 @@ const ScrollToTop = () => {
 
   useEventListener(window, "scroll", handleScrollTopVisibility, []);
 
+  const handleWhatsAppClick = () => {
+    const whatsappURL = `https://wa.me/${whatsappNumber}`;
+    window.open(whatsappURL, "_blank");
+  };
+
   return (
-    <button
-      ref={scrollTopButtonRef}
-      type="button"
-      className={`${`${s.scrollTopButton} ${s.hide}`}`}
-      onClick={scrollToTop}
-      aria-label="Scroll to top"
-    >
-      <SvgIcon name="arrowUp2" />
-      <ToolTip top="50%" left="-60px" content="Scroll to top" />
-    </button>
+    <div className={s.buttonContainer}>
+      <button
+        type="button"
+        className={`${s.whatsappButton} ${s.alwaysVisible}`}
+        onClick={handleWhatsAppClick}
+        aria-label="Contact via WhatsApp"
+      >
+        <img
+          src="../../../Assets/Images/whatsapp.png" // Replace with actual path to WhatsApp icon image
+          alt="WhatsApp"
+          className={s.whatsappIcon}
+        />
+        <ToolTip top="50%" left="-60px" content="Contact via WhatsApp" />
+      </button>
+
+      <button
+        ref={scrollTopButtonRef}
+        type="button"
+        className={`${s.scrollTopButton} ${s.hide}`}
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+      >
+        <SvgIcon name="arrowUp2" />
+        <ToolTip top="50%" left="-60px" content="Scroll to top" />
+      </button>
+    </div>
   );
 };
+
 export default ScrollToTop;

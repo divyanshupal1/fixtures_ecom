@@ -25,6 +25,34 @@
   }
 }
 
+.whatsappButton {
+  position: fixed;
+  bottom: 30px;
+  right: 100px; /* Place it to the left of the Scroll to Top button */
+  background: #25d366;
+  padding: 15px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  z-index: 30;
+  border-width: 6px;
+  pointer-events: all;
+  transition: opacity 0.25s ease, background-color 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.whatsappButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.whatsappButton:hover {
+  background-color: #1ebe5d;
+}
+
+
 .scrollTopButton>svg {
   width: 20px;
   height: 20px;
