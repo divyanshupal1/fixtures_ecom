@@ -1,52 +1,48 @@
-// Component
-import RateStars from "../../Shared/MidComponents/RateStars";
-import styles from "./ProductDetails.module.scss";
+import React from 'react';
+import { Star, CheckCircle } from 'lucide-react';
 
-const ProductDetails = ({ data }) => {
-  const { name, price, description, rate, votes, inStock } = data;
+const ProductFirstInfos = ({ data }) => {
+  const { name, price, description, rate = 4, votes = 120 } = data;
+
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, index) => (
+      <Star 
+        key={index} 
+        className={`h-5 w-5 ${index < rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`} 
+      />
+    ));
+  };
 
   return (
-    <section className={styles.productDetails}>
-      <div className={styles.productHeader}>
-        <h1 className={styles.productName} aria-label={`Product name: ${name}`}>
-          {name?.toUpperCase()}
-        </h1>
-        <span className={styles.price} aria-label={`Price: ₹${price}`}>
-          ₹{price}
-        </span>
-      </div>
+    <div className="bg-white border border-gray-100 rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+      <h1 className="text-3xl font-bold text-gray-900 mb-4 uppercase">
+        {name}
+      </h1>
 
-      <div className={styles.productMeta}>
-        {rate !== undefined && votes !== undefined && (
-          <div className={styles.rating}>
-            <RateStars rate={rate} />
-            <span className={styles.reviewCount} aria-label={`${votes} reviews`}>
-              ({votes} Reviews)
-            </span>
-          </div>
-        )}
-        {inStock && <span className={styles.inStock}>In Stock</span>}
-      </div>
-
-      <div
-        className={styles.description}
-        dangerouslySetInnerHTML={{ __html: description }}
-        aria-label="Product description"
-      />
-
-      <div className={styles.ctaContainer}>
-        <div className={styles.quantitySelector}>
-          <button className={styles.quantityBtn} aria-label="Decrease quantity">-</button>
-          <span className={styles.quantityDisplay}>1</span>
-          <button className={styles.quantityBtn} aria-label="Increase quantity">+</button>
+      <div className="flex items-center space-x-4 mb-4 max-sm:flex-col max-sm:items-start max-sm:space-x-0 max-sm:space-y-2">
+        <div className="flex items-center">
+          {renderStars(rate)}
+          <span className="text-gray-600 ml-2 text-sm">({votes} Reviews)</span>
         </div>
-        <button className={styles.buyNowBtn} aria-label="Buy Now">Buy Now</button>
-        <button className={styles.wishlistBtn} aria-label="Add to Wishlist">❤</button>
+        
+        <div className="h-5 border-r border-gray-300 mx-4 max-sm:hidden"></div>
+        
+        <div className="flex items-center text-green-600 font-semibold">
+          <CheckCircle className="h-5 w-5 mr-1" />
+          <span className="text-sm">In Stock</span>
+        </div>
       </div>
-    </section>
+
+      <div className="text-4xl font-bold text-black mb-4">
+        ₹{price.toLocaleString()}
+      </div>
+
+      <p 
+        className="text-gray-700 text-base leading-relaxed" 
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+    </div>
   );
 };
 
-export default ProductDetails;
-
-
+export default ProductFirstInfos;
