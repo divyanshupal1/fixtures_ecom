@@ -31,7 +31,7 @@ const ScrollToTop = () => {
         aria-label="Contact via WhatsApp"
       >
         <img
-          src="../../../Assets/Images/whatsapp.png" // Replace with actual path to WhatsApp icon image
+          src="https://res.cloudinary.com/dmzp6notl/image/upload/v1734315281/social_nezjkb.png" // Updated to use external WhatsApp icon link
           alt="WhatsApp"
           className={s.whatsappIcon}
         />
