@@ -7,9 +7,14 @@ const ProductDetails = ({ data }) => {
 
   return (
     <section className={styles.productDetails}>
-      <h1 className={styles.productName} aria-label={`Product name: ${name}`}>
-        {name?.toUpperCase()}
-      </h1>
+      <div className={styles.productHeader}>
+        <h1 className={styles.productName} aria-label={`Product name: ${name}`}>
+          {name?.toUpperCase()}
+        </h1>
+        <span className={styles.price} aria-label={`Price: ₹${price}`}>
+          ₹{price}
+        </span>
+      </div>
 
       <div className={styles.productMeta}>
         {rate !== undefined && votes !== undefined && (
@@ -20,19 +25,24 @@ const ProductDetails = ({ data }) => {
             </span>
           </div>
         )}
-        <div className={styles.verticalDivider} aria-hidden="true" />
         {inStock && <span className={styles.inStock}>In Stock</span>}
       </div>
-
-      <p className={styles.price} aria-label={`Price: ₹${price}`}>
-        ₹{price}
-      </p>
 
       <div
         className={styles.description}
         dangerouslySetInnerHTML={{ __html: description }}
         aria-label="Product description"
       />
+
+      <div className={styles.ctaContainer}>
+        <div className={styles.quantitySelector}>
+          <button className={styles.quantityBtn} aria-label="Decrease quantity">-</button>
+          <span className={styles.quantityDisplay}>1</span>
+          <button className={styles.quantityBtn} aria-label="Increase quantity">+</button>
+        </div>
+        <button className={styles.buyNowBtn} aria-label="Buy Now">Buy Now</button>
+        <button className={styles.wishlistBtn} aria-label="Add to Wishlist">❤</button>
+      </div>
     </section>
   );
 };
