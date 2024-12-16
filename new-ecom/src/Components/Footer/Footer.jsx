@@ -18,35 +18,19 @@ const Footer = () => {
         <section className={s.sections}>
           <section className={s.section1}>
             <b>
-              <Link to="/">Exclusive</Link>
+              <h2 to="/">Acquaso</h2>
             </b>
-            <span>Subscribe</span>
-            <p>Get 10% off your first order</p>
-
-            <form className={s.input} onSubmit={(e) => sendEmail(e)}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label htmlFor="email" aria-label="Send mail">
-                <SvgIcon name="vector" />
-                <ToolTip left="70px" top="50%" content="Send" />
-              </label>
-            </form>
           </section>
 
           <section className={s.section2}>
             <b>Support</b>
             <ul>
-              <li>111 Bijoy Sarani, Dhaka, DH 1515, Bangladesh.</li>
+              <li>Acquaso Solutions LLP, Bhupatipur, Patna, Bihar India</li>
               <li>
-                <a href="mailto:exclusive@gmail.com">exclusive@gmail.com</a>
+                <a href="mailto:support@acquaso.com">support@acquaso.com</a>
               </li>
               <li>
-                <a href="tel:+88015-88888-9999">+88015-88888-9999</a>
+                <a href="tel:+88015-88888-9999">+91-7761893123</a>
               </li>
             </ul>
           </section>
@@ -62,9 +46,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/cart">Cart</Link>
-              </li>
-              <li>
-                <Link to="/wishlist">Wishlist</Link>
               </li>
               <li>
                 <Link to="/products">Shop</Link>
@@ -92,7 +73,7 @@ const Footer = () => {
         </section>
 
         <p className={s.copyRights}>
-          <span>Copyright © Acquaso </span>
+          <span>Copyright © Acquaso Solutions LLP.</span>
         </p>
       </div>
     </footer>

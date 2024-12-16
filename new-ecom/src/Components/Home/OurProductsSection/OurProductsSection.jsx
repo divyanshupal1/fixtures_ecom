@@ -20,7 +20,7 @@ const OurProductsSection = () => {
       />
 
       <Link to="/products" className={s.viewProductsBtn}>
-        View All Products
+        Explore More
       </Link>
     </section>
   );

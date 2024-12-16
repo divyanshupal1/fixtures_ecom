@@ -6,6 +6,13 @@
   border-bottom: 1px var(--medium-light-gray) transparent;
 }
 
+.logo {
+  max-width: 150px;
+  height: auto;
+  display: block;
+}
+
+
 @include medium {
   .header {
     padding: 10px 0 14px 10px;

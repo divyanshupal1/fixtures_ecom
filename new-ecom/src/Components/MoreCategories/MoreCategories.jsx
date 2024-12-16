@@ -15,7 +15,7 @@ const MoreCategories = () => {
 
   return (
     <div className={s.moreCategories}>
-      <h1 className={s.title}>All Categories</h1>
+      <h1 className={s.title}>Explore Categories</h1>
       <div className={s.categoriesContainer}>
         {Object.keys(categories || {}).map((id) => (
           <CategoryCard categoryData={categories[id]} key={id} />

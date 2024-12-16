@@ -7,7 +7,7 @@
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Increased font size for better visibility */
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
@@ -19,33 +19,34 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    /* Center the items */
 }
 
-// Style for each category card
-.categoriesContainer>* {
-    flex: 0 0 calc(25% - 20px);
-    /* Adjust width for a 4-column layout with gaps */
+/* Style for each category card */
+.categoriesContainer > * {
+    flex: 0 0 calc(20% - 20px); /* Adjusted for a 5-column layout with gaps */
     margin-bottom: 20px;
 }
 
-@media (max-width: 1200px) {
-    .categoriesContainer>* {
-        flex: 0 0 calc(33.33% - 20px);
-        /* 3-column layout */
+@media (max-width: 1400px) {
+    .categoriesContainer > * {
+        flex: 0 0 calc(15% - 20px); /* 4-column layout */
     }
 }
 
-@media (max-width: 900px) {
-    .categoriesContainer>* {
-        flex: 0 0 calc(50% - 20px);
-        /* 2-column layout */
+@media (max-width: 1000px) {
+    .categoriesContainer > * {
+        flex: 0 0 calc(33.33% - 20px); /* 3-column layout */
     }
 }
 
-@media (max-width: 600px) {
-    .categoriesContainer>* {
-        flex: 0 0 100%;
-        /* Single column layout */
+@media (max-width: 750px) {
+    .categoriesContainer > * {
+        flex: 0 0 calc(50% - 20px); /* 2-column layout */
+    }
+}
+
+@media (max-width: 500px) {
+    .categoriesContainer > * {
+        flex: 0 0 100%; /* Single column layout */
     }
 }
