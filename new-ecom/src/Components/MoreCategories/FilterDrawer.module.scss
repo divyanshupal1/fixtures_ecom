@@ -1,0 +1,108 @@
+.filterDrawer {
+    background: var(--secondary-background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .filterTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--primary-text-color);
+  }
+  
+  .priceRange {
+    margin-bottom: 20px;
+  }
+  
+  .priceRangeTitle {
+    margin-bottom: 10px;
+  }
+  
+  .rangeInput {
+    width: 100%;
+    -webkit-appearance: none;
+    background: var(--primary-color-light);
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .priceRangeValue {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: var(--primary-text-color);
+  }
+  
+  .filterGroup {
+    margin-bottom: 20px;
+  }
+  
+  .filterGroupTitle {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .filterList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .filterItem {
+    margin-bottom: 10px;
+  }
+  
+  .filterLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filterCheckbox {
+    accent-color: var(--primary-color);
+  }
+  
+  .filterLabelText {
+    color: var(--primary-text-color);
+  }
+  
+  .divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 20px 0;
+  }
+  
+  .filterActions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .applyButton,
+  .resetButton {
+    background: var(--primary-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .applyButton:hover {
+    background: var(--primary-color-dark);
+  }
+  
+  .resetButton {
+    background: var(--secondary-color);
+  }
+  
+  .resetButton:hover {
+    background: var(--secondary-color-dark);
+  }
+  
