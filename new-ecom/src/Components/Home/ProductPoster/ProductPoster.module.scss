@@ -34,7 +34,7 @@
     }
 
     > p {
-      font: 600 3rem/60px "Inter", sans-serif;
+      font: 600 2rem/45px "Inter", sans-serif;
       color: var(--secondary-white);
       margin: 10px 0 10px;
 
@@ -55,7 +55,7 @@
   display: inline-block;
   padding: 14px 36px;
   border-radius: 4px;
-  background-color: var(--blue);
+  background-color: var(--black);
   color: var(--white);
   font-weight: 600;
   text-transform: uppercase;
@@ -64,6 +64,7 @@
 
   &:hover {
     background-color: #ffffff;
+    color: var(--black);
   }
 }
 

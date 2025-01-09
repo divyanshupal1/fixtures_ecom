@@ -7,7 +7,7 @@ const ProductPoster = () => {
     <section className={s.productPoster}>
       <div className={s.overlayContent}>
         <span>Categories</span>
-        <p>Best in Class Bathroom Fittings</p>
+        <p>Best in class bathroom fittings</p>
         <PostCounter />
         <Link to="/products" className={s.buyNowButton}>
           Buy Now!

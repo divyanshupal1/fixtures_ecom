@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import { ourProductsCustomizations } from "../../../Data/staticData";
 import SectionTitle from "../../Shared/MiniComponents/SectionTitle";
 import ExploreProducts from "../ProductPoster/ExploreProducts";
-import s from "./OurProductsSection.module.scss";
+import s from "./FeaturedProductsSection.module.scss";
 
-const OurProductsSection = () => {
-  const [productLimit, setProductLimit] = useState(8);
+const FeaturedProductsSection = () => {
+  const [productLimit, setProductLimit] = useState(8); // Default limit to 4 products
 
   const handleLoadMore = () => {
-    setProductLimit((prevLimit) => prevLimit + 4); // Dynamically load 4 more products
+    setProductLimit((prevLimit) => prevLimit + 8); // Dynamically load 4 more products
   };
 
   return (
     <section className={s.ourProductsSection}>
       <div className={s.wrapper}>
         <SectionTitle
-          eventName="Our Products"
-          sectionName="Explore Our Products"
+          eventName="Featured Products"
+          sectionName="Explore the best sellers"
         />
       </div>
 
@@ -49,4 +49,4 @@ const OurProductsSection = () => {
   );
 };
 
-export default OurProductsSection;
+export default FeaturedProductsSection;

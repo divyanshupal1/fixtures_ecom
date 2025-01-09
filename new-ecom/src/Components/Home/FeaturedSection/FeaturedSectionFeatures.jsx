@@ -9,21 +9,21 @@ const FeaturedSectionFeatures = () => {
         iconImg={car}
         iconAlt="Car"
         title="FREE AND FAST DELIVERY"
-        description="Free delivery for all orders over $140"
+        description="*Free delivery for all orders over ₹999"
       />
 
       <Feature
         iconImg={headphone}
         iconAlt="Headphone"
-        title="24/7 CUSTOMER SERVICE"
-        description="Friendly 24/7 customer support"
+        title="QUICK CUSTOMER SERVICE"
+        description="Friendly chat & email customer support"
       />
 
       <Feature
         iconImg={correctSign}
         iconAlt="Correct sign"
-        title="MONEY BACK GUARANTEE"
-        description="We reurn money within 30 days"
+        title="EASY RETURNS"
+        description="Quick refunds & replacements"
       />
     </div>
   );

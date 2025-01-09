@@ -9,6 +9,7 @@ import ProductPoster from "./ProductPoster/ProductPoster";
 import ThisMonthSection from "./ThisMonthSection/ThisMonthSection";
 import TodaySection from "./TodaySection/TodaySection";
 import useScrollOnMount from "../../Hooks/App/useScrollOnMount";
+import FeaturedProductsSection from "./FeaturedProductSection/FeaturedProductSectoion";
 
 const Home = () => {
   useScrollOnMount(0)
@@ -16,7 +17,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>E-Commercew</title>
+        <title>Acquaso</title>
       </Helmet>
 
       <div className={s.home}>
@@ -34,6 +35,7 @@ const Home = () => {
           {/* <ThisMonthSection /> */}
           <ProductPoster />
           <OurProductsSection />
+          <FeaturedProductsSection />
           <FeaturedSection />
         </div>
       </div>

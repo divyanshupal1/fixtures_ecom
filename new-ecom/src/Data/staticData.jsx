@@ -130,8 +130,8 @@ export const aboutCardsInfo = [
 
 export const ourMembersData = [
   {
-    name: "Tom Cruise",
-    jobTitle: "Founder & Chairman",
+    name: "Aakash Gupta",
+    jobTitle: "Founder",
     img: member1Img,
     socialMedia: {
       twitter: "https://twitter.com/",
@@ -145,18 +145,6 @@ export const ourMembersData = [
     name: "Emma Watson",
     jobTitle: "Managing Director",
     img: member2Img,
-    socialMedia: {
-      twitter: "https://twitter.com/",
-      instagram: "https://www.instagram.com/",
-      linkedin: "https://www.linkedin.com/",
-    },
-    id: uuid(),
-  },
-
-  {
-    name: "Will Smith",
-    jobTitle: "Product Designer",
-    img: member3Img,
     socialMedia: {
       twitter: "https://twitter.com/",
       instagram: "https://www.instagram.com/",

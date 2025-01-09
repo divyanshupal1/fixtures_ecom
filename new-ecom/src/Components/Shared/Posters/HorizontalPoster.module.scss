@@ -3,61 +3,90 @@
 .HorPoster {
   width: 100%;
   height: 284px;
-  border-radius: 4px;
+  border-radius: 8px; // Rounded corners
   position: relative;
   z-index: 1;
-  padding: 30px 20px;
+  padding: 40px 30px;
   display: flex;
   align-items: flex-end;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: #0D0D0D;
+  background-color: #0d0d0d;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  // Gradient overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, black 0%, transparent 50%, black 100%);
+    z-index: 2; // Place above the background image
+    border-radius: 8px;
+    pointer-events: none; // Ensure the gradient does not block interactions
+  }
 }
 
 @include small {
   .HorPoster {
-    padding-top: 30px;
+    padding: 30px;
   }
 }
 
 .content {
-  width: 255px;
+  position: relative; // Ensure content appears above the gradient overlay
+  z-index: 3;
+  width: 100%;
+  max-width: 300px;
 }
 
-.content>b {
+.content > b {
   color: var(--white);
-  letter-spacing: .03rem;
-  font: 600 1.5rem/24px "Inter", sans-serif;
+  letter-spacing: 0.03rem;
+  font: 600 1.4rem/20px "Inter", sans-serif;
 }
 
-.content>p {
-  margin: 14px 0 16px;
+.content > p {
+  margin: 16px 0 20px;
   color: var(--secondary-white);
-  font-size: .8rem;
-  line-height: 21px;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .shopNow {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 2px;
+  padding: 6px 12px;
+  border: 1px solid var(--secondary-white);
   color: var(--secondary-white);
   font-size: 1rem;
   width: fit-content;
   position: relative;
+  text-decoration: none;
+  transition: all 0.3s ease;
 
-  &:hover::before {
-    height: calc(100% + 10px);
-    opacity: .3;
-    transition: height .2s, opacity .2s;
+  &:hover {
+    background-color: var(--secondary-white);
+    color: var(--black);
+    transform: translateY(-2px);
   }
 }
 
 @include small {
   .shopNow {
-    font-size: .9rem;
+    font-size: 0.9rem;
+    padding: 4px 10px;
   }
 }
 
@@ -65,14 +94,20 @@
   content: '';
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -2px;
   width: 100%;
   height: 2px;
   background-color: var(--secondary-white);
-  transition: height .3s, opacity .2s .2s;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shopNow:hover::before {
+  opacity: 1;
 }
 
 .content :where(b, p)::selection,
 .shopNow::selection {
   background-color: var(--white) !important;
+  color: var(--black) !important;
 }

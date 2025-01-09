@@ -1,25 +1,47 @@
-@import "../../../Styles/mixins";
+@import "../../../Styles/mixins"; // Adjust path to your mixins file
 
 .ourProductsSection {
   margin-bottom: 170px;
-}
 
-@include small {
-  .ourProductsSection {
+  @include small {
     margin-bottom: 100px;
   }
 }
 
 .wrapper {
   display: flex;
-  gap: 87px;
-  margin-bottom: 40px;
-}
+  overflow-x: auto; /* Horizontal scrolling */
+  gap: 20px; /* Space between products */
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
 
-@include small {
-  .wrapper {
-    flex-direction: column;
-    gap: 0;
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  > * {
+    flex-shrink: 0; /* Prevent shrinking */
+    width: calc(100% / 2.5); /* Adjust width based on visible items */
+  }
+
+  @include small {
+    > * {
+      width: calc(100% - 20px); /* Full width for small screens */
+    }
   }
 }
 
@@ -35,7 +57,7 @@
   outline: none;
   cursor: pointer;
   width: fit-content;
-  background: rgba(0, 0, 0, 0.2); /* Apply a semi-transparent black */
+  background: rgba(0, 0, 0, 0.2); /* Semi-transparent black */
   color: var(--black);
   padding: 12px 48px;
   border-radius: 12px;
@@ -60,7 +82,7 @@
 }
 
 .exploreAllBtn {
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
   position: relative;
 
   &:hover {
@@ -80,12 +102,5 @@
 
   &:hover::after {
     width: 100%;
-  }
-}
-
-@include small {
-  .viewProductsBtn {
-    padding: 10px 36px;
-    font-size: 14px;
   }
 }

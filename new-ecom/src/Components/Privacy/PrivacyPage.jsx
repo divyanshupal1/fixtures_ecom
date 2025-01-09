@@ -172,7 +172,7 @@ const PrivacyPolicyPage = () => {
             <p>
               If you have any questions or concerns about this Privacy Policy or
               our privacy practices, please contact us at{" "}
-              <a href="mailto:contact@acquaso.com">contact@acquaso.com</a>.
+              <a href="mailto:support@acquaso.com">support@acquaso.com</a>.
             </p>
           </section>
         </main>

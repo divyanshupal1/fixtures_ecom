@@ -20,17 +20,23 @@ const Footer = () => {
             <b>
               <h2 to="/">Acquaso</h2>
             </b>
+            <ul>
+            <li>
+                <Link to="/dealer">DEALERSHIP ENQUIRY</Link>
+              </li>    
+              <li>
+                <Link to="/dealer">CREATOR PROGRAM</Link>
+              </li>                
+
+            </ul>
           </section>
 
           <section className={s.section2}>
             <b>Support</b>
             <ul>
-              <li>Acquaso Solutions LLP, Bhupatipur, Patna, Bihar India</li>
+              <li>Acquaso Solutions LLP, Patna, Bihar India</li>
               <li>
                 <a href="mailto:support@acquaso.com">support@acquaso.com</a>
-              </li>
-              <li>
-                <a href="tel:+88015-88888-9999">+91-7761893123</a>
               </li>
             </ul>
           </section>
@@ -73,7 +79,7 @@ const Footer = () => {
         </section>
 
         <p className={s.copyRights}>
-          <span>Copyright © Acquaso Solutions LLP.</span>
+          <span>Copyright © ACQUASO SOLUTIONS LLP</span>
         </p>
       </div>
     </footer>

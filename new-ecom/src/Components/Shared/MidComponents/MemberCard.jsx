@@ -7,10 +7,6 @@ const MemberCard = ({ data }) => {
 
   return (
     <div className={s.card}>
-      <div className={s.imgHolder}>
-        <img src={img} alt={name} />
-      </div>
-
       <div className={s.info}>
         <b>{name}</b>
         <p>{jobTitle}</p>
