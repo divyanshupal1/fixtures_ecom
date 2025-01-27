@@ -12,6 +12,7 @@ import productImg1 from "./introduction-product1.webp";
 import productImg2 from "./introduction-product2.webp";
 import productImg3 from "./introduction-product3.webp";
 import beta from "./beta.jpeg";
+import ourstoryimage from "./aboutusimageside.jpeg";
 import papa from "./papa.jpeg";
 import betanew from "./1.jpeg";
 import mastercard from "./mastercard.webp";
@@ -50,6 +51,7 @@ export {
   headphone,
   mastercard,
   beta,
+  ourstoryimage,
   papa,
   betanew,
   nagadCard,

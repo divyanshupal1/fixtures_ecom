@@ -1,4 +1,4 @@
-import { beta } from "../../../Assets/Images/Images";
+import { ourstoryimage } from "../../../Assets/Images/Images";
 import s from "./AboutHeroSection.module.scss";
 
 const AboutHeroSection = () => {
@@ -34,7 +34,7 @@ const AboutHeroSection = () => {
       </section>
 
       <div className={s.imgHolder}>
-        <img src={beta} alt="two young women happy with shopping" />
+        <img src={ourstoryimage} alt="two young women happy with shopping" />
       </div>
     </section>
   );

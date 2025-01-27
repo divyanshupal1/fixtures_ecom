@@ -11,4 +11,5 @@ const OurMembersSection = () => {
     </section>
   );
 };
+
 export default OurMembersSection;
