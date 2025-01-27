@@ -11,7 +11,7 @@ import headphone from "./headphone-logo.webp";
 import productImg1 from "./introduction-product1.webp";
 import productImg2 from "./introduction-product2.webp";
 import productImg3 from "./introduction-product3.webp";
-import beta from "./beta.jpeg";
+import beta from "./aboutusimageside.jpeg";
 import papa from "./papa.jpeg";
 import mastercard from "./mastercard.webp";
 import nagadCard from "./nagad.webp";
