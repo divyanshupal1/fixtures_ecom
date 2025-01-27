@@ -1,46 +1,54 @@
 @import "../../../Styles/mixins.scss";
 
 .imgHolder {
-  height: 460px;
-  border-radius: 4px;
+  width: 180px; /* Fixed width for the image */
+  height: 180px; /* Fixed height for the image */
+  border-radius: 50%; /* Ensures the image is circular */
+  overflow: hidden; /* Ensures the image stays within the bounds */
   margin-bottom: 20px;
   user-select: none;
+  background-color: var(--light-gray); /* Placeholder background */
+
+  > img {
+    width: 100%; /* Fills the container */
+    height: 100%; /* Fills the container */
+    object-fit: cover; /* Maintains aspect ratio while cropping to fit */
+    border-radius: inherit; /* Matches the parent’s border-radius */
+  }
 }
 
-.imgHolder>img {
-  border-radius: inherit;
-}
+.info {
+  b {
+    font: 500 1.5rem "Inter", sans-serif;
+    letter-spacing: 0.04rem;
+  }
 
-.info>b {
-  font: 500 2rem "Inter", sans-serif;
-  letter-spacing: .04rem;
-}
-
-.info>p {
-  margin-bottom: 10px;
+  p {
+    margin-bottom: 10px;
+  }
 }
 
 .socialMedia {
   display: flex;
   align-items: center;
   gap: 20px;
-}
 
-.socialMedia>a {
-  position: relative;
-}
+  a {
+    position: relative;
 
-.socialMedia>a>svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--black);
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--black);
 
-  & path {
-    fill: var(--black);
+      path {
+        fill: var(--black);
+      }
+    }
+
+    &.instagram svg path {
+      fill: var(--white);
+      stroke: var(--black);
+    }
   }
-}
-
-.socialMedia>.instagram>svg>path {
-  fill: var(--white);
-  stroke: var(--black);
 }

@@ -14,6 +14,7 @@ import {
   saudiFlag,
   usaFlag,
   visaCard,
+  beta,
 } from "../Assets/Images/Images";
 
 export const introductionSliderData = [
@@ -131,7 +132,7 @@ export const ourMembersData = [
   {
     name: "Aakash Gupta",
     jobTitle: "Director, Founder",
-    img: betanew,
+    img: beta,
     socialMedia: {
       twitter: "https://twitter.com/",
       instagram: "https://www.instagram.com/",
