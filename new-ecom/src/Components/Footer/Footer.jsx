@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import SvgIcon from "../Shared/MiniComponents/SvgIcon";
-import ToolTip from "../Shared/MiniComponents/ToolTip";
 import s from "./Footer.module.scss";
 
 const Footer = () => {
@@ -17,17 +15,20 @@ const Footer = () => {
       <div className="container">
         <section className={s.sections}>
           <section className={s.section1}>
-            <b>
-              <h2 to="/">Acquaso</h2>
-            </b>
+            <Link to="/">
+              <img
+                src="/logonew_white.png"
+                alt="Acquaso Logo"
+                className={s.logo}
+              />
+            </Link>
             <ul>
-            <li>
+              <li>
                 <Link to="/dealer">DEALERSHIP ENQUIRY</Link>
-              </li>    
+              </li>
               <li>
                 <Link to="/creatorprogram">CREATOR PROGRAM</Link>
-              </li>                
-
+              </li>
             </ul>
           </section>
 
