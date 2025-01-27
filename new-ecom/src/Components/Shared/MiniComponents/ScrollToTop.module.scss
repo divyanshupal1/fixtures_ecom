@@ -1,19 +1,20 @@
+.buttonContainer {
+  position: relative;
+}
+
 .scrollTopButton {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #ff6e61;
-  font-size: 20px;
-  padding: 10px;
-  border: 4px solid var(--white);
-  border-radius: 50%;
-  z-index: 30;
-  padding: 15px;
-  border-width: 6px;
   bottom: 30px;
   right: 30px;
+  background: #ff6e61;
+  font-size: 20px;
+  padding: 15px;
+  border: 6px solid var(--white);
+  border-radius: 50%;
+  z-index: 30;
   pointer-events: all;
-  transition: opacity .25s ease, background-color .25s;
+  transition: opacity 0.25s ease, background-color 0.25s, transform 0.25s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &.hide {
     opacity: 0;
@@ -23,38 +24,40 @@
   &:hover {
     background-color: #ff4d3d;
   }
+
+  > svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--white);
+  }
 }
 
 .whatsappButton {
   position: fixed;
-  bottom: 30px;
-  right: 100px; /* Place it to the left of the Scroll to Top button */
+  bottom: 30px; /* Default position matches Scroll to Top when it's hidden */
+  right: 100px; /* Adjust this as needed */
   background: #25d366;
   padding: 13px;
   border-radius: 50%;
-  border: 4px solid var(--white);
+  border: 6px solid var(--white);
   z-index: 30;
-  border-width: 6px;
   pointer-events: all;
-  transition: opacity 0.25s ease, background-color 0.25s;
+  transition: bottom 0.25s ease, right 0.25s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.whatsappButton img {
-  width: 24px;
-  height: 24px;
-}
+  img {
+    width: 24px;
+    height: 24px;
+  }
 
-.whatsappButton:hover {
-  background-color: #1ebe5d;
-}
+  &:hover {
+    background-color: #1ebe5d;
+  }
 
-
-.scrollTopButton>svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--white);
+  &.shift {
+    right: 30px; /* Matches Scroll to Top button's position */
+  }
 }

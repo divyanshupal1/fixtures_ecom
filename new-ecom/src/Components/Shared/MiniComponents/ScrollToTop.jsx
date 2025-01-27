@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { scrollToTop } from "../../../Functions/helper";
 import useEventListener from "../../../Hooks/Helper/useEventListener";
 import s from "./ScrollToTop.module.scss";
@@ -7,11 +7,14 @@ import ToolTip from "./ToolTip";
 
 const ScrollToTop = () => {
   const scrollTopButtonRef = useRef();
+  const [isScrollTopHidden, setIsScrollTopHidden] = useState(true); // Track visibility
   const SCROLL_REQUIRED = 1000;
   const whatsappNumber = "7761893123"; // Replace with the actual WhatsApp number
 
   function handleScrollTopVisibility() {
-    const classListMethod = window.scrollY < SCROLL_REQUIRED ? "add" : "remove";
+    const shouldHide = window.scrollY < SCROLL_REQUIRED;
+    setIsScrollTopHidden(shouldHide); // Update visibility state
+    const classListMethod = shouldHide ? "add" : "remove";
     scrollTopButtonRef.current.classList[classListMethod](s.hide);
   }
 
@@ -26,12 +29,12 @@ const ScrollToTop = () => {
     <div className={s.buttonContainer}>
       <button
         type="button"
-        className={`${s.whatsappButton} ${s.alwaysVisible}`}
+        className={`${s.whatsappButton} ${isScrollTopHidden ? s.shift : ""}`} // Dynamically apply class
         onClick={handleWhatsAppClick}
         aria-label="Contact via WhatsApp"
       >
         <img
-          src="https://res.cloudinary.com/dmzp6notl/image/upload/v1734315281/social_nezjkb.png" // Updated to use external WhatsApp icon link
+          src="https://res.cloudinary.com/dmzp6notl/image/upload/v1734315281/social_nezjkb.png" // External WhatsApp icon link
           alt="WhatsApp"
           className={s.whatsappIcon}
         />
