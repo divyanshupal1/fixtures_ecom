@@ -7,10 +7,12 @@ const MemberCard = ({ data }) => {
 
   return (
     <div className={s.card}>
+      <div className={s.image}>
+        <img src={img} alt={`${name}'s picture`} />
+      </div>
       <div className={s.info}>
         <b>{name}</b>
         <p>{jobTitle}</p>
-
         <div className={s.socialMedia}>
           <SocialMedia socialMedia={socialMedia} />
         </div>
@@ -31,6 +33,7 @@ const SocialMedia = ({ socialMedia }) => {
         key={mediaName + i}
         href={socialMedia[mediaName]}
         target="_blank"
+        rel="noopener noreferrer"
         className={instagramClass}
         title={mediaName}
       >

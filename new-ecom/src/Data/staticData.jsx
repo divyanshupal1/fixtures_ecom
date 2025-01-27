@@ -4,7 +4,7 @@ import {
   bkashCard,
   canonLogo,
   mastercard,
-  beta,
+  betanew,
   papa,
   nagadCard,
   productImg1,
@@ -103,26 +103,26 @@ export const categoriesData = [
 export const aboutCardsInfo = [
   {
     iconName: "shop",
-    number: "10.5k",
-    text: "Sallers active our site",
+    number: "GST",
+    text: "Govt. Registered Company",
     id: uuid(),
   },
   {
     iconName: "dollarSign",
-    number: "33k",
-    text: "Mopnthly Produduct Sale",
+    number: "Razorpay",
+    text: "Secure Payment Gateway",
     id: uuid(),
   },
   {
     iconName: "shoppingBag",
-    number: "45.5k",
-    text: "Customer active in our site",
+    number: "IEC",
+    text: "Import Export Approved",
     id: uuid(),
   },
   {
     iconName: "moneyBag",
-    number: "25k",
-    text: "Anual gross sale in our site",
+    number: "MSME",
+    text: "Udyam Registered",
     id: uuid(),
   },
 ];
@@ -131,7 +131,7 @@ export const ourMembersData = [
   {
     name: "Aakash Gupta",
     jobTitle: "Director, Founder",
-    img: beta,
+    img: betanew,
     socialMedia: {
       twitter: "https://twitter.com/",
       instagram: "https://www.instagram.com/",
