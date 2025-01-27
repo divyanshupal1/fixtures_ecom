@@ -4,9 +4,8 @@ import {
   bkashCard,
   canonLogo,
   mastercard,
-  member1Img,
-  member2Img,
-  member3Img,
+  beta,
+  papa,
   nagadCard,
   productImg1,
   productImg2,
@@ -131,8 +130,8 @@ export const aboutCardsInfo = [
 export const ourMembersData = [
   {
     name: "Aakash Gupta",
-    jobTitle: "Founder",
-    img: member1Img,
+    jobTitle: "Director, Founder",
+    img: beta,
     socialMedia: {
       twitter: "https://twitter.com/",
       instagram: "https://www.instagram.com/",
@@ -142,9 +141,9 @@ export const ourMembersData = [
   },
 
   {
-    name: "Emma Watson",
-    jobTitle: "Managing Director",
-    img: member2Img,
+    name: "Kamlesh Kumar",
+    jobTitle: "Director",
+    img: papa,
     socialMedia: {
       twitter: "https://twitter.com/",
       instagram: "https://www.instagram.com/",

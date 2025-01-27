@@ -25,7 +25,7 @@ const Footer = () => {
                 <Link to="/dealer">DEALERSHIP ENQUIRY</Link>
               </li>    
               <li>
-                <Link to="/dealer">CREATOR PROGRAM</Link>
+                <Link to="/creatorprogram">CREATOR PROGRAM</Link>
               </li>                
 
             </ul>

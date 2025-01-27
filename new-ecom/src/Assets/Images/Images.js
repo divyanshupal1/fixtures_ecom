@@ -11,8 +11,8 @@ import headphone from "./headphone-logo.webp";
 import productImg1 from "./introduction-product1.webp";
 import productImg2 from "./introduction-product2.webp";
 import productImg3 from "./introduction-product3.webp";
-import member1Img from "./man.webp";
-import member3Img from "./man2.webp";
+import beta from "./beta.jpeg";
+import papa from "./papa.jpeg";
 import mastercard from "./mastercard.webp";
 import nagadCard from "./nagad.webp";
 import perfumeGucci from "./perfume-gucci.webp";
@@ -48,9 +48,8 @@ export {
   googlePlay,
   headphone,
   mastercard,
-  member1Img,
-  member2Img,
-  member3Img,
+  beta,
+  papa,
   nagadCard,
   perfumeGucci,
   posterImage,
