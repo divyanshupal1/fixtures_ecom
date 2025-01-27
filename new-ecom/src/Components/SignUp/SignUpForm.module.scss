@@ -19,19 +19,19 @@
   }
 }
 
-.form>h2 {
+.form > h2 {
   font: 500 2.25rem/30px "Inter", sans-serif;
   letter-spacing: .04rem;
   width: max-content;
 }
 
 @include small {
-  .form>h2 {
+  .form > h2 {
     font-size: 1.8rem;
   }
 }
 
-.form>p {
+.form > p {
   margin: 20px 0 30px;
 }
 
@@ -40,29 +40,49 @@
   flex-direction: column;
 }
 
-.inputs>input {
+.inputs > input {
   border: none;
   outline: none;
   border-bottom: solid 1px var(--dark-gray);
   padding-bottom: 8px;
   color: var(--black);
-
+  
   &:not(:last-child) {
     margin-bottom: 40px;
   }
-
+  
   &[class=invalid] {
     border-bottom-color: var(--dark-tomato);
     color: var(--dark-tomato);
-
+    
     &::placeholder {
       color: var(--dark-tomato);
     }
   }
 }
 
-.inputs>input::placeholder {
+.inputs > input::placeholder {
   color: var(--regular-light-gray);
+}
+
+.checkboxes {
+  margin: 20px 0;
+  
+  .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    cursor: pointer;
+    
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    span {
+      color: var(--black);
+      font-size: 0.9rem;
+    }
+  }
 }
 
 .createAccBtn {
@@ -86,36 +106,36 @@
   border: 1px solid #00000066;
 }
 
-.signUpBtn>img {
+.signUpBtn > img {
   margin-right: 10px;
   width: 24px;
   height: 24px;
 }
 
-.buttons>p {
+.buttons > p {
   display: flex;
   align-items: center;
   width: fit-content;
   margin: 40px auto 0;
 }
 
-.buttons>p>span {
+.buttons > p > span {
   display: inline-block;
   margin-right: 10px;
 }
 
-.buttons>p>a {
+.buttons > p > a {
   color: var(--primary);
   position: relative;
   top: -2px;
   transition: color .2s;
-
+  
   &:hover {
     color: var(--black);
   }
 }
 
-.buttons>p>a::before {
+.buttons > p > a::before {
   content: '';
   position: absolute;
   left: 0;
@@ -126,6 +146,6 @@
   transition: background-color .2s;
 }
 
-.buttons>p>a:hover::before {
+.buttons > p > a:hover::before {
   background-color: var(--black);
 }

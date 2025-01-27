@@ -16,6 +16,8 @@ import MoreCategories from "../Components/MoreCategories/MoreCategories";
 import WishList from "../Components/WishList/WishList";
 import PrivacyPolicyPage from "../Components/Privacy/PrivacyPage"
 import TermsAndConditionsPage from "../Components/TermsandConditions/TermsAndConditionsPage";
+import ReturnPolicyPage from "../Components/ReturnPolicy/ReturnPolicyPage";
+import FAQPage from "../Components/FAQ/FAQPage";
 import DealerPage from "../Components/Dealer/DealerPage";
 import CreatorProgramPage from "../Components/CreatorsProgram/CreatorsProgramPage";
 import CancellationAndReturnPage from "../Components/Cancelliation/CancellationAndReturnPage";
@@ -27,6 +29,8 @@ export const ROUTES_CONFIG = [
   { path: "/about", element: <About /> },
   { path: "/privacy", element: <PrivacyPolicyPage /> },
   { path: "/termsandconditions", element: <TermsAndConditionsPage /> },
+  { path: "/returnpolicy", element: <ReturnPolicyPage /> },
+  { path: "/faq", element: <FAQPage/> },
   { path: "/dealer", element: <DealerPage /> },
   { path: "/creatorprogram", element: <CreatorProgramPage /> },
   { path: "/cancellation", element: <CancellationAndReturnPage /> },

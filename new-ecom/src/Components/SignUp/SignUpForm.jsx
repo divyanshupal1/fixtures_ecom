@@ -21,13 +21,12 @@ const SignUpForm = () => {
     const inputs = e.target.querySelectorAll("input");
     const formDataObj = new FormData(e.target);
     const formData = {};
-
     // Set keys and values from formDataObj to formData
     for (let pair of formDataObj.entries()) formData[pair[0]] = pair[1];
+    
     e.preventDefault();
-
     const isFormValid = simpleValidationCheck(inputs);
-
+    
     if (isFormValid) {
       const isUserAlreadySignedUp = compareDataToObjValue(
         usersData,
@@ -35,7 +34,7 @@ const SignUpForm = () => {
         "emailOrPhone"
       );
       if (isUserAlreadySignedUp) return;
-
+      
       const uniqueUsersData = uniqueArr([...usersData, formData]);
       dispatch(newSignUp(uniqueUsersData));
       dispatch(setLoginData(formData));
@@ -46,7 +45,6 @@ const SignUpForm = () => {
   function handleSignUpWithGoogle() {
     if (isSignUpWithGooglePressed) return;
     isSignUpWithGooglePressed = true;
-
     openSignWithGooglePopUp();
     setDefaultSignUpData();
   }
@@ -58,32 +56,30 @@ const SignUpForm = () => {
       password: "random-password1234",
       isSignIn: true,
     };
-
     setTimeout(() => {
       navigateTo("/");
       isSignUpWithGooglePressed = false;
-
       setTimeout(() => dispatch(setLoginData(defaultLoginData)), 500);
     }, 2500);
   }
 
   return (
-    <form action="GET" className={s.form} onSubmit={signUp}>
+    <form className={s.form} onSubmit={signUp}>
       <h2>Create an account</h2>
       <p>Enter your details below</p>
-
+      
       <div className={s.inputs}>
         <input
           type="text"
           name="username"
-          placeholder="Full Name"
+          placeholder="Username"
           onChange={(e) => (username.current = e.target.value)}
           required
         />
         <input
           type="text"
           name="emailOrPhone"
-          placeholder="Email or Phone Number"
+          placeholder="Email or phone number"
           onChange={(e) => (emailOrPhone.current = e.target.value)}
           required
         />
@@ -96,20 +92,40 @@ const SignUpForm = () => {
         />
       </div>
 
+      <div className={s.checkboxes}>
+        <label className={s.checkbox}>
+          <input
+            type="checkbox"
+            name="newsletter"
+            defaultChecked={false}
+          />
+          <span>Subscribe to Newsletter</span>
+        </label>
+        
+        <label className={s.checkbox}>
+          <input
+            type="checkbox"
+            name="terms"
+            defaultChecked={false}
+          />
+          <span>I agree to the <NavLink to="/termsandconditions" className={s.termsLink}>terms and conditions</NavLink></span>
+        </label>
+      </div>
+
       <div className={s.buttons}>
         <button type="submit" className={s.createAccBtn}>
           Create Account
         </button>
-
+        
         <button
           type="button"
           className={s.signUpBtn}
           onClick={handleSignUpWithGoogle}
         >
-          <img src={googleIcon} alt="Colored Google icon" />
-          <span>Sign up with Google</span>
+          <img src={googleIcon} alt="Google" />
+          Sign up with Google
         </button>
-
+        
         <p>
           <span>Already have account?</span>
           <NavLink to="/login">Log in</NavLink>
@@ -118,4 +134,5 @@ const SignUpForm = () => {
     </form>
   );
 };
+
 export default SignUpForm;

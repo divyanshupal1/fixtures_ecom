@@ -66,7 +66,13 @@ const Footer = () => {
                 <Link to="/privacy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/terms">Terms Of Use</Link>
+                <Link to="/returnpolicy">Return Policy</Link>
+              </li>
+              <li>
+                <Link to="/faq">FAQ's</Link>
+              </li>
+              <li>
+                <Link to="/termsandconditions">Terms Of Use</Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>
